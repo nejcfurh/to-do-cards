@@ -1,0 +1,35 @@
+<%- include('header'); -%>
+
+<div class="navigation">
+  <button class="navigation-button" onClick="window.location.href='/';">Today</button>
+  <button class="navigation-button" onClick="window.location.href='/home';">Home</button>
+  <button class="navigation-button" onClick="window.location.href='/school';">School</button>
+</div>
+
+<div class="box" id="heading">
+  <h1><%= listTitle[0].toUpperCase() + listTitle.substring(1) %></h1>
+</div>
+
+<div class="box">
+  <% newListItems.forEach(function(item){ %>
+
+    <form action="/delete" method="post">
+      <div class="item">
+        <input name="checkbox" type="checkbox" value="<%= item._id %>" onChange="this.form.submit()"/>
+        <p> <%= item.name %></p>
+      </div>
+      <input type="hidden" name="listName" value="<%= listTitle %>"/>
+     </form>
+  <% }) %>
+
+  <form class="item" action="/" method="post">
+    <input
+      type="text"
+      name="newItem"
+      placeholder="New Item"
+      autocomplete="off"
+    />
+    <button class="add-button" type="submit" name="list" value="<%= listTitle %>">+</button>
+  </form>
+</div>
+<%- include('footer'); -%>

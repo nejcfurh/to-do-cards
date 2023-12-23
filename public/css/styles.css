@@ -1,13 +1,18 @@
 html {
   background: linear-gradient(150deg, #00bfff, #ff4c68, #ef8172);
-  font-family: 'helvetica neue';
-  height: 100%;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
  
 h1 {
   color: #fff;
-  padding: 10px;
+  font-family: 'Poppins', sans-serif;
 }
 
 h2 {
@@ -16,35 +21,40 @@ h2 {
 }
 
 .navigation {
-  margin-top: 5%;
+  /* margin-top: 5%; */
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  align-content: stretch;
+  flex-wrap: wrap;
+  /* width: fit-content; */
 }
 
 .navigation-button {
   display: block;
-  background-color: #eeeef1; 
-  border-radius: 12px;
+  background: none;
   padding: 10px;
-  color: #4b4baa;
+  color: white;
   text-align: center;
-  font-size: 16px;
+  font-size: 18px;
   border: 0;
-  width: 15%;
-  transition-duration: 0.4s;
+  text-transform: uppercase;
   cursor: pointer;
+  transition-duration:400ms;
+  margin-right: 20px;
 }
 
 .navigation-button:hover {
-  background-color: #4b4baa; /* Green */
-  color: white;
+  color: #4b4baa;
 }
 
+
 .box {
-  max-width: 400px;
-  margin: 50px auto;
+  max-width: fit-content;
+  margin: 15px auto 30px;
   background: white;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
 }
 
@@ -52,13 +62,20 @@ h2 {
   background-color: #4b4baa;
   text-align: center;
   border-radius: 20px;
+  padding: 0 20px 0;
+  color: white;
+  margin: 10px auto 10px;
 }
 
 .item {
   min-height: 70px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 1px solid #f1f1f1be;
+  justify-content: flex-start;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
 }
 
 .item:last-child {
@@ -85,7 +102,7 @@ p {
 
 form.item {
   text-align: center;
-  margin-left: 20px;
+  margin: 5px 20px 5px;
 }
 
 .add-button {
@@ -125,4 +142,125 @@ input[type='text']:focus {
 footer {
   color: #f1f1f1;
   text-align: center;
+  font-size: 13px;
+  margin-top: auto;
+  height:70px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+    margin: 50px auto;
+    border-radius: 40px;
+    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.18);
+    width: 50%
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+}
+
+hr {
+  width: 90%;
+  border: 0;
+  border-top: 0.5px solid gray
+}
+
+.navigation-dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.navigation-dropdown {
+  font-size: 14px;  
+  border: none;
+  outline: none;
+  color: white;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navigation-dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: fit-content;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border: 0;
+  background-color: #4b4baa;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.navigation-dropdown-content a {
+  float: left;
+  color: rgb(234, 232, 232);
+  border: 0;
+  padding: 5px 5px;
+  text-decoration: none;
+  display: block;
+  background-color: transparent;
+  text-align: left;
+  width: inherit;
+  font-size: 15px;
+}
+
+.navigation-dropdown-content a:hover {
+  background-color: transparent;
+  transition-duration: 200ms;
+}
+
+.navigation-dropdown:hover .navigation-dropdown-content{
+  display: flex;
+  flex-direction: row;
+  transition-duration: 200ms;
+}
+
+.dropdown-button {
+  display: block;
+  padding: 15px 15px 5px 2px;
+  color: white;
+  text-align: center;
+  font-size: 17px;
+  border: 0;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius:8px;
+  background-color: transparent;
+}
+
+.dropdown-button:hover {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.navigation-button-dropdown {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  text-align: left;
+  color: white;
+}
+
+.add-button-dropdown {
+  border-radius: 50%;
+  border: 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.navigation-button-dropdown:hover {
+  color: rgba(255, 255, 255, 0.461)
+
+}
+
+.add-button-dropdown:hover {
+  background-color: gray;
 }

@@ -1,35 +1,50 @@
 <%- include('header'); -%>
 
-<div class="navigation">
-  <button class="navigation-button" onClick="window.location.href='/';">Today</button>
-  <button class="navigation-button" onClick="window.location.href='/home';">Home</button>
-  <button class="navigation-button" onClick="window.location.href='/school';">School</button>
-</div>
-
-<div class="box" id="heading">
-  <h1><%= listTitle[0].toUpperCase() + listTitle.substring(1) %></h1>
-</div>
-
-<div class="box">
-  <% newListItems.forEach(function(item){ %>
-
-    <form action="/delete" method="post">
-      <div class="item">
-        <input name="checkbox" type="checkbox" value="<%= item._id %>" onChange="this.form.submit()"/>
-        <p> <%= item.name %></p>
+<div class="container">
+  <div class="header">
+    <h1>ToDoList</h1>
+    <div class="navigation">
+      <div class="navigation-dropdown">
+        <button class="dropdown-button">Lists
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="navigation-dropdown-content">
+          <a><button class="navigation-button-dropdown" onClick="window.location.href='/';">Ongoing</button></a>
+          <a><button class="navigation-button-dropdown" onClick="window.location.href='/home';">Home</button></a>
+          <a><button class="navigation-button-dropdown" onClick="window.location.href='/school';">School</button></a>
+          <a><button class="add-button-dropdown" type="submit" name="list" value="<%= listTitle %>">+</button></a>
+        </div>
       </div>
-      <input type="hidden" name="listName" value="<%= listTitle %>"/>
-     </form>
-  <% }) %>
+    </div>
+  </div>
+  <hr>
 
-  <form class="item" action="/" method="post">
-    <input
-      type="text"
-      name="newItem"
-      placeholder="New Item"
-      autocomplete="off"
-    />
-    <button class="add-button" type="submit" name="list" value="<%= listTitle %>">+</button>
-  </form>
+  <div class="box" id="heading">
+    <h3><%= listTitle[0].toUpperCase() + listTitle.substring(1) %></h3>
+  </div>
+  <hr>
+  <div class="box">
+    <% newListItems.forEach(function(item){ %>
+
+      <form action="/delete" method="post">
+        <div class="item">
+          <input name="checkbox" type="checkbox" value="<%= item._id %>" onChange="this.form.submit()"/>
+          <p> <%= item.name %></p>
+        </div>
+        <input type="hidden" name="listName" value="<%= listTitle %>"/>
+      </form>
+    <% }) %>
+
+    <form class="item" action="/" method="post">
+      <input
+        type="text"
+        name="newItem"
+        placeholder="New Item"
+        autocomplete="off"
+      />
+      <button class="add-button" type="submit" name="list" value="<%= listTitle %>">+</button>
+    </form>
+  </div>
 </div>
+
 <%- include('footer'); -%>

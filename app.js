@@ -3,10 +3,9 @@
 // modules
 
 const username = require(__dirname + "/auth.js").username;
-
 const password = require(__dirname + "/auth.js").password;
 
-console.log(password, username);
+// console.log(password, username);
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -107,13 +106,15 @@ app.post("/", function(req, res) {
  
   if(listName === day){
     newItem.save(); 
-    res.redirect("/");
+    console.log("Item saved successfully!")
+    res.redirect(`/`);
   } else {
     List.findOne({name: listName})
     .then(function(result) {
       result.items.push(newItem);
       result.save();
-      res.redirect("/" + listName);
+      res.redirect(`/${listName}`);
+      console.log("Custom list item added successfully!")
     }).catch((err) => console.log(err, "post"));
   }
 });

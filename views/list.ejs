@@ -1,56 +1,25 @@
 <%- include('header'); -%>
 
-<!-- <div class="container">
-  <div class="header">
-    <h1 style="letter-spacing:2px">ToDoList</h1>
-    <div class="navigation">
-      <div class="navigation-dropdown">
-        <button class="dropdown-button">Lists
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="navigation-dropdown-content">
-          <a><button class="navigation-button-dropdown" onClick="window.location.href='/';">Ongoing</button></a>
-          <a><button class="navigation-button-dropdown" onClick="window.location.href='/home';">Home</button></a>
-          <a><button class="navigation-button-dropdown" onClick="window.location.href='/school';">School</button></a>
-          <a><button class="add-button-dropdown" type="submit" name="list" value="">+</button></a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <hr>
-
-  <div class="box" id="heading">
-    <h3><%= listTitle[0].toUpperCase() + listTitle.substring(1) %></h3>
-  </div>
-  <hr>
-  <div class="box">
-    <% newListItems.forEach(function(item){ %>
-
-      <form action="/delete" method="post">
-        <div class="item">
-          <input name="checkbox" type="checkbox" value="<%= item._id %>" onChange="this.form.submit()"/>
-          <p> <%= item.name %></p>
-        </div>
-        <input type="hidden" name="listName" value="<%= listTitle %>"/>
-      </form>
-    <% }) %>
-
-    <form class="item" action="/" method="post">
-      <input
-        type="text"
-        name="newItem"
-        placeholder="New Item"
-        autocomplete="off"
-      />
-      <button class="add-button" type="submit" name="list" value="<%= listTitle %>">+</button>
-    </form>
-  </div>
-</div> -->
-
 <div class="cards-box">
   <div class="wrapper">
     <div class="container-cards">
-      <input type="radio" name="slide" id="List1" checked>
+      <% cardItems.forEach((card, i) => { %>
+             <input type="radio" name="slide" id="<%= card.name %>" <%= i === (cardItems.length - 1) ? "checked" : "" %> >
+              <label for="<%= card.name %>" class="card" style="background-image: url('<%= card.url%>')">
+                <div class="title-div">
+                  <h4 class="title"><%= card.name %></h4>
+                </div>
+                <div class="row">
+                  <div class="icon"><%= i + 1 %></div>
+                  <div class="description">
+                    <p><%= card.body %></p>
+                  </div>
+                </div>
+              </label>
+      <% }) %>
+
+      <!-- static part of the cards -->
+      <!-- <input type="radio" name="slide" id="List1" checked>
       <label for="List1" class="card">
         <div class="title-div">
           <h4 class="title">Chicago</h4>
@@ -58,7 +27,7 @@
         <div class="row">
           <div class="icon">1</div>
           <div class="description">
-            <p>Chicago skyline is one of the best in the world.</p>
+            <p>Chicago skyline is one of the best in the world!</p>
           </div>
         </div>
       </label>
@@ -82,7 +51,7 @@
         <div class="row">
           <div class="icon">3</div>
           <div class="description">
-            <p>Going to school is the best time you will ever have.</p>
+            <p>Going to school is the best time you will ever have!</p>
           </div>
         </div>
       </label>
@@ -94,18 +63,49 @@
         <div class="row">
           <div class="icon">4</div>
           <div class="description">
-            <p>Unless you plan to go to Bali.</p>
+            <p>Bali is nice every season of the year!</p>
           </div>
         </div>
-      </label>
+      </label> -->
+
+      <!-- Add cards input! -->
       <input type="radio" name="slide" id="addList">
       <label for="addList" class="card">
-        <div class="title-div">
-          <h4 class="title">ADD A CUSTOM CARD</h4>
+        <div class="form-title-flex">
+          <div class="title-div">
+            <h4 class="title-add">ADD A CUSTOM CARD</h4>
+          </div>
+          <div class="card-form">
+            <form class="card-item" action="/" method="post">
+              <input
+                type="text"
+                name="cardName"
+                placeholder="Name"
+                autocomplete="off"
+              />
+              <br>
+              <input
+                type="text"
+                name="cardImg"
+                placeholder="Image (url)"
+                autocomplete="off"
+              />
+              <br>
+              <input
+                type="text"
+                name="cardBody"
+                placeholder="About"
+                autocomplete="off"
+              />
+              <br>
+              <button class="button-add" type="submit" name="card" value="accept">Generate card</button>
+            </form>        
+          </div>  
         </div>
         <div class="row">
-          <div class="icon">+</div>
-          <div class="description">
+          <div class="icon" style="display:none;">
+          </div>
+          <div class="description" style="width: 600px; text-align: center;">
             <p>You can add your own custom card here!</p>
           </div>
         </div>

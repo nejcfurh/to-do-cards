@@ -33,139 +33,106 @@ db.once('open', () => {
   console.log('Successfully connected to MongoDB');
 });
 
-const itemsSchema = {
+// // ITEMS SCHEMA
+
+// const itemsSchema = {
+//   name: {
+//     required: true,
+//     type: String
+//   }
+// };
+
+// const Item = mongoose.model('item', itemsSchema);
+
+// const item1 = new Item({
+//   name: "Welcome to your To-Do List App!"
+// });
+// const item2 = new Item({
+//   name: "Hit the + button to add a new item!"
+// });
+// const item3 = new Item({
+//   name: "Mark check button to delete an item!"
+// });
+
+// const defaultItems = [item1, item2, item3];
+
+// // LIST SCHEMA
+
+// const listSchema = {
+//   name: String,
+//   items: [itemsSchema]
+// }
+
+// const List = mongoose.model('list', listSchema);
+
+// CARDS SCHEMA
+
+const cardSchema = {
   name: {
     required: true,
+    type: String
+  },
+  url: {
+    required: true,
+    type: String
+  },
+  body: {
+    required: false,
     type: String
   }
 };
 
-const Item = mongoose.model('item', itemsSchema);
+const Card = mongoose.model('card', cardSchema);
 
-const item1 = new Item({
-  name: "Welcome to your To-Do List App!"
-});
-const item2 = new Item({
-  name: "Hit the + button to add a new item!"
-});
-const item3 = new Item({
-  name: "Mark check button to delete an item!"
-});
+const card1 = new Card({
+  name: "Chicago",
+  url: `../photos/image1.jpg`,
+  body: "Chicago skyline is one of the best in the world!"
+})
 
-const defaultItems = [item1, item2, item3];
+const card2 = new Card({
+  name: "Home",
+  url: `../photos/image2.jpg`,
+  body: "Calling a house home is fulfiling!"
+})
 
-const listSchema = {
-  name: String,
-  items: [itemsSchema]
-}
+const card3 = new Card({
+  name: "School",
+  url: `../photos/image3.jpg`,
+  body: "Going to school is the best time you will ever have!"
+})
 
-const List = mongoose.model('list', listSchema);
+const card4 = new Card({
+  name: "Bali",
+  url: `../photos/image4.jpg`,
+  body: "Bali is nice every season of the year!"
+})
 
-// app.get('/', async (req, res) => {
-//   try {
-//     // search for collections
-//     const collections = await db.db.collections();
-//     const collectionNames = collections.map(collection => collection.collectionName);
-//     // search for items
-//     Item.find({})
-//     .then(items => {
-//       if(items.length === 0){
-//         Item.insertMany(defaultItems)
-//           .then(function() {
-//             console.log("Sucessful");
-//           })
-//           .catch(function(err){
-//             console.log(err);
-//           });
-//           res.redirect("/");   
-//           } else {
-//             res.render("list", {listTitle: day, newListItems: items, collectionNames: collectionNames});
-//       }})
-//       .catch(err => console.error(err, "insert default"));
-//   } catch (error) {
-//     res.status(500).json({ error: 'Unable to fetch collections' });
-//   }
-// });
+const defaultCards = [card1, card2, card3, card4]
 
 app.get("/", function(req, res) {
-  Item.find({})
-    .then(items => {
-      if(items.length === 0){
-        Item.insertMany(defaultItems)
-          .then(function() {
-            console.log("Sucessful");
-          })
-          .catch(function(err){
-            console.log(err);
-          });
-          res.redirect("/");   
-          } else {
-            res.render("list", {listTitle: day, newListItems: items});
-      }})
-      .catch(err => console.error(err, "insert default"));
+  res.render("list", {cardItems: defaultCards})
 });
 
-app.get("/:customListName", async function (req, res) {
-  const customListName = _.capitalize(req.params.customListName);
-  await List.findOne({ name: customListName })
-    .then(async function (foundList) {
-      if (!foundList) {
-        const list = new List({
-          name: customListName,
-          items: defaultItems,
-        });
-        await list.save();
-        res.redirect("/" + customListName);
-      } else {
-        //show an existing list
-        res.render("list", {
-          listTitle: foundList.name,
-          newListItems: foundList.items,
-        });
-      }
-    })
-    .catch((err) => console.log(err));
-}),
- 
 app.post("/", function(req, res) {
-  const itemName = req.body.newItem;
-  const listName = req.body.list;
+  console.log(req.body.cardName) 
+  console.log(req.body.cardImg)
+  console.log(req.body.cardBody)
 
-  const newItem = new Item({
-    name: itemName
-  });
- 
-  if(listName === day){
-    newItem.save(); 
-    console.log("Item saved successfully!")
-    res.redirect(`/`);
-  } else {
-    List.findOne({name: listName})
-    .then(function(result) {
-      result.items.push(newItem);
-      result.save();
-      res.redirect(`/${listName}`);
-      console.log("Custom list item added successfully!")
-    }).catch((err) => console.log(err, "post"));
-  }
-});
- 
-app.post("/delete", function(req,res){
-  const checkedItemID = req.body.checkbox;
-  const listName = req.body.listName;
- 
-  if (listName === day){
-    Item.findByIdAndRemove(checkedItemID).then(function(){
-      console.log("Item sucessfully removed");
-    }) .catch(function(err){
-      console.log(err);
-    }); 
-    res.redirect("/");
-  } else {
-    List.findOneAndUpdate({name: listName}, {$pull:{ items:{_id:checkedItemID }}}, {new: true}).then(function(foundList) {
-      console.log("Custom list item removed!")
-      res.redirect("/" + listName);
-    }).catch( err => console.log(err, "delete"));
+  try {
+    const newCard = new Card({
+      name: req.body.cardName,
+      url: req.body.cardImg,
+      body: req.body.cardBody,
+    })
+    console.log(newCard)
+    console.log(defaultCards)
+    defaultCards.push(newCard)
+    console.log(defaultCards)
+    res.redirect("/")
+  } catch (err) {
+    console.log(err)
+    res.redirect("/")
   }
 });
 

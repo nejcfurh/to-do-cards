@@ -14,13 +14,10 @@ const mongoose = require('mongoose');
 const _ = require('lodash');
 
 const day = date.getDate();
-
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(express.static('public'));
-
 app.set('view engine', 'ejs');
 
 main().catch(err => console.log(err));
@@ -28,6 +25,13 @@ main().catch(err => console.log(err));
 async function main() {
   mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.06chanb.mongodb.net/ToDoListDB`, {useNewUrlParser: true});
 }
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Successfully connected to MongoDB');
+});
 
 const itemsSchema = {
   name: {
@@ -41,11 +45,9 @@ const Item = mongoose.model('item', itemsSchema);
 const item1 = new Item({
   name: "Welcome to your To-Do List App!"
 });
-
 const item2 = new Item({
   name: "Hit the + button to add a new item!"
 });
-
 const item3 = new Item({
   name: "Mark check button to delete an item!"
 });
@@ -59,19 +61,48 @@ const listSchema = {
 
 const List = mongoose.model('list', listSchema);
 
+// app.get('/', async (req, res) => {
+//   try {
+//     // search for collections
+//     const collections = await db.db.collections();
+//     const collectionNames = collections.map(collection => collection.collectionName);
+//     // search for items
+//     Item.find({})
+//     .then(items => {
+//       if(items.length === 0){
+//         Item.insertMany(defaultItems)
+//           .then(function() {
+//             console.log("Sucessful");
+//           })
+//           .catch(function(err){
+//             console.log(err);
+//           });
+//           res.redirect("/");   
+//           } else {
+//             res.render("list", {listTitle: day, newListItems: items, collectionNames: collectionNames});
+//       }})
+//       .catch(err => console.error(err, "insert default"));
+//   } catch (error) {
+//     res.status(500).json({ error: 'Unable to fetch collections' });
+//   }
+// });
+
 app.get("/", function(req, res) {
   Item.find({})
     .then(items => {
       if(items.length === 0){
-        Item.insertMany(defaultItems).then(function() {
-          console.log("Sucessful");
-        }) .catch(function(err){
-          console.log(err);
-        });
-        res.redirect("/");   
-      } else {
-        res.render("list", {listTitle: day, newListItems: items});
-      }}).catch(err => console.error(err, "insert default"));
+        Item.insertMany(defaultItems)
+          .then(function() {
+            console.log("Sucessful");
+          })
+          .catch(function(err){
+            console.log(err);
+          });
+          res.redirect("/");   
+          } else {
+            res.render("list", {listTitle: day, newListItems: items});
+      }})
+      .catch(err => console.error(err, "insert default"));
 });
 
 app.get("/:customListName", async function (req, res) {

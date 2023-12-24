@@ -296,7 +296,6 @@ form.card-item {
 
 .card-item {
   backdrop-filter: blur(15px);
-  padding:10px;
   /* background-color: rgba(255, 255, 255, 0.068); */
   margin-bottom: 30px;
   color: white;

@@ -2,7 +2,7 @@ html {
   /* vibrant background */
   /* background: linear-gradient(150deg, #00bfff, #ff4c68, #ef8172); */
   /* calm background */
-  background: linear-gradient(140deg, #070707, #211f20, #434141);
+  background: linear-gradient(180deg, #070707, #211f20);
   /* black background */
   /* background-color: rgb(20, 20, 20); */
   font-family: 'Roboto', sans-serif;
@@ -322,7 +322,7 @@ input#addList + label.card > .title-div {
 }
 
 input#addList + label.card {
-  background-color: rgba(255, 255, 255, 0.24);
+  background-color: rgba(255, 255, 255, 0.23);
 }
 
 .card[for="List1"] {

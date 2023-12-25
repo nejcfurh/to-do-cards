@@ -175,10 +175,33 @@ app.post("/delete", function(req,res){
     }); 
 });
 
-// RENDERING THE ABOUT PAGE
+// RENDERING THE ABOUT ME PAGE
+
+const aboutContent =
+  `I'm a dedicated Junior Software Engineer eager to contribute my skills to innovative projects. 
+  
+  With a solid foundation in mostly JavaScript (EJS, jQuerry, Node.JS, React.JS), and HTML/CSS coupled with my hands-on experience in building web applications and exploring emerging technologies, I'm excited about the opportunity to collaborate and learn from experienced professionals in the field.
+
+  I am proactive, detail-oriented, and committed to continuous improvement.`
+
+
+app.get("/contact", function(req, res){
+  res.render("contact", {about: aboutContent});
+});
+
+// RENDERING INFO PAGE
+
+const aboutAppContent =
+  `This is a an app that mostly uses CSS/HTML and EJS for the front-end, uses Node.JS & Express.JS as a back-end, and MongoDB as a database.
+  
+  Basic Express.JS is used for connection with the MongoDB database, that stores Image links (except the default items, which are stored locally), image titles and image descriptions!
+  
+  To display the photos, HTML <input type="radio"> is used. App extensivelly uses flexbox CSS.
+  
+  I am using free Unsplash.com stock images.`
 
 app.get("/about", function(req, res){
-  res.render("about");
+  res.render("about", {aboutApp: aboutAppContent});
 });
  
 app.listen(3000, function() {

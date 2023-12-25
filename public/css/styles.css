@@ -71,6 +71,24 @@ input[type='text']:focus {
   transition: all 0.5s;
 }
 
+input[type='url'] {
+  text-align: center;
+  border: none;
+  background: transparent;
+  font-size: 40px;
+  font-weight: 100;
+  width: fit-content;
+  color: rgba(23, 23, 26, 0.796);
+  transition: all 0.5s;
+}
+
+input[type='url']:focus {
+  outline: none;
+  color: rgba(23, 23, 26, 0.796);
+  box-shadow: inset 0 -2px 2px -2px #353434bd;
+  transition: all 0.5s;
+}
+
 ::placeholder {
   color: rgba(245, 245, 245, 0.721);
   opacity: 0.5;
@@ -192,10 +210,20 @@ hr {
   margin: 15px;
 }
 
-.card > .row > .description {
+.card > .row > .description > .delete-button > .icon {
+  background-color: rgb(23, 23, 26);
+  border-radius: 50%;
+  font-size: 20px;
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  align-items: center;
+  margin: 15px;
+}
+
+.card > .row > .description {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
   overflow: hidden;
   height: 80px;
   width: 520px;
@@ -203,9 +231,14 @@ hr {
   transform: translateY(30px);
   transition-delay: 0.3s;
   transition: all .3s ease-in;
+  align-items: center;
 }
 
 .description p {
+  color: #ffffff;
+}
+
+.description-add p {
   color: #ffffff;
 }
 

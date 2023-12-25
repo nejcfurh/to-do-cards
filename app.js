@@ -23,7 +23,7 @@ app.set('view engine', 'ejs');
 main().catch(err => console.log(err));
 
 async function main() {
-  mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.06chanb.mongodb.net/ToDoListDB`, {useNewUrlParser: true});
+  mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.06chanb.mongodb.net/CardsDB`, {useNewUrlParser: true});
 }
 
 const db = mongoose.connection;
@@ -108,33 +108,74 @@ const card4 = new Card({
   body: "Bali is nice every season of the year!"
 })
 
-const defaultCards = [card1, card2, card3, card4]
+const defaultCards = [card1, card2, card3, card4];
+
+// Save initial array of cards to DB!
+
+// defaultCards.map((card) => {
+//   db.collection('cards').insertOne(card, (err, result) => {
+//     if (err) return console.log(err)
+//     console.log('Saved to database')
+//   })
+// });
+
+// RENDERING THE LIST OF CARDS from DB
 
 app.get("/", function(req, res) {
-  res.render("list", {cardItems: defaultCards})
+  Card.find({})
+    .then(cards => 
+      {
+        if(cards.length === 0)
+        {
+          Item.insertMany(defaultCards)
+          .then(function() {
+            console.log("Filled cards with defaultItems");
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+        res.redirect("/");   
+        } else {
+          res.render("list", {cardItems: cards});
+        }
+      })
+    .catch(err => console.error(err, "insert default"));
 });
 
-app.post("/", function(req, res) {
-  console.log(req.body.cardName) 
-  console.log(req.body.cardImg)
-  console.log(req.body.cardBody)
+// ADDING A CARD TO DB
 
+app.post("/", function(req, res) {
   try {
     const newCard = new Card({
       name: req.body.cardName,
       url: req.body.cardImg,
       body: req.body.cardBody,
-    })
-    console.log(newCard)
-    console.log(defaultCards)
-    defaultCards.push(newCard)
-    console.log(defaultCards)
+      })
+    db.collection('cards').insertOne(newCard)
+    console.log("Card added to collection!")
     res.redirect("/")
   } catch (err) {
     console.log(err)
     res.redirect("/")
   }
 });
+
+// DELETING A CARD FROM DB
+
+app.post("/delete", function(req,res){
+  const cardID = req.body;
+  const cardToDelete = mongoose.Types.ObjectId.createFromHexString(cardID.card)
+  Card.findByIdAndRemove(cardToDelete)
+    .then(function() {
+      console.log("Card sucessfully removed");
+      res.redirect("/");
+    })
+    .catch(function(err){
+      console.log("Card could not be deleted!", err);
+    }); 
+});
+
+// RENDERING THE ABOUT PAGE
 
 app.get("/about", function(req, res){
   res.render("about");

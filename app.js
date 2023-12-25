@@ -23,7 +23,7 @@ app.set('view engine', 'ejs');
 main().catch(err => console.log(err));
 
 async function main() {
-  mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.06chanb.mongodb.net/CardsDB`, {useNewUrlParser: true});
+  mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.06chanb.mongodb.net/ToDoListDB`, {useNewUrlParser: true});
 }
 
 const db = mongoose.connection;
@@ -33,41 +33,32 @@ db.once('open', () => {
   console.log('Successfully connected to MongoDB');
 });
 
-// // ITEMS SCHEMA
+// ITEMS SCHEMA
 
-// const itemsSchema = {
-//   name: {
-//     required: true,
-//     type: String
-//   }
-// };
+const itemsSchema = {
+  name: {
+    required: true,
+    type: String
+  }
+};
 
-// const Item = mongoose.model('item', itemsSchema);
+const Item = mongoose.model('item', itemsSchema);
 
-// const item1 = new Item({
-//   name: "Welcome to your To-Do List App!"
-// });
-// const item2 = new Item({
-//   name: "Hit the + button to add a new item!"
-// });
-// const item3 = new Item({
-//   name: "Mark check button to delete an item!"
-// });
+const item1 = new Item({
+  name: "Welcome to your To-Do List App!"
+});
+const item2 = new Item({
+  name: "Hit the + button to add a new item!"
+});
+const item3 = new Item({
+  name: "Mark check button to delete an item!"
+});
 
-// const defaultItems = [item1, item2, item3];
+const defaultItems = [item1, item2, item3];
 
-// // LIST SCHEMA
+// LIST SCHEMA
 
-// const listSchema = {
-//   name: String,
-//   items: [itemsSchema]
-// }
-
-// const List = mongoose.model('list', listSchema);
-
-// CARDS SCHEMA
-
-const cardSchema = {
+const listSchema = {
   name: {
     required: true,
     type: String
@@ -79,64 +70,63 @@ const cardSchema = {
   body: {
     required: false,
     type: String
+  },
+  items: {
+    type: [itemsSchema]
   }
 };
 
-const Card = mongoose.model('card', cardSchema);
+const List = mongoose.model('list', listSchema);
 
-const card1 = new Card({
-  name: "Chicago",
-  url: `../photos/image1.jpg`,
-  body: "Chicago skyline is one of the best in the world!"
-})
+// const list1 = new List({
+//   name: "Ongoing",
+//   url: `../photos/image1.jpg`,
+//   body: "Chicago skyline is one of the best in the world!",
+//   items: [item1, item2, item3]
+// })
 
-const card2 = new Card({
-  name: "Home",
-  url: `../photos/image2.jpg`,
-  body: "Calling a house home is fulfiling!"
-})
+// const list2 = new List({
+//   name: "Home",
+//   url: `../photos/image2.jpg`,
+//   body: "Calling a house home is fulfiling!",
+//   items: [item1, item2]
+// })
 
-const card3 = new Card({
-  name: "School",
-  url: `../photos/image3.jpg`,
-  body: "Going to school is the best time you will ever have!"
-})
+// const list3 = new List({
+//   name: "School",
+//   url: `../photos/image3.jpg`,
+//   body: "Going to school is the best time you will ever have!",
+//   items: [item2, item3]
+// })
 
-const card4 = new Card({
-  name: "Bali",
-  url: `../photos/image4.jpg`,
-  body: "Bali is nice every season of the year!"
-})
+// const defaultLists = [list1, list2, list3];
 
-const defaultCards = [card1, card2, card3, card4];
+// Save initial array of lists to DB!
 
-// Save initial array of cards to DB!
-
-// defaultCards.map((card) => {
-//   db.collection('cards').insertOne(card, (err, result) => {
+// defaultLists.map((list) => {
+//   db.collection('lists').insertOne(list, (err, result) => {
 //     if (err) return console.log(err)
-//     console.log('Saved to database')
+//     console.log('Saved to database!')
 //   })
 // });
 
 // RENDERING THE LIST OF CARDS from DB
 
 app.get("/", function(req, res) {
-  Card.find({})
-    .then(cards => 
+  List.find({})
+    .then(lists => 
       {
-        if(cards.length === 0)
-        {
-          Item.insertMany(defaultCards)
+        if(lists.length === 0) {
+          List.insertMany(defaultLists)
           .then(function() {
-            console.log("Filled cards with defaultItems");
+            console.log("Filled lists with defaultLists");
           })
           .catch(function(err) {
             console.log(err);
           });
         res.redirect("/");   
         } else {
-          res.render("list", {cardItems: cards});
+          res.render("list", {day: day, lists: lists});
         }
       })
     .catch(err => console.error(err, "insert default"));
@@ -174,6 +164,13 @@ app.post("/delete", function(req,res){
       console.log("Card could not be deleted!", err);
     }); 
 });
+
+// REMOVING ITEMS FROM THE LIST
+
+
+// ADDING ITEMS TO THE LIST
+
+
 
 // RENDERING THE ABOUT ME PAGE
 

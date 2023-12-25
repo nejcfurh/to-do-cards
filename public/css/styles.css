@@ -15,6 +15,8 @@ body {
     flex-direction: column;
 }
 
+/* NAVIGATION BAR */
+
 .navbar {
   display: flex;
   flex-direction: row;
@@ -24,8 +26,7 @@ body {
 }
 
 .navbar-logo {
-  /* letter-spacing: 2px; */
-  text-transform: uppercase;
+  letter-spacing: 3px;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -69,6 +70,8 @@ a:hover {
   margin: 10px auto 10px;
 }
 
+/* GENERAL STYLING */
+
 p {
   margin: 0;
   padding: 20px;
@@ -80,19 +83,6 @@ p {
 form.item {
   text-align: center;
   margin: 5px 20px 5px;
-}
-
-.add-button {
-  min-height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  border-color: transparent;
-  background-color: #4b4baa;
-  color: #fff;
-  font-size: 30px;
-  /* padding-bottom: 6px; */
-  border-width: 0;
-  cursor: pointer;
 }
 
 input[type='text'] {
@@ -159,7 +149,7 @@ hr {
   border-top: 0.5px solid rgb(46, 46, 46)
 }
 
-/* card-animation */
+/* CARD ANIMATION */
 
 .cards-box {
   display: flex;
@@ -175,7 +165,7 @@ hr {
 }
 
 .container-cards {
-  min-height: 500px;
+  max-height: 500px;
   height: fit-content;
   display: flex;
   flex-wrap: nowrap;
@@ -205,20 +195,6 @@ hr {
     margin-top: 30px
 }
 
-/* .card {
-  width: 80px;
-  border: 0.75rem;
-  background-size: cover;
-  cursor: pointer;
-  overflow: hidden;
-  border-radius: 2rem;
-  margin: 0 10px;
-  display: flex;
-  align-items: flex-end;
-  transition: 0.6s cubic-bezier(0.28,-0.03,0,.99);
-  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);
-} */
-
 .card {
   width: 80px;
   border: 0.75rem;
@@ -233,6 +209,14 @@ hr {
   box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);
   flex-direction: column;
   justify-content: flex-end;
+}
+
+.row {
+  background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.011), rgba(0, 0, 0, 0.72));
+}
+
+.row-add {
+  background: linear-gradient(180deg, rgb(32 32 32 / 18%), rgb(0 0 0 / 72%));
 }
 
 .card > .row {
@@ -274,6 +258,13 @@ hr {
   transition-delay: 0.3s;
   transition: all .3s ease-in;
   align-items: center;
+}
+
+.delete-icon {
+  width: 30px; 
+  height: 30px; 
+  cursor: pointer;
+  transition: all, 0.2s;
 }
 
 .description p {
@@ -322,7 +313,7 @@ input#addList + label.card > .title-div {
 }
 
 input#addList + label.card {
-  background-color: rgba(255, 255, 255, 0.23);
+  background-color: rgba(51, 51, 51, 0.198);
 }
 
 .card[for="List1"] {
@@ -341,14 +332,12 @@ input#addList + label.card {
   background-image: url("../photos/image4.jpg");
 }
 
-.card-add[for="addList"] {
+/* .card-add[for="addList"] {
   backdrop-filter: blur(15px);
-  background-color: rgba(255, 255, 255, 0.1);
-}
+  background-color: rgba(0, 0, 0, 0.321);
+} */
 
-.row {
-  background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.011), rgba(0, 0, 0, 0.72));
-}
+/* FORM INPUT */
 
 .card-form {
   display: flex;
@@ -399,6 +388,110 @@ form.card-item {
   box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.8);
   cursor: pointer;
   transition: all 0.5s;
+}
+
+/* TASKS LIST STYLING */
+
+.card-form-tasks {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: stretch;
+  margin-right: 40px;
+}
+
+.card-task {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  margin-top: auto;
+  backdrop-filter: blur(3px) !important;
+  background-color: #0707075d;
+  padding:10px;
+  border-radius: 10px;
+  min-width: 330px;
+  width: fit-content;
+}
+
+.card-task-line {
+  display:flex; 
+  flex-direction:row;
+  width: 100%;
+}
+
+.complete-icon {
+  width: 30px; 
+  height: 30px; 
+  cursor: pointer;
+  filter: hue-rotate(90deg);
+  transition: all 0.2s;
+}
+
+.complete-icon:hover {
+  filter: hue-rotate(0);
+}
+
+.add-task-icon {
+  margin-left: 10px;
+  width: 30px; 
+  height: 30px; 
+  cursor: pointer;
+  filter: hue-rotate(90deg);
+  transition: all 0.2s;
+}
+
+.add-task-icon:hover {
+  filter: hue-rotate(120deg);
+}
+
+.card-task-box {
+ background-color: transparent;
+ border: none;
+ padding: 0px;
+}
+
+.card-task-name {
+  color: rgb(221, 221, 221);
+  text-align: left;
+  font-weight: 200;
+}
+
+.card-task-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  height: 60px;
+  margin-top: auto;
+}
+
+#card-task-input-text {
+  padding:10px;
+  font-size: 18px;
+  width: 200px;
+  text-align: center;
+  border: none;
+  color: rgb(245, 245, 247);
+  background-color:rgba(0, 0, 0, 0.523);
+  transition: all 0.5s;
+  border-radius: 10px;
+}
+
+/* #card-task-input-text:focus {
+  background-color:rgba(218, 216, 216, 0.456);
+  border-radius: 20px;
+} */
+
+#card-task-input-text::placeholder {
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 200;
 }
 
 /* card animation - responsive */

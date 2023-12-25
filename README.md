@@ -1,7 +1,12 @@
 <h1>ToDoList</h1>
-This project was done with EJS as the front-end with ExpressJS as back-end and MongoDB for database.
+This is a an app that mostly uses CSS/HTML and EJS for the front-end, uses Node.JS & Express.JS as a back-end, and MongoDB as a database.
 
-It is a work in progress. This is a cards preview for the lists of items. Proof of concept.
+Basic Express.JS is used for connection with the MongoDB database, that stores Image links (except the default items, which are stored locally), image titles and image descriptions!
+
+To display the photos, HTML <input type="radio"> is used. App extensivelly uses flexbox CSS.
+
+I am using free Unsplash.com stock images.
+Delete Icon has been created by Ilham Fitrotul Hayat
 
 <p>Vibrant look</p>
 

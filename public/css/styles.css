@@ -33,7 +33,7 @@ body {
   display: flex;
   flex-direction: row;
   font-family: 'Poppins', sans-serif;
-  text-transform: uppercase;
+  text-transform: uppercase; 
 }
 
 .navbar-link {

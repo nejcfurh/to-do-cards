@@ -136,12 +136,13 @@ app.get("/", function(req, res) {
 
 app.post("/", function(req, res) {
   try {
-    const newCard = new Card({
-      name: req.body.cardName,
-      url: req.body.cardImg,
-      body: req.body.cardBody,
+    const newList = new List({
+      name: req.body.listName,
+      url: req.body.listImg,
+      body: req.body.listBody,
+      items: [item1, item2]
       })
-    db.collection('cards').insertOne(newCard)
+    db.collection('lists').insertOne(newList)
     console.log("Card added to collection!")
     res.redirect("/")
   } catch (err) {
@@ -153,9 +154,9 @@ app.post("/", function(req, res) {
 // DELETING A CARD FROM DB
 
 app.post("/delete", function(req,res){
-  const cardID = req.body;
-  const cardToDelete = mongoose.Types.ObjectId.createFromHexString(cardID.card)
-  Card.findByIdAndRemove(cardToDelete)
+  const listID = req.body;
+  const listToDelete = mongoose.Types.ObjectId.createFromHexString(listID.card)
+  List.findByIdAndRemove(listToDelete)
     .then(function() {
       console.log("Card sucessfully removed");
       res.redirect("/");
@@ -165,11 +166,25 @@ app.post("/delete", function(req,res){
     }); 
 });
 
-// REMOVING ITEMS FROM THE LIST
-
 
 // ADDING ITEMS TO THE LIST
 
+app.post("/add", function(req, res){
+  const newItem = req.body.newItem;
+  const listName = req.body.list;
+  console.log(`"${newItem.substring(0,1).toUpperCase() + newItem.substring(1, newItem.length)}" was added to "${listName}" task list!`)
+  res.redirect("/")
+})
+
+
+// REMOVING ITEMS FROM THE LIST
+
+app.post("/deleteItem", function(req,res){
+  const listName = Object.keys(req.body).toString()
+  const itemID = Object.values(req.body).toString()
+  console.log(`Successfully deleted an item with ID: ${itemID} from "${listName}" task list!`);
+  res.redirect("/")
+})
 
 
 // RENDERING THE ABOUT ME PAGE

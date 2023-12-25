@@ -4,29 +4,30 @@
   <div class="wrapper">
     <div class="container-cards">
       <% lists.forEach((list, i) => { %>
-             <input type="radio" name="slide" id="<%= list.name %>" <%= i === (lists.length - 1) ? "checked" : "" %> >
+             <input type="radio" name="slide" id="<%= list.name %>" <%= list.name === "Daily" ? "checked" : "" %> >
               <label for="<%= list.name %>" class="card" style="background-image: url('<%= list.url%>');">
                     <div style="display:flex; flex-direction:row; height: 500px; width: 600px;">
                       <div class="title-div">
                         <h4 class="title"><%= list.name %></h4>
                       </div>
-                      <div class="card-form-tasks" action="/delete" method="post">
-                        <form class="card-task">
+                      <div class="card-form-tasks">
+                        <form class="card-task" action="/deleteItem" method="post">
                             <% list.items.forEach((item, i) => { %>
                               <div class="card-task-line">
-                                  <button class="card-task-box" name="checkbox" type="submit" value="<%= item._id %>" onChange="this.form.submit()">
+                                  <button class="card-task-box" name="<%= list.name %>" type="submit" value="<%= item._id %>" onChange="this.form.submit()">
                                     <img class="complete-icon" src="../photos/completeIcon.png"/>
                                   </button>
                                   <p class="card-task-name"> <%= item.name %></p>
                               </div>
                             <% }) %>
-                          </form>
-                        <form class="card-task-input" action="/" method="post">
+                            </form>
+                        <form class="card-task-input" action="/add" method="post">
                           <input id="card-task-input-text"
                             type="text"
                             name="newItem"
                             placeholder="New task"
                             autocomplete="off"
+                            required="required"
                           />
                           <button style="background-color: transparent; border: none; display: flex" type="submit" name="list" value="<%= list.name %>">
                             <img class="add-task-icon" src="../photos/taskAddIcon.png"/>
@@ -109,7 +110,7 @@
             <form class="card-item" action="/" method="post">
               <input
                 type="text"
-                name="cardName"
+                name="listName"
                 placeholder="Name"
                 autocomplete="off"
                 required="required"
@@ -117,7 +118,7 @@
               <br>
               <input
                 type="url"
-                name="cardImg"
+                name="listImg"
                 placeholder="Image (url)"
                 autocomplete="off"
                 required="required"
@@ -125,12 +126,12 @@
               <br>
               <input
                 type="text"
-                name="cardBody"
+                name="listBody"
                 placeholder="Description"
                 autocomplete="off"
               />
               <br>
-              <button class="button-add" type="submit" name="card" value="accept">Generate List</button>
+              <button class="button-add-list" type="submit" name="list" value="accept">Add List</button>
             </form>        
           </div>  
         </div>

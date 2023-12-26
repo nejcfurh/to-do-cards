@@ -134,7 +134,7 @@ app.post("/", function(req, res) {
       name: req.body.listName,
       url: req.body.listImg,
       body: req.body.listBody,
-      items: [item1]
+      items: []
       })
     db.collection('lists').insertOne(newList)
     console.log("Card added to collection!")

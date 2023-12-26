@@ -12,6 +12,14 @@
                       </div>
                       <div class="card-form-tasks">
                         <form class="card-task" action="/deleteItem" method="post">
+                          <% if (list.items.length <= 0) { %>
+                            <div class="card-task-line">
+                              <button class="card-task-box" name="noname" type="submit" value="notask" onChange="this.form.submit()">
+                                <!-- <img class="complete-icon" src="../photos/completeIcon.png"/> -->
+                              </button>
+                              <p class="card-task-name" style="text-align:center"> No tasks yet! Create a task below...</p>
+                          </div>
+                          <% } else { %>
                             <% list.items.forEach((item, i) => { %>
                               <div class="card-task-line">
                                   <button class="card-task-box" name="<%= list.name %>" type="submit" value="<%= item._id %>" onChange="this.form.submit()">
@@ -19,7 +27,7 @@
                                   </button>
                                   <p class="card-task-name"> <%= item.name %></p>
                               </div>
-                            <% }) %>
+                            <% })} %>
                             </form>
                         <form class="card-task-input" action="/add" method="post">
                           <input id="card-task-input-text"

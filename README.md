@@ -1,6 +1,6 @@
 <h1 align="center">ToDoCards</h1>
 
-<p align="center">This is a ToDoList App that uses CSS/HTML and EJS for the front-end, uses Node.JS & Express.JS as a back-end, and MongoDB as a database. There are no external front-end libraries used, except few of the icons. </p>
+<p align="center">This is a ToDoList App that uses CSS/HTML and EJS for the front-end, uses Node.JS & Express.JS as a back-end, and MongoDB as a database. There are no external front-end libraries in use.</p>
 
 <p align="center"> Very beginner friendly Express.JS is used for connection with the MongoDB database, that stores list Image links, list titles and list descriptions. Every list has its own tasks. Every task can be deleted and unlimited number of tasks can be added to the list. The tasks list will overflow and can be scrollable. </p>
 

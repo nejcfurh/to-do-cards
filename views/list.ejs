@@ -4,7 +4,7 @@
   <div class="wrapper">
     <div class="container-cards">
       <% lists.forEach((list, i) => { %>
-             <input type="radio" name="slide" id="<%= list.name %>" <%= list.name === "Daily" ? "checked" : "" %> >
+             <input type="radio" name="slide" id="<%= list.name %>" <%= listName == list.name ? "checked" : "" %> >
               <label for="<%= list.name %>" class="card" style="background-image: url('<%= list.url%>');">
                     <div style="display:flex; flex-direction:row; height: 500px; width: 600px;">
                       <div class="title-div">
@@ -17,7 +17,7 @@
                               <button class="card-task-box" name="noname" type="submit" value="notask" onChange="this.form.submit()">
                                 <!-- <img class="complete-icon" src="../photos/completeIcon.png"/> -->
                               </button>
-                              <p class="card-task-name" style="text-align:center"> No tasks yet! Create a task below...</p>
+                              <p class="card-task-name" style="text-align:center"> No tasks yet! Create a task below.. </p>
                           </div>
                           <% } else { %>
                             <% list.items.forEach((item, i) => { %>
@@ -47,7 +47,7 @@
                   <div class="icon"><%= i + 1 %></div>
                   <div class="description">
                       <p> <%= list.name === "Daily" ? day : list.body %></p>
-                      <form class="delete-button" action="/delete" method="post">
+                      <form class="delete-button" action="/deleteCard" method="post">
                         <!-- linter will give an error here, but do not try to fix it - the code works regardlessly -->
                       <button 
                           style="background-color: transparent; border: none; <%= list.name === "Daily" ? "visibility: hidden" : "" %>" class="icon" 
@@ -120,7 +120,7 @@
             <h4 class="title-add" style="text-align: center">ADD A CUSTOM LIST</h4>
           </div>
           <div class="card-form">
-            <form class="card-item" action="/" method="post">
+            <form class="card-item" action="/addCard" method="post">
               <input
                 type="text"
                 name="listName"

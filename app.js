@@ -108,8 +108,7 @@ let defaultLists;
 
 app.get("/", function(req, res) {
   List.find({})
-    .then(lists => 
-      {
+    .then(lists => {
         if(lists.length === 0) {
           List.insertMany(defaultLists)
           .then(function() {
@@ -120,7 +119,7 @@ app.get("/", function(req, res) {
           });
         res.redirect("/");   
         } else {
-          res.render("list", {day: day, lists: lists});
+          res.render("list", {day: day, lists: lists, listName: "Daily"});
         }
       })
     .catch(err => console.error(err, "insert default"));
@@ -128,7 +127,7 @@ app.get("/", function(req, res) {
 
 // ADDING A CARD TO DB
 
-app.post("/", function(req, res) {
+app.post("/addCard", async function(req, res) {
   try {
     const newList = new List({
       name: req.body.listName,
@@ -136,9 +135,10 @@ app.post("/", function(req, res) {
       body: req.body.listBody,
       items: []
       })
-    db.collection('lists').insertOne(newList)
+    await db.collection('lists').insertOne(newList)
     console.log("Card added to collection!")
-    res.redirect("/")
+    const updatedLists = await List.find({});
+    res.render("list", {day: day, lists: updatedLists, listName: req.body.listName});
   } catch (err) {
     console.log(err)
     res.redirect("/")
@@ -147,7 +147,7 @@ app.post("/", function(req, res) {
 
 // DELETING A CARD FROM DB
 
-app.post("/delete", function(req,res){
+app.post("/deleteCard", function(req,res){
   const listID = req.body;
   const listToDelete = mongoose.Types.ObjectId.createFromHexString(listID.card)
   List.findByIdAndRemove(listToDelete)
@@ -171,7 +171,9 @@ app.post("/add", async function(req, res){
     const updateDocument = { $push: { items: { name: req.body.newItem } } };
     const result = await List.updateOne(filter, updateDocument);
     console.log(`"Number of documents modified: ${result.modifiedCount}. Task "${newItem.substring(0,1).toUpperCase() + newItem.substring(1, newItem.length)}" was added to "${listName}" task list!`)
-    res.redirect("/")
+    console.log(listName)
+    const updatedLists = await List.find({});
+    res.render("list", {day: day, lists: updatedLists, listName: listName});
   } catch (error) {
     console.error('Error occurred while updating document:', error);
     res.redirect("/")
@@ -191,7 +193,8 @@ app.post("/deleteItem", async function(req,res){
       { $pull: { items: { _id: itemID } } }
     );
     console.log(`Number of deleted items: ${result.modifiedCount} - Successfully deleted an item with ID: ${itemID} from "${listName}" task list!`);
-    res.redirect("/");
+    const updatedLists = await List.find({});
+    res.render("list", {day: day, lists: updatedLists, listName: listName});
   } catch (error) {
     console.error('Error occurred while deleting document:', error);
     res.redirect("/");

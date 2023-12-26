@@ -48,6 +48,7 @@
                   <div class="description">
                       <p> <%= list.name === "Daily" ? day : list.body %></p>
                       <form class="delete-button" action="/delete" method="post">
+                        <!-- linter will give an error here, but do not try to fix it - the code works regardlessly -->
                       <button 
                           style="background-color: transparent; border: none; <%= list.name === "Daily" ? "visibility: hidden" : "" %>" class="icon" 
                           type="submit" 

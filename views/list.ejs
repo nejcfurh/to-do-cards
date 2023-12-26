@@ -48,7 +48,11 @@
                   <div class="description">
                       <p> <%= list.name === "Daily" ? day : list.body %></p>
                       <form class="delete-button" action="/delete" method="post">
-                      <button style="background-color: transparent; border: none" class="icon" type="submit" name="card" value="<%= list._id %>">
+                      <button 
+                          style="background-color: transparent; border: none; <%= list.name === "Daily" ? "visibility: hidden" : "" %>" class="icon" 
+                          type="submit" 
+                          name="card" 
+                          value="<%= list._id %>">
                         <img class="delete-icon" src="../photos/deleteIcon.png">
                       </button>
                     </form>

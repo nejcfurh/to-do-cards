@@ -40,44 +40,39 @@ body {
   color: #8a8989bd;
 }
 
-.navbar-links {
+/* not in use currently */
+
+/* .navbar-links {
   display: flex;
   flex-direction: row;
   font-family: 'Poppins', sans-serif;
   text-transform: uppercase; 
-}
+} */
 
-.navbar-link {
+/* .navbar-link {
   font-size: 18px;
-}
+} */
  
 h1 {
   color: #ffffffbd;
   font-family: 'Poppins', sans-serif;
 }
 
-h2 {
+/* not in use due to lack of navbar */
+
+/* h2 {
   padding: 0px 30px 0px 30px;
 }
 
 h2 > a {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.577);
-}
+} */
 
 a:hover {
   cursor: pointer;
   color: rgb(95, 95, 95);
   transition: all 0.3s;
-}
-
-#heading {
-  background-color: #4b4baa;
-  text-align: center;
-  border-radius: 20px;
-  padding: 0 20px 0;
-  color: white;
-  margin: 10px auto 10px;
 }
 
 /* GENERAL STYLING */
@@ -349,11 +344,6 @@ input#addList + label.card {
   background-image: url("../photos/image4.jpg");
 }
 
-/* .card-add[for="addList"] {
-  backdrop-filter: blur(15px);
-  background-color: rgba(0, 0, 0, 0.321);
-} */
-
 /* FORM INPUT */
 
 .card-form {
@@ -504,57 +494,10 @@ form.card-item {
   border-radius: 10px;
 }
 
-/* #card-task-input-text:focus {
-  background-color:rgba(218, 216, 216, 0.456);
-  border-radius: 20px;
-} */
-
 #card-task-input-text::placeholder {
   color: rgb(255, 255, 255);
   font-size: 20px;
   font-weight: 200;
-}
-
-/* card animation - responsive */
-
-@media (max-width: 766px) {
-  .wrapper {
-    margin-top: 400px;
-  }
-
-  .container {
-    height: 1200px;
-    flex-direction: column;
-  }
-
-  .slide {
-    width: 400px;
-    align-items: flex-start;
-  }
-
-  .slide > .row {
-    flex-direction: column;
-  }
-
-  .slide > .row > .icon-1,
-  .icon-2,
-  .icon-3 {
-    width: 50px;
-     }
-
-  .slide {
-    height: 80px;
-  }
-
-  .slide > .row > .description {
-    height: 500px;
-    width: 400px;
-  }
-
-  input:checked + label {
-    height: 600px;
-    width: 400px;
-  }
 }
 
 /* DevIcons */
@@ -582,7 +525,7 @@ form.card-item {
   padding: 15px;
 }
 
-/* About Me */
+/* About Me & Contact */
 
 .about-me-box {
   display: flex;
@@ -603,10 +546,22 @@ form.card-item {
 }
 
 .mail-icon {
-  display: inline;
-  width: 50px;
-  height: 50px;
+  display: flex;
+  margin: auto;
+  width: 45px;
+  height: 45px;
   cursor: pointer;
+}
+
+.mail-icon-mail {
+  display: flex;
+  margin: auto;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  background-color: white; 
+  padding: 0px 5px 0px 5px; 
+  border-radius: 10px
 }
 
 .contact {

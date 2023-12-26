@@ -166,24 +166,54 @@ app.post("/delete", function(req,res){
     }); 
 });
 
-
 // ADDING ITEMS TO THE LIST
 
-app.post("/add", function(req, res){
+app.post("/add", async function(req, res){
   const newItem = req.body.newItem;
   const listName = req.body.list;
-  console.log(`"${newItem.substring(0,1).toUpperCase() + newItem.substring(1, newItem.length)}" was added to "${listName}" task list!`)
-  res.redirect("/")
+
+  try {
+    const filter = { name: listName }; 
+    const updateDocument = { $push: { items: { name: req.body.newItem } } };
+    const result = await List.updateOne(filter, updateDocument);
+    console.log(`"Number of documents modified: ${result.modifiedCount}. Task "${newItem.substring(0,1).toUpperCase() + newItem.substring(1, newItem.length)}" was added to "${listName}" task list!`)
+    res.redirect("/")
+  } catch (error) {
+    console.error('Error occurred while updating document:', error);
+  }
 })
 
 
 // REMOVING ITEMS FROM THE LIST
 
-app.post("/deleteItem", function(req,res){
+app.post("/deleteItem", async function(req,res){
   const listName = Object.keys(req.body).toString()
-  const itemID = Object.values(req.body).toString()
-  console.log(`Successfully deleted an item with ID: ${itemID} from "${listName}" task list!`);
-  res.redirect("/")
+  const itemID = Object.values(req.body).toString().trim()
+
+  try {
+    const result = await List.updateOne(
+      { name: listName },
+      { $pull: { items: { _id: itemID } } }
+    );
+    console.log(`Number of deleted items: ${result.modifiedCount} - Successfully deleted an item with ID: ${itemID} from "${listName}" task list!`);
+    res.redirect("/")
+  } catch (error) {
+    console.error('Error occurred while deleting document:', error);
+  }
+
+  // try {
+  //   const _id = mongoose.Types.ObjectId.createFromHexString(itemID);
+
+  //   console.log('Generated _id:', _id);
+
+  //   const result = await List.deleteOne({ _id: _id });
+  //   console.log(`Number of deleted items: ${result} - Successfully deleted an item with ID: ${_id} from "${listName}" task list!`);
+  //   res.redirect("/")
+  // } catch (error) {
+  //   console.error('Error occurred while deleting document:', error);
+  // }
+  // console.log(`Successfully deleted an item with ID: ${itemID} from "${listName}" task list!`);
+  // res.redirect("/")
 })
 
 

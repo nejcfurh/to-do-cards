@@ -404,7 +404,7 @@ form.card-item {
   flex-wrap: wrap;
   flex-direction: row;
   align-content: stretch;
-  margin-right: 40px;
+  margin-right: 50px;
 }
 
 .card-task {
@@ -416,10 +416,13 @@ form.card-item {
   margin-top: auto;
   backdrop-filter: blur(3px) !important;
   background-color: #0707075d;
-  padding:10px;
+  padding:8px;
+  padding-left:15px;
   border-radius: 10px;
   min-width: 400px;
   width: fit-content;
+  max-height: 320px;
+  overflow: scroll;
 }
 
 .card-task-line {

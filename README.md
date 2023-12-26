@@ -19,4 +19,16 @@ Delete Icon has been created by Ilham Fitrotul Hayat.</p>
 
 <h3 align="center">How to use?</h3>
 
-<p align="center">The code can be freely reused and improved. To start working on this, create an auth.js file with your own MongoDB credentials, uncomment the code for items and saving items to DB.d When your DB is populated with test items, please comment them again. Nodemon is a module, for running this app on your local machine. Just cd to your project folder and run "nodemon". </p>
+<p align="center">The code can be freely reused and improved. </p>
+  
+<p align="center"> 1. To start working on this, create an auth.js or an .env file with your own MongoDB credentials. Open terminal and install the dependencies. </p>
+
+<p align="center"> 2. Uncomment the code for items and saving items to DB. </p>
+
+<p align="center"> 3. When your DB is populated with test items, please comment them again so it is not continously populating your DB with the same items. </p>
+
+<p align="center"> 4. User nodemon for running this app on your local machine. </p>
+
+<p align="center"> 5. Just cd to your project folder and run "nodemon". </p>
+
+<p align="center"> 6. This should be it. Enjoy! </p>

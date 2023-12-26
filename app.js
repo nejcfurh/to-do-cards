@@ -136,7 +136,7 @@ app.post("/addCard", async function(req, res) {
       items: []
       })
     await db.collection('lists').insertOne(newList)
-    console.log("Card added to collection!")
+    console.log(`Card titled ${req.body.listName} was successfully added to the collection of lists!`)
     const updatedLists = await List.find({});
     res.render("list", {day: day, lists: updatedLists, listName: req.body.listName});
   } catch (err) {
@@ -152,7 +152,7 @@ app.post("/deleteCard", function(req,res){
   const listToDelete = mongoose.Types.ObjectId.createFromHexString(listID.card)
   List.findByIdAndRemove(listToDelete)
     .then(function() {
-      console.log("Card sucessfully removed");
+      console.log(`Card was successfully removed from the collection of lists!`);
       res.redirect("/");
     })
     .catch(function(err){

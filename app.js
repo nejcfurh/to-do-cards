@@ -1,12 +1,6 @@
 'use strict';
 
-// modules
-
-const username = require(__dirname + "/auth.js").username;
-const password = require(__dirname + "/auth.js").password;
-
-// console.log(password, username);
-
+require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
 const date = require(__dirname + '/date.js'); // our own module
@@ -15,6 +9,14 @@ const _ = require('lodash');
 
 const day = date.getDate();
 const app = express();
+
+// modules
+
+const username = require(__dirname + "/auth.js").username || process.env.USERNAME;
+const password = require(__dirname + "/auth.js").password || process.env.PASSWORD;
+
+// const username = process.env.USERNAME;
+// const password = process.env.PASSWORD;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));

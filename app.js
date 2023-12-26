@@ -174,6 +174,7 @@ app.post("/add", async function(req, res){
     res.redirect("/")
   } catch (error) {
     console.error('Error occurred while updating document:', error);
+    res.redirect("/")
   }
 })
 
@@ -193,6 +194,7 @@ app.post("/deleteItem", async function(req,res){
     res.redirect("/");
   } catch (error) {
     console.error('Error occurred while deleting document:', error);
+    res.redirect("/");
   }
 })
 

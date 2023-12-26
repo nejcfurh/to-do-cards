@@ -194,22 +194,7 @@ app.post("/deleteItem", async function(req,res){
   } catch (error) {
     console.error('Error occurred while deleting document:', error);
   }
-
-  // try {
-  //   const _id = mongoose.Types.ObjectId.createFromHexString(itemID);
-
-  //   console.log('Generated _id:', _id);
-
-  //   const result = await List.deleteOne({ _id: _id });
-  //   console.log(`Number of deleted items: ${result} - Successfully deleted an item with ID: ${_id} from "${listName}" task list!`);
-  //   res.redirect("/")
-  // } catch (error) {
-  //   console.error('Error occurred while deleting document:', error);
-  // }
-  // console.log(`Successfully deleted an item with ID: ${itemID} from "${listName}" task list!`);
-  // res.redirect("/")
 })
-
 
 // RENDERING THE ABOUT ME PAGE
 

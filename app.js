@@ -33,6 +33,8 @@ db.once('open', () => {
   console.log('Successfully connected to MongoDB');
 });
 
+// ITEMS SCHEMA
+
 const itemsSchema = {
   name: {
     required: true,
@@ -54,123 +56,197 @@ const item3 = new Item({
 
 const defaultItems = [item1, item2, item3];
 
+// LIST SCHEMA
+
 const listSchema = {
-  name: String,
-  items: [itemsSchema]
-}
+  name: {
+    required: true,
+    type: String
+  },
+  url: {
+    required: true,
+    type: String
+  },
+  body: {
+    required: false,
+    type: String
+  },
+  items: {
+    type: [itemsSchema]
+  }
+};
 
 const List = mongoose.model('list', listSchema);
 
-// app.get('/', async (req, res) => {
-//   try {
-//     // search for collections
-//     const collections = await db.db.collections();
-//     const collectionNames = collections.map(collection => collection.collectionName);
-//     // search for items
-//     Item.find({})
-//     .then(items => {
-//       if(items.length === 0){
-//         Item.insertMany(defaultItems)
-//           .then(function() {
-//             console.log("Sucessful");
-//           })
-//           .catch(function(err){
-//             console.log(err);
-//           });
-//           res.redirect("/");   
-//           } else {
-//             res.render("list", {listTitle: day, newListItems: items, collectionNames: collectionNames});
-//       }})
-//       .catch(err => console.error(err, "insert default"));
-//   } catch (error) {
-//     res.status(500).json({ error: 'Unable to fetch collections' });
-//   }
+// const list1 = new List({
+//   name: "Ongoing",
+//   url: `../photos/image1.jpg`,
+//   body: "Chicago skyline is one of the best in the world!",
+//   items: [item1, item2, item3]
+// })
+
+// const list2 = new List({
+//   name: "Home",
+//   url: `../photos/image2.jpg`,
+//   body: "Calling a house home is fulfiling!",
+//   items: [item1, item2]
+// })
+
+// const list3 = new List({
+//   name: "School",
+//   url: `../photos/image3.jpg`,
+//   body: "Going to school is the best time you will ever have!",
+//   items: [item2, item3]
+// })
+
+// const defaultLists = [list1, list2, list3];
+
+let defaultLists;
+// Save initial array of lists to DB!
+
+// defaultLists.map((list) => {
+//   db.collection('lists').insertOne(list, (err, result) => {
+//     if (err) return console.log(err)
+//     console.log('Saved to database!')
+//   })
 // });
 
+// RENDERING THE LIST OF CARDS from DB
+
 app.get("/", function(req, res) {
-  Item.find({})
-    .then(items => {
-      if(items.length === 0){
-        Item.insertMany(defaultItems)
+  List.find({})
+    .then(lists => 
+      {
+        if(lists.length === 0) {
+          List.insertMany(defaultLists)
           .then(function() {
-            console.log("Sucessful");
+            console.log("Filled lists with defaultLists");
           })
-          .catch(function(err){
+          .catch(function(err) {
             console.log(err);
           });
-          res.redirect("/");   
-          } else {
-            res.render("list", {listTitle: day, newListItems: items});
-      }})
-      .catch(err => console.error(err, "insert default"));
+        res.redirect("/");   
+        } else {
+          res.render("list", {day: day, lists: lists});
+        }
+      })
+    .catch(err => console.error(err, "insert default"));
 });
 
-app.get("/:customListName", async function (req, res) {
-  const customListName = _.capitalize(req.params.customListName);
-  await List.findOne({ name: customListName })
-    .then(async function (foundList) {
-      if (!foundList) {
-        const list = new List({
-          name: customListName,
-          items: defaultItems,
-        });
-        await list.save();
-        res.redirect("/" + customListName);
-      } else {
-        //show an existing list
-        res.render("list", {
-          listTitle: foundList.name,
-          newListItems: foundList.items,
-        });
-      }
-    })
-    .catch((err) => console.log(err));
-}),
- 
+// ADDING A CARD TO DB
+
 app.post("/", function(req, res) {
-  const itemName = req.body.newItem;
+  try {
+    const newList = new List({
+      name: req.body.listName,
+      url: req.body.listImg,
+      body: req.body.listBody,
+      items: [item1, item2]
+      })
+    db.collection('lists').insertOne(newList)
+    console.log("Card added to collection!")
+    res.redirect("/")
+  } catch (err) {
+    console.log(err)
+    res.redirect("/")
+  }
+});
+
+// DELETING A CARD FROM DB
+
+app.post("/delete", function(req,res){
+  const listID = req.body;
+  const listToDelete = mongoose.Types.ObjectId.createFromHexString(listID.card)
+  List.findByIdAndRemove(listToDelete)
+    .then(function() {
+      console.log("Card sucessfully removed");
+      res.redirect("/");
+    })
+    .catch(function(err){
+      console.log("Card could not be deleted!", err);
+    }); 
+});
+
+// ADDING ITEMS TO THE LIST
+
+app.post("/add", async function(req, res){
+  const newItem = req.body.newItem;
   const listName = req.body.list;
 
-  const newItem = new Item({
-    name: itemName
-  });
- 
-  if(listName === day){
-    newItem.save(); 
-    console.log("Item saved successfully!")
-    res.redirect(`/`);
-  } else {
-    List.findOne({name: listName})
-    .then(function(result) {
-      result.items.push(newItem);
-      result.save();
-      res.redirect(`/${listName}`);
-      console.log("Custom list item added successfully!")
-    }).catch((err) => console.log(err, "post"));
+  try {
+    const filter = { name: listName }; 
+    const updateDocument = { $push: { items: { name: req.body.newItem } } };
+    const result = await List.updateOne(filter, updateDocument);
+    console.log(`"Number of documents modified: ${result.modifiedCount}. Task "${newItem.substring(0,1).toUpperCase() + newItem.substring(1, newItem.length)}" was added to "${listName}" task list!`)
+    res.redirect("/")
+  } catch (error) {
+    console.error('Error occurred while updating document:', error);
   }
-});
- 
-app.post("/delete", function(req,res){
-  const checkedItemID = req.body.checkbox;
-  const listName = req.body.listName;
- 
-  if (listName === day){
-    Item.findByIdAndRemove(checkedItemID).then(function(){
-      console.log("Item sucessfully removed");
-    }) .catch(function(err){
-      console.log(err);
-    }); 
+})
+
+
+// REMOVING ITEMS FROM THE LIST
+
+app.post("/deleteItem", async function(req,res){
+  const listName = Object.keys(req.body).toString()
+  const itemID = Object.values(req.body).toString().trim()
+
+  try {
+    const result = await List.updateOne(
+      { name: listName },
+      { $pull: { items: { _id: itemID } } }
+    );
+    console.log(`Number of deleted items: ${result.modifiedCount} - Successfully deleted an item with ID: ${itemID} from "${listName}" task list!`);
     res.redirect("/");
-  } else {
-    List.findOneAndUpdate({name: listName}, {$pull:{ items:{_id:checkedItemID }}}, {new: true}).then(function(foundList) {
-      console.log("Custom list item removed!")
-      res.redirect("/" + listName);
-    }).catch( err => console.log(err, "delete"));
+  } catch (error) {
+    console.error('Error occurred while deleting document:', error);
   }
+
+  // try {
+  //   const _id = mongoose.Types.ObjectId.createFromHexString(itemID);
+
+  //   console.log('Generated _id:', _id);
+
+  //   const result = await List.deleteOne({ _id: _id });
+  //   console.log(`Number of deleted items: ${result} - Successfully deleted an item with ID: ${_id} from "${listName}" task list!`);
+  //   res.redirect("/")
+  // } catch (error) {
+  //   console.error('Error occurred while deleting document:', error);
+  // }
+  // console.log(`Successfully deleted an item with ID: ${itemID} from "${listName}" task list!`);
+  // res.redirect("/")
+})
+
+
+// RENDERING THE ABOUT ME PAGE
+
+const aboutContent =
+  `I'm a dedicated Junior Software Engineer eager to contribute my skills to innovative projects. 
+  
+  With a solid foundation in mostly JavaScript (EJS, jQuerry, Node.JS, React.JS), and HTML/CSS coupled with my hands-on experience in building web applications and exploring emerging technologies, I'm excited about the opportunity to collaborate and learn from experienced professionals in the field.
+
+  I am proactive, detail-oriented, and committed to continuous improvement.`
+
+
+app.get("/contact", function(req, res){
+  res.render("contact", {about: aboutContent});
 });
 
+// RENDERING INFO PAGE
+
+const aboutAppContent =
+  `This is a ToDoList App that uses CSS/HTML and EJS for the front-end, uses Node.JS & Express.JS as a back-end, and MongoDB as a database. There are no external front-end libraries used, except few of the icons. 
+  
+  Very beginner friendly Express.JS is used for connection with the MongoDB database, that stores list Image links, list titles and list descriptions. Every list has its own tasks. Every task can be deleted and unlimited number of tasks can be added to the list. The tasks list will overflow and can be scrollable.
+  
+  To display the lists, HTML <input type="radio"> is used. App extensivelly uses flexbox CSS.
+  
+  I am using free Unsplash.com stock images and an icons were created by Ilham Fitrotul Hayat and downloaded on FreePic.
+  
+  The contact me page accessible by clicking on my name in the footer was created using DevIcons (can be used as a standalone, or as a module).`
+
 app.get("/about", function(req, res){
-  res.render("about");
+  res.render("about", {aboutApp: aboutAppContent});
 });
  
 app.listen(3000, function() {

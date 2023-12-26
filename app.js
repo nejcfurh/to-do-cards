@@ -101,6 +101,7 @@ const List = mongoose.model('list', listSchema);
 
 // const defaultLists = [list1, list2, list3];
 
+let defaultLists;
 // Save initial array of lists to DB!
 
 // defaultLists.map((list) => {
@@ -196,7 +197,7 @@ app.post("/deleteItem", async function(req,res){
       { $pull: { items: { _id: itemID } } }
     );
     console.log(`Number of deleted items: ${result.modifiedCount} - Successfully deleted an item with ID: ${itemID} from "${listName}" task list!`);
-    res.redirect("/")
+    res.redirect("/");
   } catch (error) {
     console.error('Error occurred while deleting document:', error);
   }
@@ -234,13 +235,15 @@ app.get("/contact", function(req, res){
 // RENDERING INFO PAGE
 
 const aboutAppContent =
-  `This is a an app that mostly uses CSS/HTML and EJS for the front-end, uses Node.JS & Express.JS as a back-end, and MongoDB as a database.
+  `This is a ToDoList App that uses CSS/HTML and EJS for the front-end, uses Node.JS & Express.JS as a back-end, and MongoDB as a database. There are no external front-end libraries used, except few of the icons. 
   
-  Basic Express.JS is used for connection with the MongoDB database, that stores Image links (except the default items, which are stored locally), image titles and image descriptions!
+  Very beginner friendly Express.JS is used for connection with the MongoDB database, that stores list Image links, list titles and list descriptions. Every list has its own tasks. Every task can be deleted and unlimited number of tasks can be added to the list. The tasks list will overflow and can be scrollable.
   
-  To display the photos, HTML <input type="radio"> is used. App extensivelly uses flexbox CSS.
+  To display the lists, HTML <input type="radio"> is used. App extensivelly uses flexbox CSS.
   
-  I am using free Unsplash.com stock images.`
+  I am using free Unsplash.com stock images and an icons were created by Ilham Fitrotul Hayat and downloaded on FreePic.
+  
+  The contact me page accessible by clicking on my name in the footer was created using DevIcons (can be used as a standalone, or as a module).`
 
 app.get("/about", function(req, res){
   res.render("about", {aboutApp: aboutAppContent});

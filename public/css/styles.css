@@ -27,8 +27,17 @@ body {
 }
 
 .navbar-logo {
-  letter-spacing: 3px;
+  letter-spacing: -1px;
   font-family: 'Poppins', sans-serif;
+}
+
+.logo-link {
+  color: #ffffffbd;
+  text-decoration: none;
+}
+
+.logo-link:hover {
+  color: #8a8989bd;
 }
 
 .navbar-links {
@@ -139,6 +148,11 @@ footer {
   font-size: 13px;
   margin-top: auto;
   padding-bottom: 30px;
+}
+
+.link-footer {
+  color: #f1f1f191;
+  text-decoration: none;
 }
 
 .header {
@@ -412,8 +426,7 @@ form.card-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
-  margin-top: auto;
+  margin: 25px auto auto;
   backdrop-filter: blur(3px) !important;
   background-color: #0707075d;
   padding:8px;
@@ -485,6 +498,7 @@ form.card-item {
   text-align: center;
   border: none;
   color: rgb(245, 245, 247);
+  backdrop-filter: blur(2px);
   background-color:rgba(0, 0, 0, 0.523);
   transition: all 0.5s;
   border-radius: 10px;
@@ -574,7 +588,7 @@ form.card-item {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding: 20px;
+  padding: 25px;
 }
 
 .about-me {

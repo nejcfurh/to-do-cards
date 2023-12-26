@@ -16,3 +16,7 @@ Delete Icon has been created by Ilham Fitrotul Hayat.</p>
 ![ToDoCardsPreview](https://github.com/NF-7/ToDoList-With-Mongoose/assets/101887698/15b74558-f32c-40dc-9de7-3c219aec4394)
   
 </p>
+
+<h3 align="center">How to use?</h3>
+
+<p align="center">The code can be freely reused and improved. To start working on this, create an auth.js file with your own MongoDB credentials, uncomment the code for items and saving items to DB.d When your DB is populated with test items, please comment them again. Nodemon is a module, for running this app on your local machine. Just cd to your project folder and run "nodemon". </p>

@@ -45,16 +45,8 @@ const itemsSchema = {
 const Item = mongoose.model('item', itemsSchema);
 
 const item1 = new Item({
-  name: "Welcome to your To-Do List App!"
-});
-const item2 = new Item({
   name: "Hit the + button to add a new item!"
 });
-const item3 = new Item({
-  name: "Mark check button to delete an item!"
-});
-
-const defaultItems = [item1, item2, item3];
 
 // LIST SCHEMA
 
@@ -102,6 +94,7 @@ const List = mongoose.model('list', listSchema);
 // const defaultLists = [list1, list2, list3];
 
 let defaultLists;
+
 // Save initial array of lists to DB!
 
 // defaultLists.map((list) => {
@@ -141,7 +134,7 @@ app.post("/", function(req, res) {
       name: req.body.listName,
       url: req.body.listImg,
       body: req.body.listBody,
-      items: [item1, item2]
+      items: [item1]
       })
     db.collection('lists').insertOne(newList)
     console.log("Card added to collection!")

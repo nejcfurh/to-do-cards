@@ -9,14 +9,8 @@ const _ = require('lodash');
 
 const day = date.getDate();
 const app = express();
-
-// modules
-
-const username = require(__dirname + "/auth.js").username || process.env.USERNAME;
-const password = require(__dirname + "/auth.js").password || process.env.PASSWORD;
-
-// const username = process.env.USERNAME;
-// const password = process.env.PASSWORD;
+const username = process.env.USERNAME;
+const password = process.env.PASSWORD;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public")); // added __dirname + for deployment

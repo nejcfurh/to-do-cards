@@ -32,3 +32,5 @@ Delete Icon has been created by Ilham Fitrotul Hayat.</p>
 <p align="center"> 5. Just cd to your project folder and run "nodemon". </p>
 
 <p align="center"> 6. This should be it. Enjoy! </p>
+
+<a href="https://to-do-cards.vercel.app">Deployed app</a>

@@ -19,7 +19,8 @@ const password = require(__dirname + "/auth.js").password || process.env.PASSWOR
 // const password = process.env.PASSWORD;
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static(__dirname + "/public")); // added __dirname + for deployment
+app.set("views", (__dirname + "/views")); // added for deployment
 app.set('view engine', 'ejs');
 
 main().catch(err => console.log(err));

@@ -33,4 +33,4 @@ Delete Icon has been created by Ilham Fitrotul Hayat.</p>
 
 <p align="center"> 6. This should be it. Enjoy! </p>
 
-<a href="https://to-do-cards.vercel.app">Deployed app</a>
+<a align="center" href="https://to-do-cards.vercel.app">Deployed app</a>

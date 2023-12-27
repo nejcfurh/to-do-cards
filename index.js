@@ -219,7 +219,8 @@ const aboutAppContent =
   
   Very beginner friendly Express.JS is used for connection with the MongoDB database, that stores list Image links, list titles and list descriptions. Every list has its own tasks. Every task can be deleted and unlimited number of tasks can be added to the list. The tasks list will overflow and can be scrollable.
   
-  To display the lists, HTML <input type="radio"> is used. App extensivelly uses flexbox CSS.
+  To display the lists, HTML <input type="radio"> is used. 
+  App extensivelly uses flexbox CSS.
   
   I am using free Unsplash.com stock images and an icons were created by Ilham Fitrotul Hayat and downloaded on FreePic.
   

@@ -279,6 +279,10 @@ hr {
   transition: all, 0.2s;
 }
 
+.delete-icon:hover {
+  opacity: 0.75;
+}
+
 .description p {
   color: #ffffff;
 }

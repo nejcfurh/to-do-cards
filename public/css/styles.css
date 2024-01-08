@@ -429,7 +429,7 @@ form.card-item {
   min-width: 400px;
   width: fit-content;
   max-height: 320px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .card-task-line {

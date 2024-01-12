@@ -432,6 +432,28 @@ form.card-item {
   overflow: auto;
 }
 
+/* scrollbar width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* scrollbar track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(211, 211, 211, 0.513);
+  border-radius: 10px;
+}
+ 
+/* scrollbar handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(152, 152, 152, 0.47); 
+  border-radius: 10px;
+}
+
+/* scrollbar handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(211, 211, 211, 0.382); 
+}
+
 .card-task-line {
   display:flex; 
   flex-direction:row;

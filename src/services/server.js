@@ -113,7 +113,7 @@ app.post('/api/todos/deleteCard', async function (req, res) {
       success: true,
       data: updatedLists,
       defaultListName: 'Daily',
-      message: 'Lists retrieved successfully!',
+      message: 'Updated lists retrieved successfully!',
     });
   } catch (err) {
     console.log('Card could not be deleted!', err);
@@ -137,6 +137,7 @@ app.post('/api/todos/addItems', async (req, res) => {
   }
 });
 
+// DELETING TODOS (ITEMS) FROM THE LIST
 app.delete('/api/todos/deleteItem', async (req, res) => {
   const { listName, itemId } = req.body;
   try {

@@ -1,9 +1,9 @@
 import Footer from './Footer';
 import Header from './Header';
 
-let aboutApp = `This is a ToDoList App that uses CSS/HTML and EJS for the front-end, uses Node.JS & Express.JS as a back-end, and MongoDB as a database. There are no external front-end libraries used, except few of the icons. 
+let aboutApp = `This is a ToDoList App that uses REACT for the front-end, Node.JS & Express.JS for back-end, and MongoDB as a database. When it comes to external front-end libraries used, I used React-Hot-Toast.
   
-  Very beginner friendly Express.JS is used for connection with the MongoDB database, that stores list Image links, list titles and list descriptions. Every list has its own tasks. Every task can be deleted and unlimited number of tasks can be added to the list. The tasks list will overflow and can be scrollable.
+  Very beginner friendly Express.JS is used for connection with the MongoDB database, that stores list image links, list titles and list descriptions. Every list has its own tasks. Every task can be deleted and unlimited number of tasks can be added to the list. The tasks list will overflow and can be scrollable.
   
   To display the lists, HTML <input type="radio"> is used. 
   App extensivelly uses flexbox CSS.

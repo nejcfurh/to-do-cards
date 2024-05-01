@@ -3,8 +3,8 @@ import { getDate } from '../../utils/helpers';
 import { useEffect, useState } from 'react';
 import Card from './Card';
 import AddCustomList from './AddCustomList';
-import Spinner from '../../ui/Spinner';
 import toast from 'react-hot-toast';
+import PageNotFound from '../../pages/PageNotFound';
 
 function CardContainer() {
   const [lists, setLists] = useState([]);
@@ -25,30 +25,34 @@ function CardContainer() {
     fetchData();
   }, []);
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <PageNotFound />;
 
   // DELETING THE CARD
-  const handleDelete = (event, listId) => {
+  const handleDelete = async (event, listId) => {
     event.preventDefault();
-    fetch(`http://localhost:3000/api/todos/deleteCard`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({ card: listId }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          // console.log('Success', data);
-          setLists(data.data);
-          setDaily(data.defaultListName);
-          toast.success('List has been successfully deleted!');
-        } else {
-          console.error('Failed to delete card');
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/todos/deleteCard`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({ card: listId }),
         }
-      })
-      .catch(error => console.error('Error:', error));
+      );
+      const data = await response.json();
+      if (data.success) {
+        console.log('Success', data);
+        setLists(data.data);
+        setDaily(data.defaultListName);
+        toast.success('List has been successfully deleted!');
+      } else {
+        console.error('Failed to delete card');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   // DELETING THE TASK
@@ -66,11 +70,8 @@ function CardContainer() {
           body: JSON.stringify({ listName, itemId }),
         }
       );
-
       if (!response.ok) throw new Error('Failed to delete');
-
       const data = await response.json();
-      // console.log('Updated list after deletion:', data);
       setLists(data.data);
       setDaily(data.defaultListName);
       toast.success('Task completed! Great job!');
@@ -93,7 +94,6 @@ function CardContainer() {
             setLists={setLists}
             setDaily={setDaily}
             handleDelete={handleDelete}
-            // handleCreate={handleCreate}
             handleDeleteTask={handleDeleteTask}
           />
         );

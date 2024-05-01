@@ -7,6 +7,10 @@ function AddCustomList({ setDaily, setLists }) {
   const [listImg, setListImg] = useState('');
   const [listBody, setListBody] = useState('');
 
+  const handleRadioChange = event => {
+    setDaily(event.target.id);
+  };
+
   const handleSubmit = async event => {
     event.preventDefault();
     const formData = {
@@ -38,7 +42,12 @@ function AddCustomList({ setDaily, setLists }) {
 
   return (
     <>
-      <input type="radio" name="slide" id="addList" />
+      <input
+        type="radio"
+        name="slide"
+        id="addList"
+        onChange={handleRadioChange}
+      />
       <label htmlFor="addList" className="card">
         <div className="form-title-flex">
           <div className="title-div">

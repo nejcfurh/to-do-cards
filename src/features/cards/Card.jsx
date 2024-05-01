@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import styled from 'styled-components';
-import { useState } from 'react';
 import Tasks from '../tasks/Tasks';
 
 const StyledButton = styled.button`
@@ -23,10 +22,9 @@ function Card({
   setDaily,
 }) {
   const { name, body, _id, url } = list;
-  const [selectedOption, setSelectedOption] = useState(daily);
 
   const handleRadioChange = event => {
-    setSelectedOption(event.target.id);
+    setDaily(event.target.id);
   };
 
   return (
@@ -36,7 +34,7 @@ function Card({
         name="slide"
         id={name}
         onChange={handleRadioChange}
-        defaultChecked={selectedOption === name}
+        checked={daily === name}
       />
       <label
         htmlFor={name}

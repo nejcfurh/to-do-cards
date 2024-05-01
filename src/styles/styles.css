@@ -1,3 +1,5 @@
+/* GLOBAL STYLES */
+
 html {
   /* vibrant background */
   /* background: linear-gradient(150deg, #00bfff, #ff4c68, #ef8172); */
@@ -18,20 +20,6 @@ body {
 }
 
 /* NAVIGATION BAR */
-
-.navbar {
-  display: flex;
-  flex-direction: row;
-  padding: 0px 50px 0px 50px;
-  justify-content: space-between;
-  align-items: center;
-  margin: auto;
-}
-
-.navbar-logo {
-  letter-spacing: -1px;
-  font-family: 'Poppins', sans-serif;
-}
 
 .logo-link {
   color: #ffffffbd;
@@ -139,14 +127,6 @@ input[type='url']:focus {
   text-transform: uppercase;
 }
 
-footer {
-  color: #f1f1f191;
-  text-align: center;
-  font-size: 13px;
-  margin-top: auto;
-  padding-bottom: 30px;
-}
-
 .link-footer {
   color: #f1f1f191;
   text-decoration: none;
@@ -189,7 +169,7 @@ hr {
 
 .title-div {
   display: flex;
-  background-color: transparent;
+  background-color: none;
   height: 100%;
   text-align: center;
   width: 80px;
@@ -289,6 +269,11 @@ hr {
   color: #ffffff;
 }
 
+.description-add {
+  width: 600px;
+  text-align: center;
+}
+
 .description-add p {
   color: #ffffff;
 }
@@ -323,7 +308,7 @@ input#addList+label.card>.form-title-flex>.title-div>.title-add {
   font-size: 25px;
   height: 400px;
   /* padding-bottom: 30px; */
-  text-align: right;
+  text-align: center;
 }
 
 input#addList+label.card>.title-div {
@@ -617,4 +602,11 @@ form.card-item {
 
 hr {
   padding: 5px;
+}
+
+.above-title-div {
+  display: flex;
+  flexDirection: row;
+  height: 500px;
+  width: 600px;
 }

@@ -2,20 +2,20 @@
 
 // our own date module
 
-exports.getDate = function () {
+export const getDate = function () {
   const today = new Date();
 
   const options = {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
-    year: "numeric"
+    year: 'numeric',
   };
 
   return today.toLocaleDateString('en-US', options);
 };
 
-exports.getDay = function () {
+export const getDay = function () {
   const today = new Date();
 
   const options = {

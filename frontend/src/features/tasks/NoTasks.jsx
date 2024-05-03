@@ -11,10 +11,7 @@ function NoTasks({ noItems }) {
         value="notask"
       >
         {noItems === 0 ? null : (
-          <img
-            className="complete-icon"
-            src="src/assets/photos/completeIcon.png"
-          />
+          <img className="complete-icon" src="../photos/completeIcon.png" />
         )}
       </button>
       <p className="card-task-name">{noTasksString}</p>

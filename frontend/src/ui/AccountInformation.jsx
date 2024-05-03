@@ -6,10 +6,7 @@ function AccountInformation({ userInformation }) {
     <div className="account-box">
       <div className="profile-card">
         <div className="profile-image">
-          <img
-            className="profile-pic"
-            src="src/assets/photos/DefaultUser.png"
-          />
+          <img className="profile-pic" src="../photos/DefaultUser.png" />
         </div>
         <div className="profile-data">
           <h1>{name}</h1>

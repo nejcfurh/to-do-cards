@@ -40,7 +40,7 @@ function CardContainer() {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `http://localhost:3000/api/todos/deleteCard`,
+        `${import.meta.env.VITE_LOCALHOST}/api/todos/deleteCard`,
         {
           method: 'POST',
           headers: {
@@ -70,7 +70,7 @@ function CardContainer() {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(
-        'http://localhost:3000/api/todos/deleteItem',
+        `${import.meta.env.VITE_LOCALHOST}/api/todos/deleteItem`,
         {
           method: 'DELETE',
           headers: {

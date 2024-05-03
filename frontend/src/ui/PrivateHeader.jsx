@@ -34,7 +34,7 @@ const PrivateHeader = React.memo(function PrivateHeader() {
       <StyledNavbar className="navbar">
         <h1 className="navbar-logo">
           <Link className="logo-link" to="/">
-            <StyledLogo src="src/assets/photos/LogoDark.png" />
+            <StyledLogo src="../photos/LogoDark.png" />
           </Link>
         </h1>
         <div className="navbar-links">

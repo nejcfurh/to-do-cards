@@ -67,10 +67,7 @@ function Card({
             >
               {name === 'Daily' ? null : (
                 <StyledButton type="submit" name="card" value={_id}>
-                  <img
-                    className="delete-icon"
-                    src="src/assets/photos/deleteIcon.png"
-                  />
+                  <img className="delete-icon" src="../photos/deleteIcon.png" />
                 </StyledButton>
               )}
             </form>

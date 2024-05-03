@@ -14,7 +14,7 @@ function PublicHeader() {
   return (
     <>
       <StyledHeader>
-        <StyledLogo src="src/assets/photos/LogoDark.png" />
+        <StyledLogo src="../photos/LogoDark.png" />
       </StyledHeader>
     </>
   );

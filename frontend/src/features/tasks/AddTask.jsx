@@ -72,10 +72,7 @@ function AddTask({ list, setLists, setDaily }) {
         onChange={handleInputChange}
       />
       <StyledButton type="submit" name="list" value={name}>
-        <img
-          className="add-task-icon"
-          src="src/assets/photos/taskAddIcon.png"
-        />
+        <img className="add-task-icon" src="../photos/taskAddIcon.png" />
       </StyledButton>
     </form>
   );

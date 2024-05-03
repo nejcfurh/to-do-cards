@@ -25,7 +25,7 @@ function TaskItem({ handleDeleteTask, listName, _id, items }) {
               >
                 <img
                   className="complete-icon"
-                  src="src/assets/photos/completeIcon.png"
+                  src="../photos/completeIcon.png"
                 />
               </button>
               <p className="card-task-name"> {name}</p>

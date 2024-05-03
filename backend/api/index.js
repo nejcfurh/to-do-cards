@@ -197,23 +197,6 @@ app.get('/api/todos', requireAuth, async (req, res) => {
   }
 });
 
-// // RENDERING THE LIST OF CARDS FROM DB -- no auth
-// app.get('/api/todos', async (req, res) => {
-//   try {
-//     const lists = await List.find({});
-//     res.json({
-//       success: true,
-//       message: 'Lists retrieved successfully',
-//       data: lists,
-//       count: lists.length,
-//       defaultListName: 'Daily',
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: 'Error loading lists!' });
-//   }
-// });
-
 // CREATING THE CARD AND SAVING IT TO DB
 app.post('/api/todos/addCard', requireAuth, async (req, res) => {
   const { listName: name, listImg: url, listBody: body, items } = req.body;
@@ -277,28 +260,6 @@ app.post('/api/todos/deleteCard', requireAuth, async function (req, res) {
   }
 });
 
-// // DELETING THE CARD FROM DB -- no auth
-// app.post('/api/todos/deleteCard', requireAuth, async function (req, res) {
-//   const listID = req.body;
-//   try {
-//     const listToDelete = mongoose.Types.ObjectId.createFromHexString(
-//       listID.card
-//     );
-//     await List.findByIdAndDelete(listToDelete);
-//     console.log(`Card was successfully removed from the collection of lists!`);
-//     const updatedLists = await List.find({});
-//     res.json({
-//       success: true,
-//       data: updatedLists,
-//       defaultListName: 'Daily',
-//       message: 'Updated lists retrieved successfully!',
-//     });
-//   } catch (err) {
-//     console.log('Card could not be deleted!', err);
-//     res.status(500).json({ error: 'Card could not be deleted!' });
-//   }
-// });
-
 // ADDING TODOS (ITEMS) TO THE LIST
 app.post('/api/todos/addItems', requireAuth, async (req, res) => {
   const { newItem, list: listName } = req.body;
@@ -324,22 +285,6 @@ app.post('/api/todos/addItems', requireAuth, async (req, res) => {
     res.status(500).json({ error: 'Failed to add item' });
   }
 });
-
-// // ADDING TODOS (ITEMS) TO THE LIST -- no auth
-// app.post('/api/todos/addItems', requireAuth, async (req, res) => {
-//   const newItem = req.body.newItem;
-//   const listName = req.body.list;
-//   try {
-//     const filter = { name: listName };
-//     const updateDocument = { $push: { items: { name: newItem } } };
-//     await List.updateOne(filter, updateDocument);
-//     const updatedLists = await List.find({});
-//     res.json({ success: true, data: updatedLists, defaultListName: listName }); // Send JSON response
-//   } catch (error) {
-//     console.error('Error occurred while updating document:', error);
-//     res.status(500).json({ error: 'Failed to add item' });
-//   }
-// });
 
 // DELETING TODOS (ITEMS) FROM THE LIST
 app.delete('/api/todos/deleteItem', requireAuth, async (req, res) => {
@@ -375,25 +320,6 @@ app.delete('/api/todos/deleteItem', requireAuth, async (req, res) => {
     res.status(500).json({ error: 'Failed to delete item' });
   }
 });
-
-// // DELETING TODOS (ITEMS) FROM THE LIST -- no auth
-// app.delete('/api/todos/deleteItem', requireAuth, async (req, res) => {
-//   const { listName, itemId } = req.body;
-//   try {
-//     const result = await List.updateOne(
-//       { name: listName },
-//       { $pull: { items: { _id: itemId } } }
-//     );
-//     console.log(
-//       `Number of deleted items: ${result.modifiedCount} - Successfully deleted an item with ID: ${itemId} from "${listName}" task list!`
-//     );
-//     const updatedLists = await List.find({});
-//     res.json({ success: true, data: updatedLists, defaultListName: listName }); // Send JSON response
-//   } catch (error) {
-//     console.error('Error occurred while deleting document:', error);
-//     res.redirect('/');
-//   }
-// });
 
 //GETTING USER INFORMATION FROM THE DB
 app.get('/api/account', requireAuth, async (req, res) => {

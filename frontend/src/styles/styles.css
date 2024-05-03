@@ -164,7 +164,6 @@ hr {
   display: flex;
   font-family: 'Roboto', sans-serif;
   height: 75vh;
-  margin-bottom: 62px;
 }
 
 .wrapper {
@@ -620,7 +619,6 @@ hr {
   font-family: 'Roboto', sans-serif;
   height: 75vh;
   align-items: center;
-  margin-bottom: 62px;
 }
 
 .account {

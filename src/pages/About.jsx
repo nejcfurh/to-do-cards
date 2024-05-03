@@ -1,27 +1,28 @@
-import Footer from './Footer';
-import Header from './Header';
+import Footer from '../ui/Footer';
+import PrivateHeader from '../ui/PrivateHeader';
 
-let aboutApp = `This is a ToDoList App that uses REACT for the front-end, Node.JS & Express.JS for back-end, and MongoDB as a database. When it comes to external front-end libraries used, I used React-Hot-Toast.
-  
-  Very beginner friendly Express.JS is used for connection with the MongoDB database, that stores list image links, list titles and list descriptions. Every list has its own tasks. Every task can be deleted and unlimited number of tasks can be added to the list. The tasks list will overflow and can be scrollable.
-  
-  To display the lists, HTML <input type="radio"> is used. 
-  App extensivelly uses flexbox CSS.
-  
-  I am using free Unsplash.com stock images and an icons were created by Ilham Fitrotul Hayat and downloaded on FreePic.
-  
-  The contact me page accessible by clicking on my name in the footer was created using DevIcons (can be used as a standalone, or as a module).`;
+let aboutApp = `Introducing ToDoCards our to-do-list web application, a seamlessly integrated solution designed with efficiency in mind. This application leverages the robust capabilities of React for its front-end, ensuring a dynamic and responsive user experience. The back-end architecture is powered by Node.js and Express.js, providing a solid foundation for high-performance interactions. MongoDB is employed as the database, expertly handling data management and user authentication.
+
+The application incorporates external libraries including React-Hot-Toast for intuitive notifications, React Router for seamless navigation, React Tooltip for enhanced user guidance, and React Icons for visually appealing interfaces.
+
+Designed with accessibility in mind, the app is beginner-friendly and facilitates easy connections to MongoDB. This allows for efficient management of list images, titles, and descriptions. Each list supports an unlimited number of tasks, which users can freely add or delete. The tasks are conveniently scrollable, thanks to an intuitive overflow setup, ensuring a tidy user interface.
+
+List displays are innovatively implemented using HTML radio buttons, and the layout extensively utilizes CSS flexbox for optimal responsiveness and organization.
+
+We have enriched our app with high-quality, free stock images from Unsplash.com, and bespoke icons crafted by Ilham Fitrotul Hayat, sourced from FreePic.
+
+Additionally, our 'Contact Me' page features Social Media Icons, which can be utilized both as a standalone feature and as an integrated module, enhancing both functionality and aesthetic appeal.`;
 
 function About() {
   return (
     <>
-      <Header />
-      <div
-        className="about-me-box"
-        style={{ width: '700px', height: '550px', margin: 'auto' }}
-      >
-        <p className="about-me">{aboutApp}</p>
+      <PrivateHeader />
+      <div className="wrapper">
+        <div className="about-me-box">
+          <p className="about-me">{aboutApp}</p>
+        </div>
       </div>
+
       <Footer />
     </>
   );

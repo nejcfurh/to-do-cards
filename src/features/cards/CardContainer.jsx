@@ -15,7 +15,13 @@ function CardContainer() {
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
-      const query = await fetch('http://localhost:3000/api/todos');
+      const token = localStorage.getItem('token');
+      const query = await fetch('http://localhost:3000/api/todos', {
+        headers: {
+          Authorization: `Bearer ${token}`, // Set the Authorization header
+          'Content-Type': 'application/json', // Assuming your API handles JSON
+        },
+      });
       const data = await query.json();
       if (!data) throw new Error('Error fetching data!');
       setLists(data.data);
@@ -30,20 +36,22 @@ function CardContainer() {
   // DELETING THE CARD
   const handleDelete = async (event, listId) => {
     event.preventDefault();
+
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch(
         `http://localhost:3000/api/todos/deleteCard`,
         {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: `Bearer ${token}`, // Set the Authorization header
+            'Content-Type': 'application/json',
           },
-          body: new URLSearchParams({ card: listId }),
+          body: JSON.stringify({ listId }),
         }
       );
       const data = await response.json();
       if (data.success) {
-        console.log('Success', data);
         setLists(data.data);
         setDaily(data.defaultListName);
         toast.success('List has been successfully deleted!');
@@ -60,11 +68,13 @@ function CardContainer() {
     event.preventDefault();
 
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch(
         'http://localhost:3000/api/todos/deleteItem',
         {
           method: 'DELETE',
           headers: {
+            Authorization: `Bearer ${token}`, // Set the Authorization header
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ listName, itemId }),

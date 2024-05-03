@@ -1,12 +1,12 @@
 import CardContainer from '../features/cards/CardContainer';
-import Header from '../pages/Header';
-import Footer from '../pages/Footer';
+import Footer from '../ui/Footer';
 import { Outlet } from 'react-router-dom';
+import PrivateHeader from '../ui/PrivateHeader';
 
 function AppLayout() {
   return (
     <>
-      <Header />
+      <PrivateHeader />
       <div className="cards-box">
         <div className="wrapper">
           <CardContainer>

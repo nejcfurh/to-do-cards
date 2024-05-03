@@ -25,12 +25,14 @@ function AddTask({ list, setLists, setDaily }) {
     const listName = name;
 
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:3000/api/todos/addItems', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Bearer ${token}`, // Set the Authorization header
+          'Content-Type': 'application/json',
         },
-        body: new URLSearchParams({
+        body: JSON.stringify({
           newItem: newItem,
           list: listName,
         }),

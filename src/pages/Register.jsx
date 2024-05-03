@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import LoginForm from '../features/authentication/LoginForm';
 import Footer from '../ui/Footer';
+import RegisterForm from '../features/authentication/RegisterForm';
 import PublicHeader from '../ui/PublicHeader';
 
 const LoginLayout = styled.main`
@@ -12,14 +12,14 @@ const LoginLayout = styled.main`
   flex-wrap: wrap;
 `;
 
-function Login() {
+function Register() {
   return (
     <LoginLayout>
       <PublicHeader />
-      <LoginForm />
+      <RegisterForm />
       <Footer />
     </LoginLayout>
   );
 }
 
-export default Login;
+export default Register;

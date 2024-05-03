@@ -1,22 +1,22 @@
-import Footer from './Footer';
-import Header from './Header';
+import Footer from '../ui/Footer';
+import PrivateHeader from '../ui/PrivateHeader';
 
-let about = `I'm a dedicated Junior Software Engineer eager to contribute my skills to innovative projects. 
-  
-  With a solid foundation in mostly JavaScript (EJS, jQuerry, Node.JS, React), and HTML/CSS coupled with my hands-on experience in building web applications and exploring emerging technologies, I'm excited about the opportunity to collaborate and learn from experienced professionals in the field.
+let about = `With a robust background in web development, primarily using JavaScript technologies such as Node.js, React, jQuery, EJS, PostgreSQL, MongoDB, alongside proficient skills in HTML/CSS, Bootstrap, TailwindCSS and WebFlow I am enthusiastic about the opportunity to contribute and grow within a dynamic team. 
 
-  I am proactive, detail-oriented, and committed to continuous improvement.`;
+My practical experience in developing web applications has been continuously enriched by exploring emerging technologies. I am known for my proactive approach, meticulous attention to detail, and a steadfast commitment to continual improvement. 
+
+I look forward to the possibility of collaborating with seasoned professionals and 
+contributing to innovative projects in the field.`;
 
 function Contact() {
   return (
     <>
-      <Header />
-      <div
-        className="about-me-box"
-        style={{ width: '950px', height: '570px', margin: 'auto' }}
-      >
-        <p className="about-me">{about}</p>
-        <hr />
+      <PrivateHeader />
+      <div className="contact-me-box">
+        <p className="contact-me">
+          I&apos;m a dedicated Junior Software Engineer eager to contribute my
+          skills to innovative projects{' '}
+        </p>
         <div className="tech-stack-icons">
           <i className="devicon-html5-plain-wordmark colored"></i>
           <i className="devicon-css3-plain-wordmark colored"></i>
@@ -33,45 +33,107 @@ function Contact() {
             <i className="devicon-webflow-original"></i>
           </div>
         </div>
-        <hr />
-        <div className="contact">
-          <p className="about-me" style={{ marginTop: '0px' }}>
-            {`Let's connect and explore how I can be a valuable asset to your
-            team`}
-          </p>
-          <hr />
-          <div className="contact-icons">
-            <a className="icon-button" href="mailto:nejc.furh7@gmail.com">
-              <img
-                className="mail-icon-mail"
-                src="https://cdn-icons-png.flaticon.com/512/666/666162.png"
-              />
+        <p className="contact-me">{about}</p>
+
+        <div className="social-media-buttons">
+          <button className="social-media-button">
+            <a href="https://www.instagram.com/nejcfurh/">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="feather feather-instagram"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
             </a>
-            <a
-              className="footer-link"
-              href="https://si.linkedin.com/in/nejcfurh"
-            >
-              <img
-                className="mail-icon"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/2048px-LinkedIn_icon.svg.png"
-              />
+          </button>
+          <button className="social-media-button">
+            <a href="https://twitter.com/nejcfurh">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon icon-tabler icon-tabler-brand-x"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="white"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+              </svg>
             </a>
-            <a className="footer-link" href="https://twitter.com/nejcfurh">
-              <img
-                className="mail-icon"
-                src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/x-social-media-round-icon.png"
-              />
+          </button>
+          <button className="social-media-button">
+            <a href="mailto:nejc.furh7@gmail.com">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="feather feather-mail"
+              >
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
             </a>
-            <a
-              className="footer-link"
-              href="https://www.facebook.com/nejcfurh/"
-            >
-              <img
-                className="mail-icon"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png"
-              />
+          </button>
+          <button className="social-media-button">
+            <a href="https://si.linkedin.com/in/nejcfurh">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="feather feather-linkedin"
+              >
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
             </a>
-          </div>
+          </button>
+          <button className="social-media-button">
+            <a href="https://www.facebook.com/nejcfurh">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="32"
+                height="32"
+                fill="none"
+                stroke="white"
+                strokeWidth="1.2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.988H8.015V12h2.423V9.607c0-2.412 1.437-3.737 3.638-3.737 1.056 0 2.165.195 2.165.195v2.385h-1.219c-1.204 0-1.596.746-1.596 1.512V12h2.713l-.434 2.89h-2.28v6.988C18.343 21.128 22 16.991 22 12 22 6.477 17.523 2 12 2z"
+                />
+              </svg>
+            </a>
+          </button>
         </div>
       </div>
       <Footer />

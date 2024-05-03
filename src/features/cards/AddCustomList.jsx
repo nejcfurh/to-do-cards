@@ -20,9 +20,11 @@ function AddCustomList({ setDaily, setLists }) {
     };
 
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:3000/api/todos/addCard', {
         method: 'POST',
         headers: {
+          Authorization: `Bearer ${token}`, // Set the Authorization header
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),

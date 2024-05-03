@@ -8,20 +8,16 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import path from 'path';
-import { fileURLToPath } from 'url';
+// import { fileURLToPath } from 'url';
 import { expressjwt } from 'express-jwt';
 
 const app = express();
 app.use(cors());
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 const username = process.env.USERNAME;
 const password = process.env.PASSWORD;
 const JWT_TOKEN = process.env.JWT_TOKEN;
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 // CONNECTING TO MONGO_DB
 
@@ -85,9 +81,12 @@ const User = mongoose.model('User', userSchema);
 
 // MIDDLEWARE
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(express.static(__dirname + '/api'));
 
 const requireAuth = expressjwt({
   secret: process.env.JWT_TOKEN,
@@ -342,6 +341,8 @@ app.get('/api/account', requireAuth, async (req, res) => {
 
 // START THE SERVER
 
-app.listen(3000, () => {
-  console.log('Server started on port 3000');
-});
+// app.listen(3000, () => {
+//   console.log('Server started on port 3000');
+// });
+
+export default app;

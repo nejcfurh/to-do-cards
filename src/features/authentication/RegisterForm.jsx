@@ -30,7 +30,7 @@ function RegisterForm() {
 
     try {
       const response = await fetch(
-        'http://localhost:3000/api/register',
+        `${import.meta.env.VITE_LOCALHOST}/api/register`,
         requestOptions
       );
       const responseData = await response.json();

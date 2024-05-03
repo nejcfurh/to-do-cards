@@ -16,7 +16,7 @@ function CardContainer() {
     async function fetchData() {
       setIsLoading(true);
       const token = localStorage.getItem('token');
-      const query = await fetch('http://localhost:3000/api/todos', {
+      const query = await fetch(`${import.meta.env.VITE_LOCALHOST}/api/todos`, {
         headers: {
           Authorization: `Bearer ${token}`, // Set the Authorization header
           'Content-Type': 'application/json', // Assuming your API handles JSON

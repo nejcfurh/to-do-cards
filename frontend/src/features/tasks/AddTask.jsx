@@ -26,17 +26,20 @@ function AddTask({ list, setLists, setDaily }) {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/api/todos/addItems', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`, // Set the Authorization header
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          newItem: newItem,
-          list: listName,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_LOCALHOST}/api/todos/addItems`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`, // Set the Authorization header
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            newItem: newItem,
+            list: listName,
+          }),
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {

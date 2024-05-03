@@ -21,14 +21,17 @@ function AddCustomList({ setDaily, setLists }) {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/api/todos/addCard', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`, // Set the Authorization header
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_LOCALHOST}/api/todos/addCard`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`, // Set the Authorization header
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await response.json();
       // console.log('Success:', data);
       setLists(data.data);

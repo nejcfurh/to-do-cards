@@ -1,7 +1,7 @@
 import Footer from '../ui/Footer';
 import PrivateHeader from '../ui/PrivateHeader';
 
-let aboutApp = `Introducing ToDoCards our to-do-list web application, a seamlessly integrated solution designed with efficiency in mind. This application leverages the robust capabilities of React for its front-end, ensuring a dynamic and responsive user experience. The back-end architecture is powered by Node.js and Express.js, providing a solid foundation for high-performance interactions. MongoDB is employed as the database, expertly handling data management and user authentication.
+let aboutApp = `Introducing - ToDoCards - my to-do-list web application, a seamlessly integrated solution designed with efficiency in mind. This application leverages the robust capabilities of React for its front-end, ensuring a dynamic and responsive user experience. The back-end architecture is powered by Node.js and Express.js, providing a solid foundation for high-performance interactions. MongoDB is employed as the database, expertly handling data management and user authentication.
 
 The application incorporates external libraries including React-Hot-Toast for intuitive notifications, React Router for seamless navigation, React Tooltip for enhanced user guidance, and React Icons for visually appealing interfaces. Designed with accessibility in mind, the app is beginner-friendly and facilitates easy connections to MongoDB. This allows for efficient management of list images, titles, and descriptions. Each list supports an unlimited number of tasks, which users can freely add or delete. The tasks are conveniently scrollable, thanks to an intuitive overflow setup, ensuring a tidy user interface.
 

@@ -552,8 +552,8 @@ form.card-item {
   background: repeating-linear-gradient(100deg, rgba(39, 39, 39, 0.75), rgba(39, 39, 39, 0.75), rgba(39, 39, 39, 0.75));
   border-radius: 20px;
   margin: auto;
-  margin-bottom: 60px;
-  min-height: 100px;
+  margin-bottom: 50px;
+  min-height: 10px;
   padding: 20px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -566,7 +566,7 @@ form.card-item {
   display: flex;
   font-family: 'Roboto', sans-serif;
   height: 75vh;
-  margin-bottom: 62px;
+
 }
 
 .contact-me-box {
@@ -574,7 +574,7 @@ form.card-item {
   flex-direction: column;
   font-family: 'Roboto', sans-serif;
   height: 75vh;
-  margin-bottom: 62px;
+
   align-items: center;
 }
 

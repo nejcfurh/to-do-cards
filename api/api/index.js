@@ -1,12 +1,8 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-'use strict';
-
+import dotenv from 'dotenv';
+dotenv.config({ path: './.env.local' });
 // PACKAGES
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-dotenv.config({ path: './.env.local' });
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
@@ -17,10 +13,10 @@ import { expressjwt } from 'express-jwt';
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 const username = process.env.USERNAME;
 const password = process.env.PASSWORD;
 const JWT_TOKEN = process.env.JWT_TOKEN;

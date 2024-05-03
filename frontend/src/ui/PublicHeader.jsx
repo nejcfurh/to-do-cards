@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 const StyledHeader = styled.div`
   text-align: center;
-  margin-top: 100px;
+  margin-top: 60px;
+  margin-bottom: 40px;
 `;
 
 const StyledLogo = styled.img`

@@ -8,7 +8,8 @@ const Form = styled.form`
       padding-top: 1rem;
       font-family: 'Poppins', sans-serif;
       width: 30rem;
-      margin-bottom: 170px;
+      margin-bottom: 150px;
+      zoom: 0.9;
 
       /* Box */
       border-radius: 10px;

@@ -553,8 +553,7 @@ form.card-item {
   border-radius: 20px;
   margin: auto;
   margin-bottom: 60px;
-  max-width: 550px;
-  min-height: 150px;
+  min-height: 100px;
   padding: 20px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);

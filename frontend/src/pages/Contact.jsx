@@ -1,7 +1,7 @@
 import Footer from '../ui/Footer';
 import PrivateHeader from '../ui/PrivateHeader';
 
-let about = `With a robust background in web development, primarily using JavaScript technologies such as Node.js, React, jQuery, EJS, PostgreSQL, MongoDB, alongside proficient skills in HTML/CSS, Bootstrap, TailwindCSS and WebFlow I am enthusiastic about the opportunity to contribute and grow within a dynamic team. 
+let about = `I'm a dedicated Junior Software Engineer eager to contribute my skills to innovative projects!With a robust background in web development, primarily using JavaScript technologies such as Node.js, React, jQuery, EJS, PostgreSQL, MongoDB, alongside proficient skills in HTML/CSS, Bootstrap, TailwindCSS and WebFlow I am enthusiastic about the opportunity to contribute and grow within a dynamic team. 
 
 My practical experience in developing web applications has been continuously enriched by exploring emerging technologies. I am known for my proactive approach, meticulous attention to detail, and a steadfast commitment to continual improvement. 
 
@@ -13,10 +13,6 @@ function Contact() {
     <>
       <PrivateHeader />
       <div className="contact-me-box">
-        <p className="contact-me">
-          I&apos;m a dedicated Junior Software Engineer eager to contribute my
-          skills to innovative projects{' '}
-        </p>
         <div className="tech-stack-icons">
           <i className="devicon-html5-plain-wordmark colored"></i>
           <i className="devicon-css3-plain-wordmark colored"></i>

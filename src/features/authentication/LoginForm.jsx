@@ -12,8 +12,8 @@ import { HiMiniInformationCircle } from 'react-icons/hi2';
 import { Tooltip } from 'react-tooltip';
 
 function LoginForm() {
-  const [email, setEmail] = useState('test@nejcfurh.dev');
-  const [password, setPassword] = useState('nejc1234');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isPending, setIsPending] = useState(false);
   const { setIsAuthenticated } = useAuth();
   const navigate = useNavigate();

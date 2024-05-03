@@ -2,6 +2,7 @@
   "name": "to-do-cards-react-server",
   "private": true,
   "version": "1.0.0",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "server": "nodemon index.js"

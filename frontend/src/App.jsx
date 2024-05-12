@@ -5,9 +5,9 @@ import AppLayout from './pages/AppLayout';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import Login from './pages/Login';
-import Register from './pages/Register';
 import ProtectedRoute from './ui/ProtectedRoute';
 import Account from './pages/Account';
+import OAuthSuccess from './features/authentication/OAuthSuccess';
 
 function App() {
   return (
@@ -49,7 +49,8 @@ function App() {
               }
             />
             <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
+            <Route path="login/success" element={<OAuthSuccess />} />
+            {/* <Route path="*" element={<Navigate to="/" />} /> */}
           </Routes>
         </AuthProvider>
       </BrowserRouter>

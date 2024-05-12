@@ -10,9 +10,21 @@ import cors from 'cors';
 import path from 'path';
 // import { fileURLToPath } from 'url';
 import { expressjwt } from 'express-jwt';
+import passport from 'passport';
+import session from 'express-session';
+import './oauth/passport.js';
 
 const app = express();
 app.use(cors());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 const username = process.env.USERNAME;
 const password = process.env.PASSWORD;
 const JWT_TOKEN = process.env.JWT_TOKEN;
@@ -67,17 +79,46 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Please provide an email!'],
     unique: [true, 'Email Exists!'],
   },
-
   password: {
     type: String,
-    required: [true, 'Please provide a password!'],
+    required: [
+      function () {
+        return (
+          !this.googleId &&
+          !this.facebookId &&
+          !this.gitHubId &&
+          !this.twitterXId
+        );
+      },
+      'Please provide a password!',
+    ],
     unique: false,
+    default: null,
   },
-
+  googleId: {
+    type: String,
+    unique: true,
+    sparse: true,
+  },
+  facebookId: {
+    type: String,
+    unique: true,
+    sparse: true,
+  },
+  gitHubId: {
+    type: String,
+    unique: true,
+    sparse: true,
+  },
+  twitterXId: {
+    type: String,
+    unique: true,
+    sparse: true,
+  },
   lists: [listSchema],
 });
 
-const User = mongoose.model('User', userSchema);
+export const User = mongoose.model('User', userSchema);
 
 // MIDDLEWARE
 
@@ -346,6 +387,102 @@ app.get('/api/account', requireAuth, async (req, res) => {
     console.error('Error fetching user data:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
+});
+
+// OAUTH
+
+// GOOGLE AUTH
+app.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+app.get(
+  '/auth/google/todocards',
+  passport.authenticate('google', {
+    failureRedirect: '/login',
+  }),
+  (req, res) => {
+    const token = jwt.sign(
+      { userId: req.user._id, email: req.user.email },
+      JWT_TOKEN,
+      { expiresIn: '24h' }
+    );
+    res.redirect(`https://to-do-cards.vercel.app/login/success?token=${token}`);
+  }
+);
+
+// FACEBOOK AUTH
+app.get(
+  '/auth/facebook',
+  passport.authenticate('facebook', { scope: ['email'] })
+);
+
+app.get(
+  '/auth/facebook/callback',
+  passport.authenticate('facebook', {
+    failureRedirect: '/login',
+  }),
+  (req, res) => {
+    const token = jwt.sign(
+      { userId: req.user._id, email: req.user.email },
+      JWT_TOKEN,
+      { expiresIn: '24h' }
+    );
+    res.redirect(`https://to-do-cards.vercel.app/login/success?token=${token}`);
+  }
+);
+
+// TWITTER X AUTH
+
+app.get('/auth/twitter', passport.authenticate('twitter'));
+
+app.get(
+  '/auth/twitter/callback',
+  passport.authenticate('twitter', {
+    failureRedirect: '/login',
+  }),
+  (req, res) => {
+    const token = jwt.sign(
+      { userId: req.user._id, email: req.user.email },
+      JWT_TOKEN,
+      { expiresIn: '24h' }
+    );
+    res.redirect(`https://to-do-cards.vercel.app/login/success?token=${token}`);
+  }
+);
+
+// GITHUB AUTH
+
+// GitHub OAuth
+app.get(
+  '/auth/github',
+  passport.authenticate('github', { scope: ['user:email'] })
+);
+
+app.get(
+  '/auth/github/callback',
+  passport.authenticate('github', {
+    failureRedirect: '/login',
+  }),
+  (req, res) => {
+    const token = jwt.sign(
+      { userId: req.user._id, email: req.user.email },
+      JWT_TOKEN,
+      { expiresIn: '24h' }
+    );
+    res.redirect(`https://to-do-cards.vercel.app/login/success?token=${token}`);
+  }
+);
+
+app.get('/api/verify-token', (req, res) => {
+  const token = req.headers['authorization'].split(' ')[1];
+  jwt.verify(token, JWT_TOKEN, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ valid: false });
+    }
+    res.json({ valid: true, userId: decoded.userId });
+  });
 });
 
 // START THE SERVER

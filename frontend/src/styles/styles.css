@@ -2,7 +2,7 @@
 
 :root {
   --background: #060D23;
-  --linkedin: #0A66C2;
+  --github: #8f9090b3;
   --youtube: #e52d27;
   --x: #0F1419;
   --white: #FFF;
@@ -1085,7 +1085,7 @@ ul {
 } */
 
 .item:nth-child(2) {
-  --bg-color: var(--linkedin);
+  --bg-color: var(--github);
 }
 
 .item:nth-child(3) {

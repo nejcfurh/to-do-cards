@@ -45,7 +45,9 @@ function LoginForm() {
         navigate(from);
       } else {
         console.error('Login Failed:', data.message);
-        toast.error(`Login failed! ${data.message}`);
+        toast.error(
+          `Please check your credentials or use social login options!`
+        );
       }
     } catch (error) {
       console.error('Login Error:', error.message);
@@ -73,9 +75,7 @@ function LoginForm() {
               }}
             >
               Email:{' '}
-              <span style={{ textTransform: 'lowercase' }}>
-                test@nejcfurh.dev
-              </span>{' '}
+              <span style={{ textTransform: 'lowercase' }}>test@test.dev</span>{' '}
               <br /> Password:{' '}
               <span style={{ textTransform: 'lowercase' }}>nejc1234</span>
             </p>

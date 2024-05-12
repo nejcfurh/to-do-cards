@@ -762,8 +762,8 @@ hr {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-bottom: 150px;
-  zoom: 1.1;
+  /* padding-bottom: 150px;
+  zoom: 1.1; */
 }
 
 .title-section {

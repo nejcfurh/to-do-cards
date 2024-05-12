@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StyledHeader = styled.div`
   text-align: center;
   margin-top: 60px;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
 `;
 
 const StyledLogo = styled.img`

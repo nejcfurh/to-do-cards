@@ -9,7 +9,7 @@ Additionally, our 'Contact Me' page features Social Media Icons, which can be ut
 <hr/>
 <h3 align=center>Login page</h3>
 
-<img align=center width="1462" alt="ScreenShot 2024-05-03 at 20 15 47" src="https://github.com/NF-7/to-do-cards/assets/101887698/a9aa1099-3357-4d7a-bdbb-f9a434da707e">
+<img align=center width="1503" alt="ScreenShot 2024-05-12 at 21 54 49" src="https://github.com/NF-7/to-do-cards/assets/101887698/7de4a103-d1c2-4289-aa85-5e45d1501a99">
 
 <h3 align=center>Authenticated user view of the ToDoCards </h3>
 

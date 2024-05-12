@@ -100,11 +100,20 @@ const requireAuth = expressjwt({
 app.post('/api/register', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    const dailyList = {
+      name: 'Daily',
+      url: 'https://images.unsplash.com/photo-1506485338023-6ce5f36692df?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      body: 'Daily tasks!',
+    };
+
     const user = new User({
       name: req.body.name,
       email: req.body.email,
       password: hashedPassword,
+      lists: [dailyList],
     });
+
     const result = await user.save();
     console.log(result);
 
@@ -341,8 +350,8 @@ app.get('/api/account', requireAuth, async (req, res) => {
 
 // START THE SERVER
 
-// app.listen(3000, () => {
-//   console.log('Server started on port 3000');
-// });
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
 
 export default app;

@@ -1,11 +1,15 @@
 import { useState } from 'react';
+import Button from '../../ui/Button';
+import Form from '../../ui/Form';
+import Input from '../../ui/Input';
+import FormRowVertical from '../../ui/FormRowVertical';
 import SpinnerMini from '../../ui/SpinnerMini';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
+import FormRowHorizontal from '../../ui/FormRowHorizontal';
 import { HiMiniInformationCircle } from 'react-icons/hi2';
 import { Tooltip } from 'react-tooltip';
-import SocialMediaButtons from '../../ui/SocialMediaButtons';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
@@ -49,27 +53,27 @@ function LoginForm() {
       }
     } catch (error) {
       console.error('Login Error:', error.message);
-      toast.error('Login Error, please try again!');
+      toast.error('Login Error:', error.message);
     } finally {
       setIsPending(false);
     }
   };
 
   return (
-    <div className="form-container sign-in-container">
-      <form action="#" className="form-section" onSubmit={handleSubmit}>
-        <div className="title-section">
-          Sign in{' '}
-          <a className="tooltip" style={{ fontSize: '20px' }}>
+    <Form onSubmit={handleSubmit}>
+      <h3>
+        Please log in to your account{' '}
+        <span>
+          <a className="tooltip">
             <HiMiniInformationCircle />
           </a>
-          <Tooltip anchorSelect=".tooltip" place="top" clickable>
+          <Tooltip anchorSelect=".tooltip" place="bottom" clickable>
             <p
               style={{
                 textAlign: 'center',
                 fontSize: '12px',
                 color: 'white',
-                padding: '4px',
+                padding: '5px',
               }}
             >
               Email:{' '}
@@ -80,39 +84,43 @@ function LoginForm() {
               <span style={{ textTransform: 'lowercase' }}>nejc1234</span>
             </p>
           </Tooltip>
-        </div>
-        <SocialMediaButtons />
-        <span className="span-section"> or sign in using Email ...</span>
-        <label className="label-section">
-          <input
-            type="email"
-            // id="email"
-            placeholder="Email"
-            className="input-section"
-            autoComplete="username"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            disabled={isPending}
-          />
-        </label>
-        <label className="label-section">
-          <input
-            type="password"
-            // id="password"
-            placeholder="Password"
-            className="input-section"
-            autoComplete="current-password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            disabled={isPending}
-          />
-        </label>
-        {/* <a href="#">Forgot your password?</a> */}
-        <button className="button" disabled={isPending}>
-          {!isPending ? 'Sign in' : <SpinnerMini />}
-        </button>
-      </form>
-    </div>
+        </span>
+      </h3>
+      <FormRowVertical label="Email">
+        <Input
+          type="email"
+          id="email"
+          // This makes this form better for password managers
+          autoComplete="username"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          disabled={isPending}
+        />
+      </FormRowVertical>
+      <FormRowVertical label="Password">
+        <Input
+          type="password"
+          id="password"
+          // This makes this form better for password managers
+          autoComplete="current-password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          disabled={isPending}
+        />
+      </FormRowVertical>
+      <FormRowHorizontal>
+        <Button $size="small" $variation="primary" disabled={isPending}>
+          {!isPending ? 'Log in' : <SpinnerMini />}
+        </Button>
+        <Button
+          $size="small"
+          $variation="secondary"
+          onClick={() => navigate('/register')}
+        >
+          Sign Up
+        </Button>
+      </FormRowHorizontal>
+    </Form>
   );
 }
 

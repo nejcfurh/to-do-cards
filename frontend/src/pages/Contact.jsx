@@ -33,7 +33,11 @@ function Contact() {
 
         <div className="social-media-buttons">
           <button className="social-media-button">
-            <a href="https://www.instagram.com/nejcfurh/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.instagram.com/nejcfurh/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -53,7 +57,11 @@ function Contact() {
             </a>
           </button>
           <button className="social-media-button">
-            <a href="https://twitter.com/nejcfurh" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://twitter.com/nejcfurh"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="icon icon-tabler icon-tabler-brand-x"
@@ -91,8 +99,12 @@ function Contact() {
               </svg>
             </a>
           </button>
-          <button className="social-media-button">
-            <a href="https://si.linkedin.com/in/nejcfurh" target="_blank" rel="noopener noreferrer">
+          <button className="social-media-button linkedin">
+            <a
+              href="https://si.linkedin.com/in/nejcfurh"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -112,7 +124,11 @@ function Contact() {
             </a>
           </button>
           <button className="social-media-button">
-            <a href="https://www.facebook.com/nejcfurh" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.facebook.com/nejcfurh"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

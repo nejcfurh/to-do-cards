@@ -7,6 +7,7 @@
   --x: #0F1419;
   --white: #FFF;
   --facebook: #19399a;
+  --linkedin: #0A66C2;
 }
 
 html {
@@ -1094,4 +1095,9 @@ ul {
 
 .item:nth-child(4) {
   --bg-color: var(--x);
+}
+
+.social-media-button .linkedin:hover {
+  background-color: var(--linkedin);
+  stroke: white;
 }

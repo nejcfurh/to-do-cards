@@ -57,23 +57,23 @@ function LoginForm() {
     }
   };
 
-  const togglePasswordVisibility = e => {
-    e.preventDefault();
-    // console.log(e.target.previousSibling);
-    const inputIcon = e.target;
-    const input = e.target.previousSibling;
-    inputIcon.setAttribute(
-      'src',
-      input.getAttribute('type') === 'password'
-        ? 'photos/eye-off.svg'
-        : 'photos/eye.svg'
-    );
+  // const togglePasswordVisibility = e => {
+  //   e.preventDefault();
+  //   // console.log(e.target.previousSibling);
+  //   const inputIcon = e.target;
+  //   const input = e.target.previousSibling;
+  //   inputIcon.setAttribute(
+  //     'src',
+  //     input.getAttribute('type') === 'password'
+  //       ? 'photos/eye-off.svg'
+  //       : 'photos/eye.svg'
+  //   );
 
-    input.setAttribute(
-      'type',
-      input.getAttribute('type') === 'password' ? 'text' : 'password'
-    );
-  };
+  //   input.setAttribute(
+  //     'type',
+  //     input.getAttribute('type') === 'password' ? 'text' : 'password'
+  //   );
+  // };
 
   return (
     <div className="form-container sign-in-container">
@@ -126,13 +126,13 @@ function LoginForm() {
             onChange={e => setPassword(e.target.value)}
             disabled={isPending}
           />
-          <img
+          {/* <img
             alt="Eye Icon"
             title="Eye Icon"
             src="photos/eye.svg"
             className="input_icon"
             onClick={togglePasswordVisibility}
-          />
+          /> */}
         </label>
         {/* <a href="#">Forgot your password?</a> */}
         <button className="button" disabled={isPending}>

@@ -5,8 +5,8 @@ const StyledFooter = styled.footer`
   color: #f1f1f191;
   text-align: center;
   font-size: 13px;
-  margin-top: 40px;
-  margin-bottom: 50px;
+  margin-top: 55px;
+  margin-bottom: 25px;
 `;
 
 const Footer = React.memo(function Footer() {

@@ -15,6 +15,7 @@ function Logout() {
   return (
     <Link to="/contact" className="navbar-link" onClick={logout}>
       <HiOutlineLogout className="header-icon" />
+      <div className="navbar-link-title">Logout</div>
     </Link>
   );
 }

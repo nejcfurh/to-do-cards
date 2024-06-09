@@ -2,13 +2,14 @@ import styled from 'styled-components';
 
 const StyledHeader = styled.div`
   text-align: center;
-  margin-top: 60px;
-  /* margin-bottom: 40px; */
+  margin-top: 35px;
+  margin-bottom: 30px;
+  opacity: 85%;
 `;
 
 const StyledLogo = styled.img`
-  max-width: 400px;
-  max-height: 140px;
+  max-width: 350px;
+  max-height: 120px;
 `;
 
 function PublicHeader() {

@@ -57,6 +57,24 @@ function LoginForm() {
     }
   };
 
+  const togglePasswordVisibility = e => {
+    e.preventDefault();
+    // console.log(e.target.previousSibling);
+    const inputIcon = e.target;
+    const input = e.target.previousSibling;
+    inputIcon.setAttribute(
+      'src',
+      input.getAttribute('type') === 'password'
+        ? 'photos/eye-off.svg'
+        : 'photos/eye.svg'
+    );
+
+    input.setAttribute(
+      'type',
+      input.getAttribute('type') === 'password' ? 'text' : 'password'
+    );
+  };
+
   return (
     <div className="form-container sign-in-container">
       <form action="#" className="form-section" onSubmit={handleSubmit}>
@@ -88,8 +106,9 @@ function LoginForm() {
             type="email"
             // id="email"
             placeholder="Email"
+            name="email"
             className="input-section"
-            autoComplete="username"
+            // autoComplete="username"
             value={email}
             onChange={e => setEmail(e.target.value)}
             disabled={isPending}
@@ -100,11 +119,19 @@ function LoginForm() {
             type="password"
             // id="password"
             placeholder="Password"
+            name="password"
             className="input-section"
-            autoComplete="current-password"
+            // autoComplete="current-password"
             value={password}
             onChange={e => setPassword(e.target.value)}
             disabled={isPending}
+          />
+          <img
+            alt="Eye Icon"
+            title="Eye Icon"
+            src="photos/eye.svg"
+            className="input_icon"
+            onClick={togglePasswordVisibility}
           />
         </label>
         {/* <a href="#">Forgot your password?</a> */}

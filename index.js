@@ -434,7 +434,6 @@ app.get(
 );
 
 // TWITTER X AUTH
-
 app.get('/auth/twitter', passport.authenticate('twitter'));
 
 app.get(
@@ -453,8 +452,6 @@ app.get(
 );
 
 // GITHUB AUTH
-
-// GitHub OAuth
 app.get(
   '/auth/github',
   passport.authenticate('github', { scope: ['user:email'] })

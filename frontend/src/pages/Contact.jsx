@@ -1,12 +1,13 @@
 import Footer from '../ui/Footer';
 import PrivateHeader from '../ui/PrivateHeader';
 
-let about = `I'm a dedicated Junior Software Engineer eager to contribute my skills to innovative projects!With a robust background in web development, primarily using JavaScript technologies such as Node.js, React, jQuery, EJS, PostgreSQL, MongoDB, alongside proficient skills in HTML/CSS, Bootstrap, TailwindCSS and WebFlow I am enthusiastic about the opportunity to contribute and grow within a dynamic team. 
+let about = `I'm a dedicated Junior Software Engineer eager to contribute my skills to innovative projects! I have a robust background in web development, primarily using JavaScript technologies such as Node.js, React, jQuery, EJS, PostgreSQL, MongoDB, alongside proficient skills in HTML/CSS, Bootstrap, TailwindCSS and WebFlow.
+ I am enthusiastic about the opportunity to contribute and grow within a dynamic team. 
 
-My practical experience in developing web applications has been continuously enriched by exploring emerging technologies. I am known for my proactive approach, meticulous attention to detail, and a steadfast commitment to continual improvement. 
+My practical experience in developing web applications has been continuously enriched by exploring emerging technologies. 
+I am known for my proactive approach, meticulous attention to detail, and a steadfast commitment to continual improvement. 
 
-I look forward to the possibility of collaborating with seasoned professionals and 
-contributing to innovative projects in the field.`;
+I look forward to the possibility of collaborating with seasoned professionals and contributing to innovative projects in the field.`;
 
 function Contact() {
   return (
@@ -14,24 +15,85 @@ function Contact() {
       <PrivateHeader />
       <div className="contact-me-box">
         <div className="tech-stack-icons">
-          <i className="devicon-html5-plain-wordmark colored"></i>
-          <i className="devicon-css3-plain-wordmark colored"></i>
-          <i className="devicon-tailwindcss-original-wordmark colored"></i>
-          <i className="devicon-bootstrap-plain-wordmark colored"></i>
-          <i className="devicon-jquery-plain-wordmark colored"></i>
-          <i className="devicon-nodejs-plain colored"></i>
-          <i className="devicon-express-original-wordmark colored"></i>
-          <i className="devicon-mongodb-plain-wordmark colored"></i>
-          <i className="devicon-postgresql-plain-wordmark colored"></i>
-          <i className="devicon-react-original-wordmark colored"></i>
-          <i className="devicon-redux-original colored"></i>
-          <div className="rounded-corners">
-            <i className="devicon-webflow-original"></i>
+          <div className="slide-track">
+            <div className="slide">
+              <i className="devicon-html5-plain-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-css3-plain-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-tailwindcss-original-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-bootstrap-plain-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-jquery-plain-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-nodejs-plain colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-express-original-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-mongodb-plain-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-postgresql-plain-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-react-original-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-redux-original colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-webflow-original colored"></i>
+            </div>
+            {/* <!-- Duplicate slides --> */}
+            <div className="slide">
+              <i className="devicon-html5-plain-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-css3-plain-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-tailwindcss-original-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-bootstrap-plain-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-jquery-plain-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-nodejs-plain colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-express-original-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-mongodb-plain-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-postgresql-plain-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-react-original-wordmark colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-redux-original colored"></i>
+            </div>
+            <div className="slide">
+              <i className="devicon-webflow-original colored"></i>
+            </div>
           </div>
         </div>
         <p className="contact-me">{about}</p>
 
-        <div className="social-media-buttons">
+        <div className="social-media-buttons-contact">
           <button className="social-media-button">
             <a
               href="https://www.instagram.com/nejcfurh/"

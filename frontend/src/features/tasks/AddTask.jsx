@@ -46,7 +46,7 @@ function AddTask({ list, setLists, setDaily }) {
         setLists(data.data);
         setDaily(data.defaultListName);
         setInputValue('');
-        toast.success('Task created succesfully! Try to complete it soon!');
+        toast.success('Task created succesfully!');
       } else {
         throw new Error(data.message || 'Failed to create item');
       }

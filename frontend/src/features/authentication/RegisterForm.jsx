@@ -72,7 +72,7 @@ function RegisterForm() {
             type="email"
             id="email"
             // This makes this form better for password managers
-            autoComplete="username"
+            // autoComplete="username"
             value={email}
             onChange={e => setEmail(e.target.value)}
             disabled={isPending}
@@ -85,7 +85,7 @@ function RegisterForm() {
             type="password"
             id="password"
             // This makes this form better for password managers
-            autoComplete="current-password"
+            // autoComplete="current-password"
             value={password}
             onChange={e => setPassword(e.target.value)}
             disabled={isPending}

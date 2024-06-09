@@ -1,8 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { HiOutlineUpload } from 'react-icons/hi';
+import Modal from '../../ui/Modal';
+import UploadImage from '../../ui/UploadImage';
 
 function AddCustomList({ setDaily, setLists }) {
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [listName, setListName] = useState('');
   const [listImg, setListImg] = useState('');
   const [listBody, setListBody] = useState('');
@@ -45,6 +49,20 @@ function AddCustomList({ setDaily, setLists }) {
     }
   };
 
+  const handleUpload = () => {
+    setIsOpenModal(!isOpenModal);
+  };
+
+  const handleImageUpload = url => {
+    setListImg(url);
+  };
+
+  const closeModal = () => setIsOpenModal(false);
+
+  // Truncate the URL for display purposes
+  const truncatedListImg =
+    listImg.length > 10 ? `${listImg.substring(0, 17)}...` : listImg;
+
   return (
     <>
       <input
@@ -75,15 +93,21 @@ function AddCustomList({ setDaily, setLists }) {
                 onChange={e => setListName(e.target.value)}
               />
               <br />
-              <input
-                type="url"
-                name="listImg"
-                placeholder="Image (url)"
-                autoComplete="off"
-                required="required"
-                value={listImg}
-                onChange={e => setListImg(e.target.value)}
-              />
+              <div className="input-upload">
+                <input
+                  type="url"
+                  name="listImg"
+                  placeholder="Image (url)"
+                  autoComplete="off"
+                  required="required"
+                  value={truncatedListImg}
+                  onChange={e => setListImg(e.target.value)}
+                />
+                <HiOutlineUpload
+                  className="upload-icon"
+                  onClick={handleUpload}
+                />
+              </div>
               <br />
               <input
                 type="text"
@@ -110,6 +134,12 @@ function AddCustomList({ setDaily, setLists }) {
             <p>You can add additional lists here!</p>
           </div>
         </div>
+        <Modal open={isOpenModal} onClose={closeModal}>
+          <UploadImage
+            onCloseModal={closeModal}
+            onImageUpload={handleImageUpload}
+          />
+        </Modal>
       </label>
     </>
   );

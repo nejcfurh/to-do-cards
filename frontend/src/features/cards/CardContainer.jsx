@@ -55,6 +55,7 @@ function CardContainer() {
         setLists(data.data);
         setDaily(data.defaultListName);
         toast.success('List has been successfully deleted!');
+        // Delete background from Supabase as well
       } else {
         console.error('Failed to delete card');
       }

@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { HiOutlineLogout, HiOutlineUpload } from 'react-icons/hi';
+import { HiOutlineLogin, HiOutlineUpload } from 'react-icons/hi';
 import { useState } from 'react';
 import supabase from '../services/supabase';
 import SpinnerMini from './SpinnerMini';
@@ -32,13 +32,12 @@ const GlobalStyle = createGlobalStyle`
 
 const DropzoneBox = styled.form`
   border-radius: 0.8rem;
-  padding: 3rem;
+  padding: 2.5rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  min-width: 40rem;
+  width: 44rem;
   box-shadow: 0px 0px 20px 12px rgba(255, 254, 254, 0.2);
-  width: 100%;
   background: var(--dropzone-bg);
 `;
 
@@ -89,7 +88,7 @@ const DropzoneArea = styled.div`
 `;
 
 const FileInfo = styled.p`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: 'white';
   font-weight: 200;
 `;
@@ -140,19 +139,19 @@ const DropzoneActions = styled.div`
 `;
 
 const ActionButton = styled.button`
-  border-radius: 50px;
+  font-family: 'Roboto', sans-serif;
   /* box-shadow: 0 0px 0px; */
+
   flex-grow: 1;
-  color: #ffffff;
-  font-size: 1.2rem;
-  font-weight: 200;
+  font-size: 1.1rem;
+  font-weight: 300;
   text-transform: uppercase;
   transition: all 0.3s ease-in-out;
 
   ${({ type }) =>
     type === 'reset' &&
     `
-    border-radius: 0.5rem;
+    border-radius: 20px;
     color: var(--text);
     background: var(--secondary);
     cursor: pointer;
@@ -160,6 +159,7 @@ const ActionButton = styled.button`
 
     &:hover {
       background: var(--secondary-hover);
+      opacity: 0.8;
     }
   `}
 
@@ -167,15 +167,16 @@ const ActionButton = styled.button`
     type === 'submit' &&
     `
     background: var(--primary);
-    border-radius: 0.5rem;
+    border-radius: 20px;
     padding: 1rem 2rem;
-    color: var(--primary-text);
-    border: none;
+    color: var(--text);
     cursor: pointer;
     border: 1px solid var(--border);
 
     &:hover {
       background: var(--primary-hover);
+      background: #2e962a;
+      opacity: 0.8;
     }
   `}
 `;
@@ -308,7 +309,7 @@ function UploadImage({ onCloseModal, onImageUpload }) {
         <Title>
           <div>Upload a background image</div>
           <ExitIcon>
-            <HiOutlineLogout onClick={onCloseModal} />
+            <HiOutlineLogin onClick={onCloseModal} />
           </ExitIcon>
         </Title>
         <Subtitle>

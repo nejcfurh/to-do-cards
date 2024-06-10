@@ -30,14 +30,13 @@ function AddCustomList({ setDaily, setLists }) {
         {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${token}`, // Set the Authorization header
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(formData),
         }
       );
       const data = await response.json();
-      // console.log('Success:', data);
       setLists(data.data);
       setDaily(data.defaultListName);
       setListBody('');
@@ -73,7 +72,7 @@ function AddCustomList({ setDaily, setLists }) {
       />
       <label htmlFor="addList" className="card">
         <div className="form-title-flex">
-          <div className="title-div">
+          <div className="title-div-add">
             <h4 className="title-add">ADD A CUSTOM LIST</h4>
           </div>
           <div className="card-form">

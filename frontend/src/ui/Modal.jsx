@@ -6,8 +6,6 @@ const MODAL_STYLE = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  borderRadius: '20px',
-  padding: '50px',
   zIndex: 1000,
 };
 
@@ -17,7 +15,7 @@ const OVERLAY_STYLE = {
   left: 0,
   right: 0,
   bottom: 0,
-  backgroundColor: 'rgba(0,0,0, .85)', //
+  backgroundColor: 'rgba(0,0,0, .88)', //
   zIndex: 1000,
 };
 

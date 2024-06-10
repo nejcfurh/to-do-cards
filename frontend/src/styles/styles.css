@@ -190,12 +190,10 @@ hr {
   display: flex;
   flex-wrap: nowrap;
   justify-content: start;
-  /* margin-bottom: 90px; */
 }
 
 .title-div {
   display: flex;
-  background-color: none;
   height: 100%;
   text-align: center;
   width: 80px;
@@ -205,6 +203,20 @@ hr {
   font-weight: bold;
   color: white;
   background: repeating-linear-gradient(99deg, rgba(0, 0, 0, 0.75), rgba(255, 255, 255, 0.010), rgba(255, 255, 255, 0.001));
+  cursor: pointer;
+}
+
+.title-div-add {
+  display: flex;
+  height: 100%;
+  text-align: center;
+  width: 80px;
+  justify-content: center;
+  font-size: 40px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
 }
 
 .title {
@@ -212,14 +224,13 @@ hr {
   transform: rotate(-180deg);
   height: fit-content;
   text-transform: uppercase;
-  margin-top: 30px
+  margin-top: 30px;
 }
 
 .card {
   width: 80px;
   border: 0.75rem;
   background-size: cover;
-  cursor: pointer;
   overflow: hidden;
   border-radius: 2rem;
   margin: 0 10px;
@@ -274,9 +285,6 @@ hr {
   overflow: hidden;
   height: 80px;
   width: 520px;
-  opacity: 0;
-  transform: translateY(30px);
-  transition-delay: 0.3s;
   transition: all .3s ease-in;
   align-items: center;
 }
@@ -326,15 +334,13 @@ input:checked+label .description {
   transform: translateY(0) !important
 }
 
-input#addList+label.card>.form-title-flex>.title-div>.title-add {
+input#addList+label.card>.form-title-flex>.title-div-add>.title-add {
   writing-mode: tb-rl;
   transform: rotate(-180deg);
-  /* height: fit-content; */
   text-transform: uppercase;
   margin-top: 30px;
   font-size: 25px;
   height: 400px;
-  /* padding-bottom: 30px; */
   text-align: center;
 }
 
@@ -391,14 +397,14 @@ form.card-item {
   font-weight: 100;
   text-transform: uppercase;
   margin-top: 25px;
-  transition: all 0.3s;
+  transition: all 0.3s ease-in-out;
 }
 
 .button-add-list:hover {
-  box-shadow: 0px 10px 10px -10px rgba(0, 0, 0, 0.936);
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease-in-out;
   color: white;
+  opacity: 0.8;
 }
 
 /* TASKS LIST STYLING */
@@ -451,6 +457,7 @@ form.card-item {
 /* scrollbar handle on hover */
 .card-task::-webkit-scrollbar-thumb:hover {
   background: rgba(211, 211, 211, 0.382);
+  cursor: pointer;
 }
 
 .card-task-line {
@@ -574,7 +581,6 @@ hr {
 
 .above-title-div {
   display: flex;
-  flexDirection: row;
   height: 500px;
   width: 600px;
 }
@@ -1171,7 +1177,6 @@ ul {
 .upload-icon {
   position: absolute;
   right: 1px;
-  padding-top: 8px;
   font-size: 35px;
   color: rgba(167, 167, 168, 0.796);
   transition: all 0.3s ease;

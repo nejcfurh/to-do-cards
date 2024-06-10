@@ -289,6 +289,13 @@ app.post('/api/todos/deleteCard', requireAuth, async function (req, res) {
       return res.status(404).json({ message: 'List not found' });
     }
 
+    const extractImageName = url => {
+      const parts = url.split('/');
+      return parts[parts.length - 1];
+    };
+
+    const imageName = extractImageName(user.lists[listIndex].url);
+
     user.lists.splice(listIndex, 1);
     await user.save();
 
@@ -300,6 +307,7 @@ app.post('/api/todos/deleteCard', requireAuth, async function (req, res) {
       data: user.lists,
       defaultListName: 'Daily',
       message: 'Updated lists retrieved successfully!',
+      image: imageName,
     });
   } catch (err) {
     console.log('Card could not be deleted!', err);

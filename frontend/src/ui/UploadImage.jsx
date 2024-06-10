@@ -140,8 +140,6 @@ const DropzoneActions = styled.div`
 
 const ActionButton = styled.button`
   font-family: 'Roboto', sans-serif;
-  /* box-shadow: 0 0px 0px; */
-
   flex-grow: 1;
   font-size: 1.1rem;
   font-weight: 300;
@@ -192,9 +190,9 @@ const ExitIcon = styled.div`
 `;
 
 const AlertMessage = styled.div`
-  color: #ff0000cd; /* Red color for the alert */
-  background: #f8d7da; /* Light red background */
-  border: 1px solid #f5c2c7; /* Border matching the background */
+  color: #ff0000cd;
+  background: #f8d7da;
+  border: 1px solid #f5c2c7;
   padding: 1rem;
   border-radius: 0.5rem;
   margin-top: 1rem;

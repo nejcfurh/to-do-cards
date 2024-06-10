@@ -5,6 +5,7 @@ import Card from './Card';
 import AddCustomList from './AddCustomList';
 import toast from 'react-hot-toast';
 import PageNotFound from '../../pages/PageNotFound';
+import { deleteImageSupabase } from '../../services/apiSupabase';
 
 function CardContainer() {
   const [lists, setLists] = useState([]);
@@ -56,6 +57,7 @@ function CardContainer() {
         setDaily(data.defaultListName);
         toast.success('List has been successfully deleted!');
         // Delete background from Supabase as well
+        deleteImageSupabase(data.image);
       } else {
         console.error('Failed to delete card');
       }

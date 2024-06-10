@@ -31,7 +31,7 @@ function AddTask({ list, setLists, setDaily }) {
         {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${token}`, // Set the Authorization header
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({

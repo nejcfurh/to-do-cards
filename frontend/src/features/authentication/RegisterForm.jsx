@@ -60,7 +60,7 @@ function RegisterForm() {
             className="input-section"
             id="name"
             // This makes this form better for password managers
-            autoComplete="name"
+            // autoComplete="name"
             value={name}
             onChange={e => setName(e.target.value)}
             disabled={isPending}

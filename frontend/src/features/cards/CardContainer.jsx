@@ -18,8 +18,8 @@ function CardContainer() {
       const token = localStorage.getItem('token');
       const query = await fetch(`${import.meta.env.VITE_LOCALHOST}/api/todos`, {
         headers: {
-          Authorization: `Bearer ${token}`, // Set the Authorization header
-          'Content-Type': 'application/json', // Assuming your API handles JSON
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
       });
       const data = await query.json();
@@ -44,7 +44,7 @@ function CardContainer() {
         {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${token}`, // Set the Authorization header
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ listId }),
@@ -75,7 +75,7 @@ function CardContainer() {
         {
           method: 'DELETE',
           headers: {
-            Authorization: `Bearer ${token}`, // Set the Authorization header
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ listName, itemId }),

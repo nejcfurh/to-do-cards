@@ -58,7 +58,6 @@ function AddCustomList({ setDaily, setLists }) {
 
   const closeModal = () => setIsOpenModal(false);
 
-  // Truncate the URL for display purposes
   const truncatedListImg =
     listImg.length > 10 ? `${listImg.substring(0, 17)}...` : listImg;
 

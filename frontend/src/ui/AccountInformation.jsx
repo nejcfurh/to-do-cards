@@ -1,49 +1,16 @@
-import {
-  HiOutlineCheckCircle,
-  HiOutlineClipboardList,
-  HiOutlineViewList,
-} from 'react-icons/hi';
+import ProfileTable from './ProfileTable';
+import ProfileImage from './ProfileImage.jsx';
 
 /* eslint-disable react/prop-types */
-const ProfileTable = ({ lists }) => {
-  return (
-    <table className="profile-table">
-      <thead>
-        <tr>
-          <th>
-            <HiOutlineViewList />
-          </th>
-          <th>
-            <HiOutlineClipboardList />
-          </th>
-          <th>
-            <HiOutlineCheckCircle />
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {lists.map((list, index) => (
-          <tr key={index}>
-            <td className="list-name">{list.name}</td>
-            <td>{list.items.length}</td>
-            <td>{list.completedItems.length}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-};
-
-/* eslint-disable react/prop-types */
-function AccountInformation({ userInformation }) {
-  const { name, email, lists } = userInformation.data;
+function AccountInformation({ userInformation, refreshAvatar }) {
+  const { name, email, lists, avatar } = userInformation.data;
 
   return (
     <div className="account-box">
       <div className="profile-card">
         <div className="profile-top">
           <div className="profile-image">
-            <img className="profile-pic" src="../photos/DefaultUser.png" />
+            <ProfileImage avatar={avatar} refreshAvatar={refreshAvatar} />
           </div>
           <div className="profile-data">
             <p className="profile-item-name">Name:</p>

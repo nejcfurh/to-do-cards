@@ -114,7 +114,7 @@ const FileUploadIcon = styled.div`
 `;
 
 const ImagePreviewContainer = styled.div`
-  display: ${({ $show }) => ($show ? 'flex' : 'none')};
+  display: ${({ show }) => (show ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
   border: 2px dashed var(--dropzone-border);
@@ -201,7 +201,7 @@ const AlertMessage = styled.div`
 `;
 
 // eslint-disable-next-line react/prop-types
-function UploadImage({ onCloseModal, onImageUpload }) {
+function UploadAvatar({ onCloseModal, onImageUpload }) {
   const [fileInfo, setFileInfo] = useState('No Files Selected');
   const [previewSrc, setPreviewSrc] = useState('');
   const [alertMessage, setAlertMessage] = useState('');
@@ -280,7 +280,7 @@ function UploadImage({ onCloseModal, onImageUpload }) {
     const filePath = `${fileName}`;
 
     let { error } = await supabase.storage
-      .from('card-images')
+      .from('avatar-images')
       .upload(filePath, selectedFile);
 
     if (error) {
@@ -288,7 +288,7 @@ function UploadImage({ onCloseModal, onImageUpload }) {
       console.error('Error uploading file:', error.message);
     } else {
       const { data } = supabase.storage
-        .from('card-images')
+        .from('avatar-images')
         .getPublicUrl(filePath);
 
       const imageUrl = data.publicUrl;
@@ -305,7 +305,7 @@ function UploadImage({ onCloseModal, onImageUpload }) {
       <GlobalStyle />
       <DropzoneBox onReset={handleReset} onSubmit={e => e.preventDefault()}>
         <Title>
-          <div>Upload a background image ...</div>
+          <div>Upload an avatar image ...</div>
           <ExitIcon>
             <HiOutlineLogin onClick={onCloseModal} />
           </ExitIcon>
@@ -335,7 +335,7 @@ function UploadImage({ onCloseModal, onImageUpload }) {
           </DropzoneArea>
           <ImagePreviewContainer
             id="image-preview-container"
-            $show={!!previewSrc}
+            show={!!previewSrc}
           >
             <ImagePreview
               id="image-preview"
@@ -358,4 +358,4 @@ function UploadImage({ onCloseModal, onImageUpload }) {
   );
 }
 
-export default UploadImage;
+export default UploadAvatar;

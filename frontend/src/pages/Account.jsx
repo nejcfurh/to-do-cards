@@ -8,36 +8,58 @@ function Account() {
   const [userInformation, setUserInformation] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [avatar, setAvatar] = useState(null);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(
+        `${import.meta.env.VITE_LOCALHOST}/api/account`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to fetch data');
+      }
+      setUserInformation(data);
+      setAvatar(data.data.avatar);
+    } catch (error) {
+      console.error('Error:', error);
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const token = localStorage.getItem('token');
-        const response = await fetch(
-          `${import.meta.env.VITE_LOCALHOST}/api/account`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-          }
-        );
-        const data = await response.json();
-        if (!response.ok) {
-          throw new Error(data.message || 'Failed to fetch data');
-        }
-        setUserInformation(data);
-      } catch (error) {
-        console.error('Error:', error);
-        setError(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchData();
   }, []);
+
+  const refreshAvatar = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_LOCALHOST}/api/account`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      if (data.success) {
+        setAvatar(data.data.avatar);
+      }
+    } catch (error) {
+      console.error('Error fetching avatar:', error);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -61,7 +83,13 @@ function Account() {
   return (
     <>
       <PrivateHeader />
-      <AccountInformation userInformation={userInformation} />
+      <AccountInformation
+        userInformation={{
+          ...userInformation,
+          data: { ...userInformation.data, avatar },
+        }}
+        refreshAvatar={refreshAvatar}
+      />
       <Footer />
     </>
   );

@@ -56,6 +56,7 @@ function Card({
         </div>
         <div className="row">
           <div className="icon">{index + 1}</div>
+          {/* <HiOutlinePencil /> */}
           <div className="description">
             <p> {name === 'Daily' ? day : body} </p>
             <form

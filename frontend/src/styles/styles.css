@@ -48,7 +48,6 @@ body {
   flex-direction: column;
   align-items: center;
   font-size: 28px;
-  margin: 10px;
   transition: opacity 0.3s ease-in-out;
   text-decoration: none;
   color: inherit;
@@ -579,7 +578,7 @@ form.card-item {
 }
 
 hr {
-  padding: 5px;
+  margin: 2.5rem 0 2rem;
 }
 
 .above-title-div {
@@ -709,7 +708,14 @@ hr {
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
+  overflow: hidden;
+  border: 0.25rem solid #8f8f8f40;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+.profile-pic:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 .profile-data {

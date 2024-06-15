@@ -118,6 +118,11 @@ const userSchema = new mongoose.Schema({
     sparse: true,
   },
   lists: [listSchema],
+  avatar: {
+    type: String,
+    required: false,
+    unique: false,
+  },
 });
 
 export const User = mongoose.model('User', userSchema);
@@ -398,6 +403,39 @@ app.get('/api/account', requireAuth, async (req, res) => {
     });
   } catch (error) {
     console.error('Error fetching user data:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+// UPDATING THE USER AVATAR
+app.put('/api/account/avatar', requireAuth, async (req, res) => {
+  const userId = req.auth.userId;
+  const { avatar } = req.body;
+
+  if (!avatar && avatar === '') {
+    return res.status(400).json({ message: 'Avatar URL is required!' });
+  }
+
+  console.log(`Updating avatar for userId: ${userId} with URL: ${avatar}`);
+
+  try {
+    const user = await User.findOneAndUpdate(
+      { _id: userId },
+      { $set: { avatar } },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found!' });
+    }
+
+    res.json({
+      success: true,
+      data: user,
+      message: 'Avatar updated successfully!',
+    });
+  } catch (error) {
+    console.error('Error updating avatar:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });

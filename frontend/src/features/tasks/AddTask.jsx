@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import styled from 'styled-components';

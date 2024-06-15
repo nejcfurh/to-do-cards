@@ -51,6 +51,7 @@ db.once('open', () => {
 
 const itemsSchema = new mongoose.Schema({
   name: { type: String, required: true },
+  date: { type: Date, required: true, default: Date.now },
 });
 
 // const Item = mongoose.model('Item', itemsSchema);
@@ -62,6 +63,7 @@ const listSchema = new mongoose.Schema({
   url: { type: String, required: true },
   body: { type: String, required: false },
   items: [itemsSchema],
+  completedItems: [itemsSchema],
 });
 
 const List = mongoose.model('List', listSchema);
@@ -341,8 +343,8 @@ app.post('/api/todos/addItems', requireAuth, async (req, res) => {
   }
 });
 
-// DELETING TODOS (ITEMS) FROM THE LIST
-app.delete('/api/todos/deleteItem', requireAuth, async (req, res) => {
+// COMPLETING TODOS (ITEMS) FROM THE LIST
+app.put('/api/todos/completeItem', requireAuth, async (req, res) => {
   const { listName, itemId } = req.body;
   const userId = req.auth.userId;
 
@@ -351,28 +353,31 @@ app.delete('/api/todos/deleteItem', requireAuth, async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'List not found' });
     }
-    const result = await User.updateOne(
-      { _id: userId, 'lists.name': listName },
-      { $pull: { 'lists.$.items': { _id: itemId } } }
+
+    // Find the item to move
+    const list = user.lists.find(list => list.name === listName);
+    const itemIndex = list.items.findIndex(
+      item => item._id.toString() === itemId
     );
 
-    if (result.modifiedCount === 0) {
-      return res
-        .status(404)
-        .json({ message: 'Item not found or could not be deleted' });
+    if (itemIndex === -1) {
+      return res.status(404).json({ message: 'Task not found' });
     }
 
+    const [completedItem] = list.items.splice(itemIndex, 1);
+    completedItem.date = new Date();
+    list.completedItems.push(completedItem);
+
+    await user.save();
+
     console.log(
-      `Successfully deleted an item with ID: ${itemId} from "${listName}" task list!`
+      `Successfully moved a task with ID: ${itemId} from "${listName}" task list to completed tasks!`
     );
 
-    const updatedUser = await User.findById(userId);
-    const updatedLists = updatedUser.lists;
-
-    res.json({ success: true, data: updatedLists, defaultListName: listName });
+    res.json({ success: true, data: user.lists, defaultListName: listName });
   } catch (error) {
-    console.error('Error occurred while deleting document:', error);
-    res.status(500).json({ error: 'Failed to delete item' });
+    console.error('Error occurred while moving item:', error);
+    res.status(500).json({ error: 'Failed to complete task!' });
   }
 });
 
@@ -383,13 +388,13 @@ app.get('/api/account', requireAuth, async (req, res) => {
   try {
     const user = await User.findOne({ _id: userId });
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not found!' });
     }
 
     res.json({
       success: true,
       data: user,
-      message: 'User data retrieved successfully',
+      message: 'User data retrieved successfully!',
     });
   } catch (error) {
     console.error('Error fetching user data:', error);
@@ -492,8 +497,8 @@ app.get('/api/verify-token', (req, res) => {
 
 // START THE SERVER
 
-// app.listen(3000, () => {
-//   console.log('Server started on port 3000');
-// });
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
 
 export default app;

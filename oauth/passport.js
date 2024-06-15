@@ -7,6 +7,12 @@ import TwitterStrategy from 'passport-twitter';
 import GitHubStrategy from 'passport-github2';
 import { User } from '../index.js';
 
+const dailyList = {
+  name: 'Daily',
+  url: 'https://images.unsplash.com/photo-1506485338023-6ce5f36692df?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  body: 'Daily tasks!',
+};
+
 // GOOGLE STRATEGY
 
 passport.use(
@@ -22,12 +28,6 @@ passport.use(
       try {
         let user = await User.findOne({ email: profile.emails[0].value });
         if (!user) {
-          const dailyList = {
-            name: 'Daily',
-            url: 'https://images.unsplash.com/photo-1506485338023-6ce5f36692df?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            body: 'Daily tasks!',
-          };
-
           user = await User.create({
             googleId: profile.id,
             name: profile.displayName,
@@ -58,12 +58,6 @@ passport.use(
       try {
         let user = await User.findOne({ email: profile.emails[0].value });
         if (!user) {
-          const dailyList = {
-            name: 'Daily',
-            url: 'https://images.unsplash.com/photo-1506485338023-6ce5f36692df?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            body: 'Daily tasks!',
-          };
-
           user = await User.create({
             facebookId: profile.id,
             name: `${profile.name.givenName} ${profile.name.familyName}`,
@@ -94,12 +88,6 @@ passport.use(
       try {
         let user = await User.findOne({ twitterXId: profile.id });
         if (!user) {
-          const dailyList = {
-            name: 'Daily',
-            url: 'https://images.unsplash.com/photo-1506485338023-6ce5f36692df?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            body: 'Daily tasks!',
-          };
-
           user = await User.create({
             twitterXId: profile.id,
             name: profile.displayName,
@@ -128,15 +116,10 @@ passport.use(
       try {
         let user = await User.findOne({ gitHubId: profile.id });
         if (!user) {
-          const dailyList = {
-            name: 'Daily',
-            url: 'https://images.unsplash.com/photo-1506485338023-6ce5f36692df?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            body: 'Daily tasks!',
-          };
           user = await User.create({
             gitHubId: profile.id,
             name: profile.username,
-            email: profile.profileUrl,
+            email: profile.username + '@GitHub',
             password: null,
             lists: [dailyList],
           });

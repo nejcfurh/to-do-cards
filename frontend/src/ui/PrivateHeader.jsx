@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import {
+  HiOutlineHomeModern,
   HiOutlineInformationCircle,
   HiOutlineMegaphone,
   HiOutlineUserCircle,
@@ -39,6 +40,10 @@ const PrivateHeader = React.memo(function PrivateHeader() {
           </Link>
         </h1>
         <div className="navbar-links">
+          <Link to="/" className="navbar-link">
+            <HiOutlineHomeModern className="header-icon" />
+            <div className="navbar-link-title">Home</div>
+          </Link>
           <Link to="/account" className="navbar-link">
             <HiOutlineUserCircle className="header-icon" />
             <div className="navbar-link-title">Account</div>

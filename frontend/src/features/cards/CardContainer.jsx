@@ -73,9 +73,9 @@ function CardContainer() {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(
-        `${import.meta.env.VITE_LOCALHOST}/api/todos/deleteItem`,
+        `${import.meta.env.VITE_LOCALHOST}/api/todos/completeItem`,
         {
-          method: 'DELETE',
+          method: 'PUT',
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',

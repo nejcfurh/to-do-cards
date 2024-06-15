@@ -114,7 +114,7 @@ const FileUploadIcon = styled.div`
 `;
 
 const ImagePreviewContainer = styled.div`
-  display: ${({ show }) => (show ? 'flex' : 'none')};
+  display: ${({ $show }) => ($show ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
   border: 2px dashed var(--dropzone-border);
@@ -335,7 +335,7 @@ function UploadAvatar({ onCloseModal, onImageUpload }) {
           </DropzoneArea>
           <ImagePreviewContainer
             id="image-preview-container"
-            show={!!previewSrc}
+            $show={!!previewSrc}
           >
             <ImagePreview
               id="image-preview"

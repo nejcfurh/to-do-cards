@@ -65,7 +65,11 @@ function Account() {
     return (
       <>
         <PrivateHeader />
-        <Spinner />
+        <div className="cards-box">
+          <div className="wrapper">
+            <Spinner />
+          </div>
+        </div>
         <Footer />
       </>
     );
@@ -83,13 +87,17 @@ function Account() {
   return (
     <>
       <PrivateHeader />
-      <AccountInformation
-        userInformation={{
-          ...userInformation,
-          data: { ...userInformation.data, avatar },
-        }}
-        refreshAvatar={refreshAvatar}
-      />
+      <div className="cards-box">
+        <div className="wrapper">
+          <AccountInformation
+            userInformation={{
+              ...userInformation,
+              data: { ...userInformation.data, avatar },
+            }}
+            refreshAvatar={refreshAvatar}
+          />
+        </div>
+      </div>
       <Footer />
     </>
   );

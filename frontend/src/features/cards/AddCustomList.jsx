@@ -82,6 +82,7 @@ function AddCustomList({ setDaily, setLists }) {
               onSubmit={handleSubmit}
             >
               <input
+                className="input-add-card-text"
                 type="text"
                 name="listName"
                 placeholder="Name"
@@ -93,6 +94,7 @@ function AddCustomList({ setDaily, setLists }) {
               <br />
               <div className="input-upload">
                 <input
+                  className="input-add-card-url"
                   type="url"
                   name="listImg"
                   placeholder="Image (url)"
@@ -108,6 +110,7 @@ function AddCustomList({ setDaily, setLists }) {
               </div>
               <br />
               <input
+                className="input-add-card-text"
                 type="text"
                 name="listBody"
                 placeholder="Description"

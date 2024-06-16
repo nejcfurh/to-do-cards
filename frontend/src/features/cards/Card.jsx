@@ -1,6 +1,10 @@
 /* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import Tasks from '../tasks/Tasks';
+import MultiOptionMenuButton from '../../ui/MultiOptionMenuButton';
+import { useState } from 'react';
+import Modal from '../../ui/Modal';
+import EditCardInformation from '../../ui/EditCardInformation';
 
 const StyledButton = styled.button`
   background-color: transparent;
@@ -12,7 +16,6 @@ const StyledButton = styled.button`
 
 function Card({
   list,
-  index,
   day,
   daily,
   handleDelete,
@@ -21,7 +24,14 @@ function Card({
   setLists,
   setDaily,
 }) {
+  const [activeTasks, setActiveTasks] = useState(true);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const { name, body, _id, url } = list;
+
+  const handleCloseModal = () => setIsOpenModal(false);
+  const handleEditButton = () => {
+    setIsOpenModal(!isOpenModal);
+  };
 
   const handleRadioChange = event => {
     setDaily(event.target.id);
@@ -52,11 +62,18 @@ function Card({
             list={list}
             setDaily={setDaily}
             setLists={setLists}
+            active={activeTasks}
           />
         </div>
         <div className="row">
-          <div className="icon">{index + 1}</div>
-          {/* <HiOutlinePencil /> */}
+          <div className="icon">
+            <MultiOptionMenuButton
+              activeTasks={activeTasks}
+              setActiveTasks={setActiveTasks}
+              name={name}
+              modalOpen={handleEditButton}
+            />
+          </div>
           <div className="description">
             <p> {name === 'Daily' ? day : body} </p>
             <form
@@ -74,6 +91,14 @@ function Card({
             </form>
           </div>
         </div>
+        <Modal open={isOpenModal} onClose={handleCloseModal}>
+          <EditCardInformation
+            list={list}
+            onClose={handleCloseModal}
+            setLists={setLists}
+            setDaily={setDaily}
+          />
+        </Modal>
       </label>
     </>
   );

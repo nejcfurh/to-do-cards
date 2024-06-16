@@ -322,6 +322,50 @@ app.post('/api/todos/deleteCard', requireAuth, async function (req, res) {
   }
 });
 
+// UPDATING THE CARD INFORMATION
+app.put('/api/todos/updateCard', requireAuth, async function (req, res) {
+  const { listId, listName, listBody } = req.body;
+  const userId = req.auth.userId;
+
+  if (!listId || !listName || !listBody) {
+    return res.status(400).json({ message: 'All fields are required!' });
+  }
+
+  try {
+    const user = await User.findOne({ _id: userId, 'lists._id': listId });
+    if (!user) {
+      return res.status(404).json({ message: 'List not found for this user' });
+    }
+
+    const result = await User.updateOne(
+      {
+        _id: userId,
+        'lists._id': listId,
+      },
+      {
+        $set: {
+          'lists.$.name': listName,
+          'lists.$.body': listBody,
+        },
+      }
+    );
+
+    if (result.nModified === 0) {
+      return res.status(400).json({ message: 'Failed to update list!' });
+    }
+
+    const updatedUser = await User.findById(userId);
+    const updatedLists = updatedUser.lists;
+
+    console.log(`Successfully updated information for "${listName}"!`);
+
+    res.json({ success: true, data: updatedLists, defaultListName: listName });
+  } catch (error) {
+    console.error('Error occurred while updating document:', error);
+    res.status(500).json({ error: 'Failed to update list!' });
+  }
+});
+
 // ADDING TODOS (ITEMS) TO THE LIST
 app.post('/api/todos/addItems', requireAuth, async (req, res) => {
   const { newItem, list: listName } = req.body;
@@ -340,6 +384,8 @@ app.post('/api/todos/addItems', requireAuth, async (req, res) => {
 
     const updatedUser = await User.findById(userId);
     const updatedLists = updatedUser.lists;
+
+    console.log(`Successfully added a "${newItem}" task list to active tasks!`);
 
     res.json({ success: true, data: updatedLists, defaultListName: listName });
   } catch (error) {

@@ -11,13 +11,22 @@ const ProfileTable = ({ lists }) => {
       <thead>
         <tr>
           <th>
-            <HiOutlineViewList />
+            <div className="table-row">
+              <HiOutlineViewList />
+              <p>Lists</p>
+            </div>
           </th>
           <th>
-            <HiOutlineClipboardList />
+            <div className="table-row">
+              <HiOutlineClipboardList />
+              <p>Tasks</p>
+            </div>
           </th>
           <th>
-            <HiOutlineCheckCircle />
+            <div className="table-row">
+              <HiOutlineCheckCircle />
+              <p>Completed</p>
+            </div>
           </th>
         </tr>
       </thead>
@@ -25,8 +34,20 @@ const ProfileTable = ({ lists }) => {
         {lists.map((list, index) => (
           <tr key={index}>
             <td className="list-name">{list.name}</td>
-            <td>{list.items.length}</td>
-            <td>{list.completedItems.length}</td>
+            <td>
+              {!list.items.length
+                ? 'No active tasks!'
+                : list?.items?.length === 1
+                ? list?.items?.length + ' active task'
+                : list?.items?.length + ' active tasks'}
+            </td>
+            <td>
+              {!list.completedItems.length
+                ? 'None completed!'
+                : list?.completedItems?.length === 1
+                ? list?.completedItems?.length + ' task completed'
+                : list?.completedItems?.length + ' tasks completed'}
+            </td>
           </tr>
         ))}
       </tbody>

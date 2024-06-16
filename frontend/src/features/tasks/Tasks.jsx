@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import AddTask from './AddTask';
 import TaskItem from './TaskItem';
+import CompletedItem from './CompletedItem';
 
 function Tasks({
   handleDeleteTask,
@@ -9,14 +10,25 @@ function Tasks({
   list,
   setLists,
   setDaily,
+  active,
 }) {
-  const { items } = list;
+  const { items, completedItems } = list;
+
+  if (!active) {
+    return (
+      <div className="card-form-tasks">
+        <CompletedItem completedItems={completedItems} />
+      </div>
+    );
+  }
+
   return (
     <div className="card-form-tasks">
       <TaskItem
         handleDeleteTask={handleDeleteTask}
         listName={list.name}
         items={items}
+        completedItems={completedItems}
         _id={_id}
       />
       <AddTask

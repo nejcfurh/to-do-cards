@@ -105,7 +105,7 @@ form.item {
   margin: 5px 20px 5px;
 }
 
-input[type='text'] {
+.input-add-card-text {
   text-align: center;
   border: none;
   background: transparent;
@@ -117,14 +117,14 @@ input[type='text'] {
   transition: all 0.3s;
 }
 
-input[type='text']:focus {
+.input-add-card-text:focus {
   outline: none;
   color: rgba(156, 156, 156, 0.796);
   box-shadow: inset 0 -2px 2px -2px #9c9c9cbd;
   transition: all 0.3s;
 }
 
-input[type='url'] {
+.input-add-card-url {
   text-align: center;
   border: none;
   background: transparent;
@@ -136,7 +136,7 @@ input[type='url'] {
   transition: all 0.3s;
 }
 
-input[type='url']:focus {
+.input-add-card-url:focus {
   outline: none;
   color: rgba(156, 156, 156, 0.796);
   box-shadow: inset 0 -2px 2px -2px #9c9c9cbd;
@@ -163,11 +163,10 @@ input[type='url']:focus {
 }
 
 hr {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin: 2.5rem 0 2rem;
   width: 90%;
   border: 0;
-  border-top: 0.5px solid rgb(46, 46, 46)
+  border-top: 0.5px solid rgb(68, 67, 67)
 }
 
 /* CARD ANIMATION */
@@ -259,7 +258,7 @@ hr {
 }
 
 .card>.row>.icon {
-  background-color: rgba(23, 23, 26, 0.791);
+  /* background-color: rgba(23, 23, 26, 0); */
   color: white;
   border-radius: 50%;
   width: 50px;
@@ -468,6 +467,12 @@ form.card-item {
   width: 100%;
 }
 
+.card-task-line-completed {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+}
+
 .complete-icon {
   width: 30px;
   height: 30px;
@@ -505,6 +510,14 @@ form.card-item {
   font-weight: 200;
 }
 
+.card-task-name-completed {
+  color: rgb(221, 221, 221);
+  text-align: center;
+  font-weight: 200;
+  font-size: 1rem;
+  padding: 10px;
+}
+
 .card-task-input {
   display: flex;
   flex-direction: row;
@@ -516,6 +529,8 @@ form.card-item {
 }
 
 #card-task-input-text {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
   padding: 10px;
   font-size: 18px;
   width: 200px;
@@ -531,7 +546,13 @@ form.card-item {
 #card-task-input-text::placeholder {
   color: rgb(255, 255, 255);
   font-size: 20px;
-  font-weight: 200;
+}
+
+#card-task-input-text:focus {
+  outline: none;
+  color: rgb(245, 245, 247);
+  box-shadow: inset 0 -2px 2px -2px #9c9c9cbd;
+  transition: all 0.3s;
 }
 
 /* About Me & Contact */
@@ -577,10 +598,6 @@ form.card-item {
   margin-bottom: 20px
 }
 
-hr {
-  margin: 2.5rem 0 2rem;
-}
-
 .above-title-div {
   display: flex;
   height: 500px;
@@ -594,6 +611,7 @@ hr {
   height: 68vh;
   zoom: 0.94;
   align-items: center;
+  justify-content: center;
 }
 
 .account {
@@ -687,8 +705,8 @@ hr {
   border: 1px solid #8f8f8f40;
   box-shadow: 0px 0px 20px 12px rgba(255, 254, 254, 0.15);
   color: white;
-  min-width: 300px;
-  margin-top: 20px;
+  min-width: fit-content;
+  height: fit-content;
 }
 
 .profile-top {
@@ -763,12 +781,35 @@ hr {
 }
 
 .list-name {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 200;
 }
 
 .profile-table th {
   font-size: 2rem;
+}
+
+.profile-table td {
+  font-size: 1.3rem;
+  font-weight: 200;
+}
+
+.profile-table p {
+  font-size: 1.2rem;
+  color: white;
+}
+
+.table-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-row p {
+  margin: 0;
+  padding: 0 0 0 5px;
+  font-weight: bold;
 }
 
 /* Improved Login Page */
@@ -1235,4 +1276,182 @@ ul {
 .upload-icon:hover {
   cursor: pointer;
   opacity: 50%;
+}
+
+/* MULTIOPTION MENU BUTTON */
+
+/* MAIN WRAPPER */
+.wrapper-menu {
+  width: 50px;
+  border-radius: 50%;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.454);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: 5;
+  position: relative;
+}
+
+/* POPUP MENU BUTTON */
+
+.popup-menu {
+  cursor: pointer;
+}
+
+.popup-menu:hover .linee1 {
+  width: 10px;
+  transform: translateX(0px);
+  color: rgba(255, 255, 255, 0.605);
+}
+
+.popup-menu:hover .linee1::before {
+  width: 0px;
+  transform: translateX(0px);
+  color: rgba(255, 255, 255, 0.455);
+}
+
+.popup-menu:hover .linee3 {
+  width: 15px;
+  color: rgba(255, 255, 255, 0.605);
+}
+
+.popup-menu:hover .linee3::after {
+  content: "";
+  display: block;
+  transform: translateX(17px);
+  width: 3px;
+  height: 3px;
+  background: #dcdbdb;
+  transition: width 0.2s ease 0.1s;
+}
+
+.linee {
+  width: 18px;
+  height: 3px;
+  background: #dcdbdb;
+  margin-top: 3px;
+  border-radius: 5px;
+  transition: all 0.2s;
+}
+
+.linee1 {
+  width: 15px;
+  transform: translateX(5px);
+}
+
+.linee1::before {
+  content: "";
+  display: block;
+  transform: translateX(-5px);
+  width: 3px;
+  height: 3px;
+  background: #dcdbdb;
+  transition: width 0.2s ease 0.1s, transform 0.2s;
+}
+
+.linee3::after {
+  content: "";
+  display: block;
+  transform: translateX(17px);
+  width: 0px;
+  height: 3px;
+  background: #dcdbdb;
+  transition: width 0.2s ease 0.1s;
+}
+
+.linee3 {
+  width: 13px;
+}
+
+/* POPUP MENU ITEMS */
+
+.nav-items {
+  width: 22px;
+  height: 22px;
+  background: rgba(0, 0, 0, 0.505);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  padding: 10px;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  transform: scale(0);
+  transition: transform 0.1s cubic-bezier(0.23, -0.47, 0.58, -0.63);
+}
+
+.nav-items:hover {
+  transform: scale(1.1);
+  transition-timing-function: 0.1s;
+  color: rgb(219, 218, 218);
+  ;
+}
+
+.nav-items span {
+  padding: 5px;
+}
+
+.items1 {
+  top: -3.5rem;
+  left: 4px;
+  transition-delay: 0.2s;
+}
+
+.items2 {
+  top: -7rem;
+  left: 4px;
+  transition-delay: 0.1s;
+}
+
+.show-menu {
+  transform: scale(1);
+  /* transition: transform 0.3s cubic-bezier(0.23, -0.47, 0.58, -0.63); */
+  transition: transform 0.3s ease-in;
+}
+
+/* EDIT CARD MODAL */
+
+.edit-name-input {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  /* width: fit-content; */
+  color: rgba(167, 167, 168, 0.796);
+  transition: all 0.3s;
+}
+
+.edit-url-input {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  /* width: fit-content; */
+  color: rgba(167, 167, 168, 0.796);
+  transition: all 0.3s;
+}
+
+.edit-body-input {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  color: rgba(167, 167, 168, 0.796);
+  transition: all 0.3s;
+}
+
+.edit-name-input:focus,
+.edit-url-input:focus,
+.edit-body-input:focus {
+  outline: none;
+  color: rgba(156, 156, 156, 0.796);
+  box-shadow: inset 0 -2px 2px -2px #9c9c9cbd;
+  transition: all 0.3s;
 }

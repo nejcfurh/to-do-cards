@@ -551,7 +551,7 @@ form.card-item {
 #card-task-input-text:focus {
   outline: none;
   color: rgb(245, 245, 247);
-  box-shadow: inset 0 -2px 2px -2px #9c9c9cbd;
+  /* box-shadow: inset 0 -2px 2px -2px #9c9c9cbd; */
   transition: all 0.3s;
 }
 

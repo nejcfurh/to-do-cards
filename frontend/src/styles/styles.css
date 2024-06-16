@@ -1426,6 +1426,13 @@ ul {
   transition: all 0.3s;
 }
 
+.edit-name-input::placeholder,
+.edit-body-input::placeholder,
+.edit-url-input::placeholder {
+  font-size: 22px;
+  text-align: center;
+}
+
 .edit-url-input {
   border: none;
   background: transparent;

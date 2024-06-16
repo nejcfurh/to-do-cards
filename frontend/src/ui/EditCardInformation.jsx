@@ -38,7 +38,7 @@ const DropzoneBox = styled.form`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 44rem;
+  width: 32rem;
   box-shadow: 0px 0px 20px 12px rgba(255, 254, 254, 0.2);
   background: var(--dropzone-bg);
 `;
@@ -60,6 +60,7 @@ const Subtitle = styled.h5`
   font-weight: 200;
   margin-top: 0;
   margin-bottom: 2rem;
+  /* text-align: center; */
 `;
 
 const DropzoneActions = styled.div`
@@ -74,7 +75,7 @@ const ActionButton = styled.button`
   font-family: 'Roboto', sans-serif;
   flex-grow: 1;
   font-size: 1.1rem;
-  font-weight: 300;
+  font-weight: 200;
   text-transform: uppercase;
   transition: all 0.3s ease-in-out;
 
@@ -193,7 +194,7 @@ function EditCardInformation({ onClose, list, setLists, setDaily }) {
   };
 
   const truncatedListImg =
-    listImg.length > 10 ? `${listImg.substring(0, 55)}...` : listImg;
+    listImg.length > 10 ? `${listImg.substring(0, 38)}...` : listImg;
 
   // UPDATING THE CARD
   const handleUpdate = async (event, listId) => {
@@ -239,15 +240,15 @@ function EditCardInformation({ onClose, list, setLists, setDaily }) {
         method="put"
       >
         <Title>
-          <div>Update information ...</div>
+          Update information for &quot;{name}&quot;
           <ExitIcon>
             <HiOutlineLogin onClick={onClose} />
           </ExitIcon>
         </Title>
         <Subtitle>
           {name === 'Daily'
-            ? 'On the "Daily" list you can only update the background image!'
-            : `Below you can update name, image, or the subtitle of the selected card!`}
+            ? `On the "${name}" list you can only update the background image!`
+            : `Update name, image, or the subtitle of "${name}" list!`}
         </Subtitle>
         {name === 'Daily' ? null : (
           <input

@@ -136,7 +136,6 @@ function EditCardInformation({ onClose, list, setLists, setDaily }) {
   };
 
   const onUploadButtonClick = () => {
-    console.log('click');
     inputFile.current.click();
   };
 

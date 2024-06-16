@@ -5,6 +5,7 @@ import { useRef, useState } from 'react';
 import SpinnerMini from './SpinnerMini';
 import toast from 'react-hot-toast';
 import supabase from '../services/supabase';
+import { deleteImageSupabase } from '../services/apiSupabase';
 
 const MIN_WIDTH = 700;
 const MIN_HEIGHT = 700;
@@ -38,7 +39,7 @@ const DropzoneBox = styled.form`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 32rem;
+  width: 34rem;
   box-shadow: 0px 0px 20px 12px rgba(255, 254, 254, 0.2);
   background: var(--dropzone-bg);
 `;
@@ -132,6 +133,14 @@ function EditCardInformation({ onClose, list, setLists, setDaily }) {
   const inputFile = useRef(null);
 
   const handleReset = () => {
+    if (listImg.includes('supabase')) {
+      const extractImageName = listImg => {
+        const parts = listImg.split('/');
+        return parts[parts.length - 1];
+      };
+      const imageName = extractImageName(listImg);
+      deleteImageSupabase(imageName);
+    }
     onClose();
   };
 
@@ -220,6 +229,14 @@ function EditCardInformation({ onClose, list, setLists, setDaily }) {
         setLists(data.data);
         setDaily(data.defaultListName);
         toast.success('List information updated!');
+        if (url.includes('supabase')) {
+          const extractImageName = url => {
+            const parts = url.split('/');
+            return parts[parts.length - 1];
+          };
+          const imageName = extractImageName(url);
+          deleteImageSupabase(imageName);
+        }
       } else {
         console.error('Failed to update card!');
       }
@@ -300,7 +317,9 @@ function EditCardInformation({ onClose, list, setLists, setDaily }) {
           />
         )}
         <DropzoneActions>
-          <ActionButton type="reset">Cancel</ActionButton>
+          <ActionButton type="reset" onClick={handleReset}>
+            Cancel
+          </ActionButton>
           <ActionButton type="submit">
             {!loading ? 'Update' : <SpinnerMini />}
           </ActionButton>

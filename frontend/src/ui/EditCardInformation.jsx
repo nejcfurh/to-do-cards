@@ -1,9 +1,13 @@
 /* eslint-disable react/prop-types */
 import styled, { createGlobalStyle } from 'styled-components';
-import { HiOutlineLogin } from 'react-icons/hi';
-import { useState } from 'react';
+import { HiOutlineLogin, HiOutlineUpload } from 'react-icons/hi';
+import { useRef, useState } from 'react';
 import SpinnerMini from './SpinnerMini';
 import toast from 'react-hot-toast';
+import supabase from '../services/supabase';
+
+const MIN_WIDTH = 700;
+const MIN_HEIGHT = 700;
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -119,26 +123,77 @@ const ExitIcon = styled.div`
 
 // eslint-disable-next-line react/prop-types
 function EditCardInformation({ onClose, list, setLists, setDaily }) {
-  const { name, body, _id } = list;
+  const { name, body, _id, url } = list;
   const [loading, setLoading] = useState(false);
   const [listName, setListName] = useState(name);
-  //   const [listImg, setListImg] = useState(url);
+  const [listImg, setListImg] = useState(url);
   const [listBody, setListBody] = useState(body);
+  const inputFile = useRef(null);
 
   const handleReset = () => {
     onClose();
   };
 
-  //   const handleUpload = () => {
-  //     console.log('picture upload triggered');
-  //   };
+  const onUploadButtonClick = () => {
+    console.log('click');
+    inputFile.current.click();
+  };
 
-  //   const handleUpdateInformation = () => {
-  //     console.log('click for update registered!');
-  //   };
+  const handleFileChange = e => {
+    const file = e.target.files[0];
+    if (file) {
+      validateImageDimensions(file);
+    }
+  };
 
-  //   const truncatedListImg =
-  //     listImg.length > 10 ? `${listImg.substring(0, 55)}...` : listImg;
+  const validateImageDimensions = file => {
+    const reader = new FileReader();
+
+    reader.onload = e => {
+      const img = new Image();
+      img.src = e.target.result;
+
+      img.onload = () => {
+        if (img.width >= MIN_WIDTH && img.height >= MIN_HEIGHT) {
+          return file;
+        } else {
+          e.target.value = '';
+        }
+      };
+    };
+
+    reader.readAsDataURL(file);
+    handleUpload(file);
+  };
+
+  const handleUpload = async file => {
+    setLoading(true);
+
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Math.random()}.${fileExt}`;
+    const filePath = `${fileName}`;
+
+    let { error } = await supabase.storage
+      .from('card-images')
+      .upload(filePath, file);
+
+    if (error) {
+      console.error('Error uploading file:', error.message);
+    } else {
+      const { data } = supabase.storage
+        .from('card-images')
+        .getPublicUrl(filePath);
+
+      const imageUrl = data.publicUrl;
+      if (imageUrl) {
+        setListImg(imageUrl);
+      }
+    }
+    setLoading(false);
+  };
+
+  const truncatedListImg =
+    listImg.length > 10 ? `${listImg.substring(0, 55)}...` : listImg;
 
   // UPDATING THE CARD
   const handleUpdate = async (event, listId) => {
@@ -155,7 +210,7 @@ function EditCardInformation({ onClose, list, setLists, setDaily }) {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ listId, listName, listBody }),
+          body: JSON.stringify({ listId, listName, listBody, listImg }),
         }
       );
       const data = await response.json();
@@ -184,26 +239,30 @@ function EditCardInformation({ onClose, list, setLists, setDaily }) {
         method="put"
       >
         <Title>
-          <div>Update card information ...</div>
+          <div>Update information ...</div>
           <ExitIcon>
             <HiOutlineLogin onClick={onClose} />
           </ExitIcon>
         </Title>
         <Subtitle>
-          Below you can update name or the subtitle of the card!
+          {name === 'Daily'
+            ? 'On the "Daily" list you can only update the background image!'
+            : `Below you can update name, image, or the subtitle of the selected card!`}
         </Subtitle>
-        <input
-          className="edit-name-input"
-          type="text"
-          name="listName"
-          placeholder="Name"
-          autoComplete="off"
-          required="required"
-          value={listName}
-          onChange={e => setListName(e.target.value)}
-        />
+        {name === 'Daily' ? null : (
+          <input
+            className="edit-name-input"
+            type="text"
+            name="listName"
+            placeholder="Name"
+            autoComplete="off"
+            required="required"
+            value={listName}
+            onChange={e => setListName(e.target.value)}
+          />
+        )}
         <br />
-        {/* <div className="input-upload">
+        <div className="input-upload">
           <input
             className="edit-url-input"
             type="url"
@@ -214,18 +273,32 @@ function EditCardInformation({ onClose, list, setLists, setDaily }) {
             value={truncatedListImg}
             onChange={e => setListImg(e.target.value)}
           />
-          <HiOutlineUpload className="upload-icon" onClick={handleUpload} />
-        </div> */}
+          <input
+            type="file"
+            ref={inputFile}
+            id="upload-file"
+            name="uploaded-file"
+            accept="image/*"
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+          />
+          <HiOutlineUpload
+            className="upload-icon"
+            onClick={onUploadButtonClick}
+          />
+        </div>
         <br />
-        <input
-          className="edit-body-input"
-          type="text"
-          name="listBody"
-          placeholder="Description"
-          autoComplete="off"
-          value={listBody}
-          onChange={e => setListBody(e.target.value)}
-        />
+        {name === 'Daily' ? null : (
+          <input
+            className="edit-body-input"
+            type="text"
+            name="listBody"
+            placeholder="Description"
+            autoComplete="off"
+            value={listBody}
+            onChange={e => setListBody(e.target.value)}
+          />
+        )}
         <DropzoneActions>
           <ActionButton type="reset">Cancel</ActionButton>
           <ActionButton type="submit">

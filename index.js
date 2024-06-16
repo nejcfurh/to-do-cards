@@ -324,7 +324,7 @@ app.post('/api/todos/deleteCard', requireAuth, async function (req, res) {
 
 // UPDATING THE CARD INFORMATION
 app.put('/api/todos/updateCard', requireAuth, async function (req, res) {
-  const { listId, listName, listBody } = req.body;
+  const { listId, listName, listBody, listImg } = req.body;
   const userId = req.auth.userId;
 
   if (!listId || !listName || !listBody) {
@@ -346,6 +346,7 @@ app.put('/api/todos/updateCard', requireAuth, async function (req, res) {
         $set: {
           'lists.$.name': listName,
           'lists.$.body': listBody,
+          'lists.$.url': listImg,
         },
       }
     );

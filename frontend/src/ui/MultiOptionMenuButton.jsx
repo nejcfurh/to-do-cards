@@ -1,12 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 
-function MultiOptionMenuButton({
-  activeTasks,
-  setActiveTasks,
-  name,
-  modalOpen,
-}) {
+function MultiOptionMenuButton({ activeTasks, setActiveTasks, modalOpen }) {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleOnMouseEnter = () => {
@@ -47,14 +42,12 @@ function MultiOptionMenuButton({
             <i className="fas fa-check" onClick={toggleCompletedTasks}></i>
           )}
         </div>
-        {name === 'Daily' ? null : (
-          <div
-            className={`nav-items items2 ${isVisible ? 'show-menu' : ''}`}
-            onClick={modalOpen}
-          >
-            <i className="fas fa-edit"></i>
-          </div>
-        )}
+        <div
+          className={`nav-items items2 ${isVisible ? 'show-menu' : ''}`}
+          onClick={modalOpen}
+        >
+          <i className="fas fa-edit"></i>
+        </div>
       </div>
     </>
   );

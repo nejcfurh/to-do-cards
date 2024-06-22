@@ -66,8 +66,8 @@ function CardContainer() {
     }
   };
 
-  // DELETING THE TASK
-  const handleDeleteTask = async (event, listName, itemId) => {
+  // COMPLETING THE TASK
+  const handleCompleteTask = async (event, listName, itemId) => {
     event.preventDefault();
 
     try {
@@ -107,7 +107,7 @@ function CardContainer() {
             setLists={setLists}
             setDaily={setDaily}
             handleDelete={handleDelete}
-            handleDeleteTask={handleDeleteTask}
+            handleCompleteTask={handleCompleteTask}
           />
         );
       })}

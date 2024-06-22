@@ -8,8 +8,8 @@ const StyledHeader = styled.div`
 `;
 
 const StyledLogo = styled.img`
-  max-width: 350px;
-  max-height: 120px;
+  /* max-width: 350px; */
+  max-height: 100px;
 `;
 
 function PublicHeader() {

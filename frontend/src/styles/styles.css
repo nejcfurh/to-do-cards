@@ -470,7 +470,8 @@ form.card-item {
 .card-task-line-completed {
   display: flex;
   flex-direction: row;
-  width: fit-content;
+  width: 100%;
+  align-items: center;
 }
 
 .complete-icon {
@@ -516,6 +517,16 @@ form.card-item {
   font-weight: 200;
   font-size: 1rem;
   padding: 10px;
+}
+
+.completed-task-delete {
+  color: white;
+  margin-right: 5px;
+}
+
+.completed-task-delete:hover {
+  color: rgba(255, 0, 0, 0.555);
+  cursor: pointer;
 }
 
 .card-task-input {

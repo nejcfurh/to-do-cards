@@ -386,7 +386,9 @@ app.post('/api/todos/addItems', requireAuth, async (req, res) => {
     const updatedUser = await User.findById(userId);
     const updatedLists = updatedUser.lists;
 
-    console.log(`Successfully added a "${newItem}" task list to active tasks!`);
+    console.log(
+      `Successfully added a "${newItem}" on ${listName} task list to active tasks!`
+    );
 
     res.json({ success: true, data: updatedLists, defaultListName: listName });
   } catch (error) {
@@ -430,6 +432,43 @@ app.put('/api/todos/completeItem', requireAuth, async (req, res) => {
   } catch (error) {
     console.error('Error occurred while moving item:', error);
     res.status(500).json({ error: 'Failed to complete task!' });
+  }
+});
+
+// DELETING THE TASKS FROM THE COMPLETED LIST
+app.delete('/api/todos/deleteItem', requireAuth, async (req, res) => {
+  const { listName, itemId } = req.body;
+  const userId = req.auth.userId;
+
+  try {
+    const user = await User.findOne({ _id: userId, 'lists.name': listName });
+    if (!user) {
+      return res.status(404).json({ message: 'List not found' });
+    }
+
+    // Find the list containing the item to delete
+    const list = user.lists.find(list => list.name === listName);
+    const itemIndex = list.completedItems.findIndex(
+      item => item._id.toString() === itemId
+    );
+
+    if (itemIndex === -1) {
+      return res.status(404).json({ message: 'Task not found' });
+    }
+
+    // Remove the item from the list
+    list.completedItems.splice(itemIndex, 1);
+
+    await user.save();
+
+    console.log(
+      `Successfully deleted a task with ID: ${itemId} from completed tasks list!`
+    );
+
+    res.json({ success: true, data: user.lists, defaultListName: listName });
+  } catch (error) {
+    console.error('Error occurred while deleting item:', error);
+    res.status(500).json({ error: 'Failed to delete task!' });
   }
 });
 

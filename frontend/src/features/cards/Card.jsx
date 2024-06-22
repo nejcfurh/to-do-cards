@@ -20,7 +20,7 @@ function Card({
   daily,
   handleDelete,
   handleCreate,
-  handleDeleteTask,
+  handleCompleteTask,
   setLists,
   setDaily,
 }) {
@@ -56,7 +56,7 @@ function Card({
             <h4 className="title">{name}</h4>
           </div>
           <Tasks
-            handleDeleteTask={handleDeleteTask}
+            handleCompleteTask={handleCompleteTask}
             handleCreate={handleCreate}
             _id={_id}
             list={list}

@@ -4,7 +4,7 @@ import TaskItem from './TaskItem';
 import CompletedItem from './CompletedItem';
 
 function Tasks({
-  handleDeleteTask,
+  handleCompleteTask,
   handleCreate,
   _id,
   list,
@@ -17,7 +17,12 @@ function Tasks({
   if (!active) {
     return (
       <div className="card-form-tasks">
-        <CompletedItem completedItems={completedItems} />
+        <CompletedItem
+          completedItems={completedItems}
+          listName={list.name}
+          setLists={setLists}
+          setDaily={setDaily}
+        />
       </div>
     );
   }
@@ -25,7 +30,7 @@ function Tasks({
   return (
     <div className="card-form-tasks">
       <TaskItem
-        handleDeleteTask={handleDeleteTask}
+        handleCompleteTask={handleCompleteTask}
         listName={list.name}
         items={items}
         completedItems={completedItems}

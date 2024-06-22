@@ -3,11 +3,11 @@
 
 import NoTasks from './NoTasks';
 
-function TaskItem({ handleDeleteTask, listName, _id, items }) {
+function TaskItem({ handleCompleteTask, listName, _id, items }) {
   return (
     <form
       className="card-task"
-      onSubmit={e => handleDeleteTask(e, listName, _id)}
+      onSubmit={e => handleCompleteTask(e, listName, _id)}
     >
       {items.length === 0 ? (
         <NoTasks noItems={items.length} />
@@ -21,7 +21,7 @@ function TaskItem({ handleDeleteTask, listName, _id, items }) {
                 name={name}
                 type="button"
                 value={item_id}
-                onClick={e => handleDeleteTask(e, listName, item_id)}
+                onClick={e => handleCompleteTask(e, listName, item_id)}
               >
                 <img
                   className="complete-icon"

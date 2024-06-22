@@ -25,8 +25,8 @@ const StyledNavbar = styled.nav`
 `;
 
 const StyledLogo = styled.img`
-  max-width: 350px;
-  max-height: 120px;
+  /* max-width: 230px; */
+  max-height: 95px;
 `;
 
 const PrivateHeader = React.memo(function PrivateHeader() {

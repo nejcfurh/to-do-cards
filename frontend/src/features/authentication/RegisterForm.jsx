@@ -12,6 +12,12 @@ function RegisterForm() {
   const [isPending, setIsPending] = useState(false);
   const navigate = useNavigate();
   const { setIsAuthenticated } = useAuth();
+  const [viewPassword, setViewPassword] = useState(false);
+
+  const handlePasswordVisibility = e => {
+    e.preventDefault();
+    setViewPassword(() => !viewPassword);
+  };
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -54,7 +60,65 @@ function RegisterForm() {
         <span className="span-section">
           or use your Email for registration ...
         </span>
-        <label className="label-section">
+        <div className="box-input">
+          <div className="input__wrapper">
+            <input
+              id="name"
+              type="text"
+              placeholder="Your Email"
+              required
+              className="input__field"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              disabled={isPending}
+            />
+            <output htmlFor="password" className="input__label">
+              Name
+            </output>
+          </div>
+          <br />
+          <div className="input__wrapper">
+            <input
+              // id="email"
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+              className="input__field"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              disabled={isPending}
+            />
+            <output htmlFor="password" className="input__label">
+              Email
+            </output>
+          </div>
+          <br />
+          <div className="input__wrapper">
+            <input
+              // id="password"
+              type={viewPassword ? 'text' : 'password'}
+              name="password"
+              placeholder="Your Password"
+              required
+              className="input__field"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              disabled={isPending}
+            />
+            <output htmlFor="password" className="input__label">
+              Password
+            </output>
+            <img
+              alt="Toggle View"
+              title="Eye Icon"
+              src={viewPassword ? 'photos/eye-off.svg' : 'photos/eye.svg'}
+              className="input__icon"
+              onClick={handlePasswordVisibility}
+            />
+          </div>
+        </div>
+        {/* <label className="label-section">
           <input
             placeholder="Name"
             className="input-section"
@@ -92,7 +156,7 @@ function RegisterForm() {
             placeholder="Password"
             className="input-section"
           />
-        </label>
+        </label> */}
         <button className="button" disabled={isPending}>
           {!isPending ? 'Sign up' : <SpinnerMini />}
         </button>

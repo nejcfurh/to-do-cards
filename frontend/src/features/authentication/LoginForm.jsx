@@ -14,6 +14,12 @@ function LoginForm() {
   const { setIsAuthenticated } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [viewPassword, setViewPassword] = useState(false);
+
+  const handlePasswordVisibility = e => {
+    e.preventDefault();
+    setViewPassword(() => !viewPassword);
+  };
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -57,30 +63,12 @@ function LoginForm() {
     }
   };
 
-  // const togglePasswordVisibility = e => {
-  //   e.preventDefault();
-  //   // console.log(e.target.previousSibling);
-  //   const inputIcon = e.target;
-  //   const input = e.target.previousSibling;
-  //   inputIcon.setAttribute(
-  //     'src',
-  //     input.getAttribute('type') === 'password'
-  //       ? 'photos/eye-off.svg'
-  //       : 'photos/eye.svg'
-  //   );
-
-  //   input.setAttribute(
-  //     'type',
-  //     input.getAttribute('type') === 'password' ? 'text' : 'password'
-  //   );
-  // };
-
   return (
     <div className="form-container sign-in-container">
       <form action="#" className="form-section" onSubmit={handleSubmit}>
         <div className="title-section">
           Sign in{' '}
-          <a className="tooltip" style={{ fontSize: '20px' }}>
+          <a className="tooltip" style={{ fontSize: '18px' }}>
             <HiMiniInformationCircle />
           </a>
           <Tooltip anchorSelect=".tooltip" place="top" clickable>
@@ -89,7 +77,7 @@ function LoginForm() {
                 textAlign: 'center',
                 fontSize: '12px',
                 color: 'white',
-                padding: '4px',
+                padding: '2px',
               }}
             >
               Email:{' '}
@@ -101,41 +89,55 @@ function LoginForm() {
         </div>
         <SocialMediaButtons />
         <span className="span-section"> or sign in using Email ...</span>
-        <label className="label-section">
-          <input
-            type="email"
-            // id="email"
-            placeholder="Email"
-            name="email"
-            className="input-section"
-            // autoComplete="username"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            disabled={isPending}
-          />
-        </label>
-        <label className="label-section">
-          <input
-            type="password"
-            // id="password"
-            placeholder="Password"
-            name="password"
-            className="input-section"
-            // autoComplete="current-password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            disabled={isPending}
-          />
-          {/* <img
-            alt="Eye Icon"
-            title="Eye Icon"
-            src="photos/eye.svg"
-            className="input_icon"
-            onClick={togglePasswordVisibility}
-          /> */}
-        </label>
+        <div className="box-input">
+          <div className="input__wrapper">
+            <input
+              // id="email"
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+              className="input__field"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              disabled={isPending}
+            />
+            {/* quickfix for css cascading of label element - it broke the main page if used as label */}
+            <output htmlFor="password" className="input__label">
+              Email
+            </output>
+          </div>
+          <br />
+          <div className="input__wrapper">
+            <input
+              // id="password"
+              type={viewPassword ? 'text' : 'password'}
+              name="password"
+              placeholder="Your Password"
+              required
+              className="input__field"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              disabled={isPending}
+            />
+            <output htmlFor="password" className="input__label">
+              Password
+            </output>
+            <img
+              alt="Toggle View"
+              title="Eye Icon"
+              src={viewPassword ? 'photos/eye-off.svg' : 'photos/eye.svg'}
+              className="input__icon"
+              onClick={handlePasswordVisibility}
+            />
+          </div>
+        </div>
         {/* <a href="#">Forgot your password?</a> */}
-        <button className="button" disabled={isPending}>
+        <button
+          className="button"
+          style={{ marginTop: '2.5rem' }}
+          disabled={isPending}
+        >
           {!isPending ? 'Sign in' : <SpinnerMini />}
         </button>
       </form>

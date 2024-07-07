@@ -8,6 +8,10 @@
   --white: #FFF;
   --facebook: #19399a;
   --linkedin: #0A66C2;
+  --primary-input: #030405;
+  --secondary-input: rgb(69, 69, 69);
+  --background-input: #e4e4e4;
+  --box-background-input: #fcfcfc;
 }
 
 html {
@@ -862,7 +866,7 @@ form.card-item {
 
 .span-section {
   font-size: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 1.25rem;
 }
 
 .input-section {
@@ -950,7 +954,7 @@ form.card-item {
   font-weight: bold;
   padding: 12px 45px;
   letter-spacing: 1.5px;
-  margin-top: 25px;
+  margin-top: 30px;
   text-transform: uppercase;
   transition: transform 200ms ease-in-out;
   cursor: pointer;
@@ -1472,4 +1476,72 @@ ul {
   color: rgba(156, 156, 156, 0.796);
   box-shadow: inset 0 -2px 2px -2px #9c9c9cbd;
   transition: all 0.3s;
+}
+
+/* INPUTS LOGIN PAGE */
+
+.box-input {
+  max-width: fit-content;
+  padding-top: 1rem;
+  border-radius: 0.5rem;
+}
+
+.input__wrapper {
+  position: relative;
+}
+
+.input__field {
+  outline: 1.5px solid var(--secondary-input);
+  width: 17rem;
+  font-size: 1rem;
+  border-radius: 0.45rem;
+  color: var(--secondary-input);
+  padding: 0.5rem;
+  border: none;
+  padding-right: 2rem;
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.input__field::placeholder {
+  color: transparent;
+}
+
+.input__field:placeholder-shown~.input__label {
+  font-size: 1rem;
+  cursor: text;
+  color: var(--secondary-input);
+  top: 0.5rem;
+}
+
+output,
+.input__field:focus~.input__label {
+  position: absolute;
+  top: -0.6rem;
+  padding: 0 0.25rem;
+  background-color: var(--box-background-input);
+  display: block;
+  font-size: 0.875rem;
+  left: 0.5rem;
+  color: var(--secondary-input);
+  transition: 0.3s;
+}
+
+.input__field:focus~.input__label {
+  color: var(--primary-input);
+}
+
+.input__field:focus {
+  outline: 1px solid var(--primary-input);
+}
+
+.input__icon {
+  position: absolute;
+  right: -0.625rem;
+  bottom: -0.625rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  cursor: pointer;
 }

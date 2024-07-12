@@ -1482,6 +1482,8 @@ ul {
 
 .box-input {
   max-width: fit-content;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
   padding-top: 1rem;
   border-radius: 0.5rem;
 }
@@ -1496,6 +1498,7 @@ ul {
   font-size: 1rem;
   border-radius: 0.45rem;
   color: var(--secondary-input);
+  font-family: 'Roboto', sans-serif;
   padding: 0.5rem;
   border: none;
   padding-right: 2rem;
@@ -1508,7 +1511,7 @@ ul {
 }
 
 .input__field:placeholder-shown~.input__label {
-  font-size: 1rem;
+  font-size: 0.9rem;
   cursor: text;
   color: var(--secondary-input);
   top: 0.5rem;
@@ -1517,14 +1520,14 @@ ul {
 output,
 .input__field:focus~.input__label {
   position: absolute;
-  top: -0.6rem;
+  top: -0.5rem;
   padding: 0 0.25rem;
   background-color: var(--box-background-input);
   display: block;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   left: 0.5rem;
   color: var(--secondary-input);
-  transition: 0.3s;
+  transition: 0.3s all ease-in-out;
 }
 
 .input__field:focus~.input__label {

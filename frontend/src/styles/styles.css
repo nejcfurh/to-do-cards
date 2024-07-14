@@ -1482,9 +1482,9 @@ ul {
 
 .box-input {
   max-width: fit-content;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
-  padding-top: 1rem;
+  padding-top: 0.75rem;
   border-radius: 0.5rem;
 }
 
@@ -1493,15 +1493,16 @@ ul {
 }
 
 .input__field {
-  outline: 1.5px solid var(--secondary-input);
-  width: 17rem;
-  font-size: 1rem;
-  border-radius: 0.45rem;
+  outline: 0.75px solid var(--secondary-input);
+  width: 17.5rem;
+  font-size: 14px;
+  border-radius: 1rem;
   color: var(--secondary-input);
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding: 0.5rem;
   border: none;
-  padding-right: 2rem;
+  padding-right: 0.7rem;
+  padding-left: 0.7rem;
   background: transparent;
   transition: all 0.2s;
 }
@@ -1540,7 +1541,7 @@ output,
 
 .input__icon {
   position: absolute;
-  right: -0.625rem;
+  right: -0.425rem;
   bottom: -0.625rem;
   width: 1.75rem;
   height: 1.75rem;

@@ -60,6 +60,8 @@ function LoginForm() {
       toast.error('Login Error, please try again!');
     } finally {
       setIsPending(false);
+      setEmail('');
+      setPassword('');
     }
   };
 

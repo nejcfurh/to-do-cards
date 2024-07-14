@@ -47,7 +47,7 @@ function CompletedItem({ completedItems, listName, setLists, setDaily }) {
               />
               <p className="card-task-name-completed">
                 <strong>
-                  {name.length >= 25 ? `${name.substring(0, 25)}...` : name}
+                  {name.length >= 25 ? `${name.substring(0, 23)}...` : name}
                 </strong>{' '}
                 was completed on{' '}
                 <strong>{dateObject.toLocaleDateString('en-US')}</strong>.

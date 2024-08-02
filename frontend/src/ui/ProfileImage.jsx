@@ -4,9 +4,6 @@ import { deleteAvatarSupabase } from '../services/apiSupabase';
 import UploadAvatar from './UploadAvatar';
 import Modal from './Modal';
 
-const defaultUserUrl =
-  'https://mgpihvqzjbhiowlsiuac.supabase.co/storage/v1/object/public/avatar-images/DefaultUser.png?t=2024-06-15T15%3A56%3A35.569Z';
-
 // eslint-disable-next-line react/prop-types
 function ProfileImage({ avatar, refreshAvatar }) {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -80,7 +77,7 @@ function ProfileImage({ avatar, refreshAvatar }) {
     <div className="profile-image">
       <img
         className="profile-pic"
-        src={avatarUrl || defaultUserUrl}
+        src={avatarUrl || 'frontend/public/photos/DefaultUser.png'}
         onClick={updateAvatar}
         alt="ProfileImage"
       />

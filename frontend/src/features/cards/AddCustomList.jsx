@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { HiOutlineUpload } from 'react-icons/hi';
 import Modal from '../../ui/Modal';
 import UploadImage from '../../ui/UploadImage';
+import { truncateListImgUrl } from '../../utils/helpers';
 
 function AddCustomList({ setDaily, setLists }) {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -58,9 +59,6 @@ function AddCustomList({ setDaily, setLists }) {
 
   const closeModal = () => setIsOpenModal(false);
 
-  const truncatedListImg =
-    listImg.length > 10 ? `${listImg.substring(0, 17)}...` : listImg;
-
   return (
     <>
       <input
@@ -100,7 +98,7 @@ function AddCustomList({ setDaily, setLists }) {
                   placeholder="Image (url)"
                   autoComplete="off"
                   required="required"
-                  value={truncatedListImg}
+                  value={truncateListImgUrl(listImg)}
                   onChange={e => setListImg(e.target.value)}
                 />
                 <HiOutlineUpload

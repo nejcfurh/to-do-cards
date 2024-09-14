@@ -1089,15 +1089,15 @@ form.card-item {
 ul {
   display: flex;
   list-style: none;
-  gap: 1.5rem;
+  gap: 1.3rem;
   padding: 0;
   margin: 0;
 }
 
 .item a {
   text-decoration: none;
-  width: 3.3rem;
-  height: 3.3rem;
+  width: 3rem;
+  height: 3rem;
   background-color: #353636;
   border-radius: 50%;
   display: flex;
@@ -1129,9 +1129,9 @@ ul {
 
 .icon {
   margin-top: 1px;
-  font-size: 2.1rem;
+  font-size: 1.8rem;
   color: hsl(0, 0%, 100%);
-  transition: 0.5s ease;
+  transition: 0.85s ease;
   z-index: 2;
 }
 
@@ -1483,8 +1483,8 @@ ul {
 .box-input {
   max-width: fit-content;
   font-family: 'Montserrat', sans-serif;
-  font-size: 1rem;
-  padding-top: 0.75rem;
+  font-size: 0.9rem;
+  padding-top: 0.8rem;
   border-radius: 0.5rem;
 }
 
@@ -1495,14 +1495,14 @@ ul {
 .input__field {
   outline: 0.75px solid var(--secondary-input);
   width: 17.5rem;
-  font-size: 14px;
+  font-size: 12px;
   border-radius: 1rem;
   color: var(--secondary-input);
   font-family: 'Montserrat', sans-serif;
   padding: 0.5rem;
   border: none;
-  padding-right: 0.7rem;
-  padding-left: 0.7rem;
+  padding-right: 0.8rem;
+  padding-left: 0.8rem;
   background: transparent;
   transition: all 0.2s;
 }
@@ -1528,7 +1528,7 @@ output,
   font-size: 0.8rem;
   left: 0.5rem;
   color: var(--secondary-input);
-  transition: 0.3s all ease-in-out;
+  transition: 0.4s all ease-in-out;
 }
 
 .input__field:focus~.input__label {
@@ -1542,7 +1542,7 @@ output,
 .input__icon {
   position: absolute;
   right: -0.425rem;
-  bottom: -0.625rem;
+  bottom: -0.775rem;
   width: 1.75rem;
   height: 1.75rem;
   transform: translate(-50%, -50%);

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { footerCopyright } from '../utils/constants';
 
 const StyledFooter = styled.footer`
   color: #f1f1f191;
@@ -12,9 +13,7 @@ const StyledFooter = styled.footer`
 const Footer = React.memo(function Footer() {
   return (
     <div>
-      <StyledFooter>
-        © ToDoCards was designed and developed by Nejc Furh in 2024.
-      </StyledFooter>
+      <StyledFooter>{footerCopyright}</StyledFooter>
     </div>
   );
 });

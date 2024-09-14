@@ -1,36 +1,15 @@
 /* eslint-disable react/prop-types */
 import { getDate } from '../../utils/helpers';
-import { useEffect, useState } from 'react';
 import Card from './Card';
 import AddCustomList from './AddCustomList';
 import toast from 'react-hot-toast';
 import PageNotFound from '../../pages/PageNotFound';
 import { deleteImageSupabase } from '../../services/apiSupabase';
+import { useLists } from '../../hooks/useLists';
 
 function CardContainer() {
-  const [lists, setLists] = useState([]);
-  const [daily, setDaily] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+  const { lists, daily, isLoading, setDaily, setLists } = useLists();
   const day = getDate();
-
-  useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true);
-      const token = localStorage.getItem('token');
-      const query = await fetch(`${import.meta.env.VITE_LOCALHOST}/api/todos`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = await query.json();
-      if (!data) throw new Error('Error fetching data!');
-      setLists(data.data);
-      setDaily(data.defaultListName);
-      setIsLoading(false);
-    }
-    fetchData();
-  }, []);
 
   if (isLoading) return <PageNotFound />;
 
